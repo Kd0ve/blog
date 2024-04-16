@@ -22,7 +22,9 @@ _testmain.go
 *.exe
 *.test
 
-public/
-resources/
+public
+themes
+resources
+
+assets/jsconfig.json
 .DS_Store
-.hugo_build.lock
