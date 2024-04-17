@@ -3,7 +3,7 @@ title: "Overview of Hugo Site Setup"
 description: "This is a general overview of how I got my site set up and little pointers"
 date: '2024-04-17'
 lastmod: '2024-04-17'
-catagories:
+categories:
 - Guides
 tags: 
 - Post
