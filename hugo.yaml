@@ -83,10 +83,10 @@ params:
 
         disqusjs:
             shortname: kd0ve
-            apiUrl:
-            apiKey:
-            admin: Kat
-            adminLabel:
+            apiUrl: https://disqus.com/api/oauth/2.0/authorize/
+            apiKey: Owe8C1AItMUbwC2ucPrVqpTzGm8NFHx5IFuOu9nCCqUNk1cMM2bkRtQcyBa08reJ
+            admin: disqus_b9ECJFgeqr
+            adminLabel: Kat
 
         utterances:
             repo:
