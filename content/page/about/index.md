@@ -1,13 +1,13 @@
 ---
 title: About
-description: Who is Kdove?
-date: '2019-02-28'
+description: Hugo, the world's fastest framework for building websites
+date: '2024-04-16'
 aliases:
   - about-us
   - about-hugo
   - contact
 license: CC BY-NC-ND
-lastmod: '2020-10-09'
+lastmod: '2024-04-17'
 menu:
     main: 
         weight: -90
@@ -48,5 +48,5 @@ First, I want to direct you to my resume [here](https://kd0ve.github.io/resume).
 
 I encourage anyone looking to ask further questions to click below. It will redirect you to my Linkedin, where we can connect. Feel free to send me a message if you're wondering anything! Hopefully this website will give you plenty of information about my interests and such, but if not, I am more than willing to speak with anyone! I will also provide my email below!
       
-[Linkedin](https://www.linkedin.com/in/katrina-dube-386ba41a8)
+[Linkedin](https://www.linkedin.com/in/katrina-dube-386ba41a8)<br>
 [Email](mailto:katrinaldube@gmail.com)
