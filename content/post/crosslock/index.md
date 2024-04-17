@@ -23,7 +23,7 @@ image: "decompiler.png"
 
 ## <u>Intro</u>
 
-So, I need to be more vague about this write-up, but I wanted to put out something regarding a recent competition I did. It was a lot of fun. How I did was significantly better than it had been. I went from getting 717th place to 244th place. So that means I met my goal this year!! Anyway, I'm going to do a quick write-up of one of their sections.
+So, I need to be vaguer about this write-up, but I wanted to put out something regarding a recent competition I did. It was a lot of fun. How I did was significantly better than it had been. I went from getting 717th place to 244th place. So that means I met my goal this year!! Anyway, I'm going to do a quick write-up of one of their sections.
 
 This section was under their "Enumeration and Exploitation" category. It was the medium challenge and was indeed quite the challenge. I want to write about this one because I had to write some Python scripts for it, which I found to be a lot of fun.
 
@@ -33,13 +33,13 @@ This one involved a .dll file that we had to find the flag within. The whole poi
 
 ### How?
 
-My first thought was to try to run it, but I was worried about running a .dll on my device, for obvious reasons (still tried to though... do not recommend it... nothing happened it's just a stupid idea). So, after going to other problems for a while, I came back to this one. After looking up "how to open .dll" and things like that, I eventually figured out that you needed to use a decompiler to look at the .dll code. So I started looking up decompilers and eventually found a couple of opens. The main one I used was through JetBrains called [dotPeek](https://www.jetbrains.com/decompiler/). 
+My first thought was to try to run it, but I was worried about running a .dll on my device, for obvious reasons (still tried to though... do not recommend it... nothing happened it's just a stupid idea). So, after going to other problems for a while, I came back to this one. After looking up "how to open .dll" and things like that, I eventually figured out that you needed to use a decompiler to look at the .dll code. So, I started looking up decompilers and eventually found a couple of opens. The main one I used was a JetBrains based decompiler called [dotPeek](https://www.jetbrains.com/decompiler/). 
 
 ### Taking Action
 
-Once I got all that up and running, I opened up the .dll in the decompiler and started digging around. This is what I saw:
+Once I got all that up and running, I opened the .dll in the decompiler and started digging around. This is what I saw:
 
-![.dd in DotPeek decompiler](decompiler.png)
+![.dll in DotPeek decompiler](decompiler.png)
 
 I then clicked the dropdown next to the crosslock app and one function *immediately* stuck out to me.
 
@@ -74,3 +74,4 @@ This gave me the flag in hex. The reason it was so garbled was that it was encry
 If you want to see more writeups from me, feel free to comment, or send me a message either of the ways I have available in my [about](http://kd0ve.github.io/about/). Let me know if you'd like more!
 
 ---
+
