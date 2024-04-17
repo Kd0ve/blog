@@ -1,7 +1,7 @@
 ---
 title: "Crosslock"
-date: 2024-04-16T00:20:04-04:00
-lastmod: 2024-04-16T00:20:04-04:00
+date: '2024-04-16T00:20:04-04:00'
+lastmod: '2024-04-16T00:20:04-04:00'
 author: ["Kat"]
 categories: 
 - Write-Ups
@@ -74,4 +74,6 @@ This gave me the flag in hex. The reason it was so garbled was that it was encry
 If you want to see more writeups from me, feel free to comment, or send me a message either of the ways I have available in my [about](http://kd0ve.github.io/about/). Let me know if you'd like more!
 
 ---
+
+
 
