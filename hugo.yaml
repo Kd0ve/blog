@@ -40,7 +40,7 @@ services:
         shortname: "kd0ve"
     # GA Tracking ID
     googleAnalytics:
-        id:
+        id: G-TYMHMTK6Q6
 
 permalinks:
     post: /p/:slug/
