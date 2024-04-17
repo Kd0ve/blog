@@ -13,6 +13,7 @@ menu:
         weight: -90
         params:
             icon: user
+comments: false
 ---
 
 Hi! My name is Katrina. I also go by Kat, and online I go by Kdove.
