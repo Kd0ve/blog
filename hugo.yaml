@@ -1,4 +1,5 @@
 baseurl: https://kd0ve.github.io
+url: https://kd0ve.github.io
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 3
@@ -16,10 +17,10 @@ hasCJKLanguage: false
 languages:
     en:
         languageName: English
-        title: Example Site
+        title: Dove
         weight: 1
         params:
-            description: Example description
+            description: I like breaking things :)
     zh-cn:
         languageName: 中文
         title: 演示站点
@@ -51,7 +52,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    favicon: img/apple-touch-icon.png # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
         since: 2024
@@ -206,7 +207,14 @@ params:
 ### See https://stack.jimmycai.com/config/menu
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
-    main: []
+    main: 
+        - identifier: blog
+          name: Blog Home
+          url: http://kd0ve.github.io/blog/
+          weight: -100
+          params:
+            icon: infinity
+            newTab: false
 
     social:
         - identifier: github
