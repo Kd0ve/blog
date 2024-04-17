@@ -2,7 +2,7 @@
 title: "Hello World"
 date: 2024-04-15T17:44:04-04:00
 lastmod: 2024-04-15T17:44:04-04:00
-author: ["Kat"]
+author: ["Dove"]
 # categories: 
 # - categorie 1
 # - categorie 2
