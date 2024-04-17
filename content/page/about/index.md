@@ -1,6 +1,6 @@
 ---
 title: About
-description: Hugo, the world's fastest framework for building websites
+description: Who is Kdove?
 date: '2024-04-16'
 aliases:
   - about-us
