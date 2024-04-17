@@ -4,7 +4,7 @@ description: "This is a general overview of how I got my site set up and little 
 date: '2024-04-17'
 lastmod: '2024-04-17'
 catagories:
-- Guide
+- Guides
 tags: 
 - Post
 - Webdev
