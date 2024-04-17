@@ -214,13 +214,6 @@ menu:
           params:
             icon: infinity
             newTab: false
-        - identifier: about
-          name: About
-          url: /about/
-          weight: -90
-          params:
-            icon: user
-            newTab: false
 
     social:
         - identifier: github
