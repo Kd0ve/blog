@@ -9,11 +9,6 @@ tags:
 - Post
 - Webdev
 license: CC BY-NC-ND
-menu:
-    main: 
-        weight: -90
-        params:
-            icon: user
 comments: true
 image: 'hugo-logo.png'
 ---
