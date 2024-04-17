@@ -1,5 +1,4 @@
 baseurl: https://kd0ve.github.io
-url: https://kd0ve.github.io
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 3
