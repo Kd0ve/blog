@@ -207,10 +207,10 @@ params:
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
     main: 
-        - identifier: blog
-          name: Blog Home
-          url: http://kd0ve.github.io/blog/
-          weight: -100
+        - identifier: main
+          name: Landing Page
+          url: http://kd0ve.github.io/
+          weight: -150
           params:
             icon: infinity
             newTab: false
