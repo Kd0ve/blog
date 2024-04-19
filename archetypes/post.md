@@ -1,8 +1,9 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 description: ""
-date: '2024-00-00'
-lastmod: '2024-00-00'
+date: {{ .Date }}
+lastmod: {{ .Date }}
+draft: false
 categories:
 tags:
 license: CC BY-NC-ND

@@ -1,8 +1,8 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 description: ""
-date: '2024-00-00'
-lastmod: '2024-00-00'
+date: {{ .Date }}
+lastmod: {{ .Date }}
 aliases:
   - about-us
   - about-hugo
