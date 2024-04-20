@@ -14,7 +14,7 @@ comments: true
 image: 'shellbags-output.png'
 ---
 
-Today, I'm going to walk through how I solved Try Hack Me's Forensics practice challenge. The task is to analyze a memory dump of a target system and find the malicious files. It largely focuses on identifying different IOC.
+Today, I'm going to walk through how I solved [Try Hack Me's Forensics](https://tryhackme.com/r/room/forensics) practice challenge. The task is to analyze a memory dump of a target system and find the malicious files. It largely focuses on identifying different IOC.
 
 ---
 
@@ -30,16 +30,16 @@ The first question was:
 
 > What is the Operating System of this Dump file? (OS name)
 
-This was pretty straight forward as the extracted files all were referencing Windows. 
+This was pretty straight forward as the extracted files all were referencing the OS. 
 
-![Here is an example of where Windows was referenced](showing-os.png)
-
-**Windows** was the answer.
+![Here is an example of where the OS was referenced](showing-os.png)
 
 ### Digging Deeper
 Extracting all those files via binwalk was unrealistic. I went back to Autopsy to see what options I had. Nothing still. It seemed to get stuck processing the image. 
 
-After researching other ways to analyze a memory dump, I ran into someone mentioning Volatility, which I vaguely remembered was good for analyzing system dumps. I hadn't used it much up to this point, but I switched to a using Volatility Workbench. 
+After researching other ways to analyze a memory dump, I ran into someone mentioning Volatility, which I vaguely remembered was good for analyzing system dumps. I also hadn't paid attention to the room having the Volatility logo on it which would've saved me some time.
+
+I hadn't used it much up to this point, but I switched to a using Volatility. At first, I used Volatility Workbench.
 
 This gave me the answer to the next question: 
 
@@ -49,12 +49,10 @@ In Volatility Workbench, there is an option to view processes once you specify t
 
 ![Here is was the processes list looked like](proccesses-list.png)
 
-If you look, you can see SearchIndexer with the PID of **2180**.
-
 ### Files Upon Files...
-In the meantime, I was bombarded with alerts from my computer because I was still letting Autopsy extract files, and of course they were marked as malicious, and of course I shouldn't be running this stuff on my host machine, especially my host *Windows* machine. Alas, I never learn.
+In the meantime, my Autopsy scan was still running away. I decided to check up on that as it seemed some more files were uncovered as the image was being analyzed.
 
-It showed a bunch of carved files, and a potentially malicious zip file, but nothing of importance. The real helper here would be Volatility Workbench.
+It showed a bunch of carved files, and a potentially malicious zip file, but nothing of importance. The real helper here would be Volatility.
 
 ![Here is what Autopsy was showing me](carved.png)
 
@@ -68,7 +66,7 @@ That didn't end up giving me what I needed. I decided to cave and just use Volat
 
 The shellbags plugin was supposed to give a list of accessed directories and their last access time, which would give me exactly what I needed.
 
-Getting Volatility working is always a pain, especially when it's Volatility 2. But I got it installed and working, and ran `python2 vol.py -f victim.raw imageinfo` to get the profile I should run. 
+Getting Volatility working is always a pain, especially when it's Volatility 2. But I got it installed and working, and ran `vol.py -f victim.raw imageinfo` to get the profile I should run. 
 
 ![This was the output for running that command](volatility-profile.png)
 
@@ -76,9 +74,9 @@ Then I ran `vol.py -f victim.raw --profile=<profile> shellbags` to hopefully get
 
 ![Here is the output for running the shellbags plugin against the image](shellbags-output.png)
 
-So, it's not sorted, obviously, so I did the same command but had it output to a text document. I was hoping to be able to put it into an excel spreadsheet. The command I did was `vol.py -f victim.raw --profile=Win7SP1x64 shellbags > access.txt` (This took forever to run).
+It's not sorted, obviously, so I did the same command but had it output to a text document. I was hoping to be able to put it into an excel spreadsheet. The command I did was `vol.py -f victim.raw --profile=Win7SP1x64 shellbags > access.txt` (This took forever to run).
 
-I decided to look through the output manually and just parse it out since there weren't a whole lot, and I ended up finding the directory. It was **deleted_files**.
+I decided to look through the output manually and just parse it out since there weren't a whole lot, and I ended up finding the directory.
 
 ![Here is where I found the listing for the last accessed directory](shellbags-last-accessed.png)
 
@@ -88,11 +86,13 @@ I decided to look through the output manually and just parse it out since there 
 ### Netscan
 Next question is about malicious services on different ports, so I'll be running `vol.py -f victim.raw --profile=Win7SP1x64 netscan` to get the running services and their associated ports
 
-I was pretty confused at first because I could tell which service was the malicious one, I got the PID of it, `2464` and the service was `wmpnetwk.exe` as that's not a typical service, but it's listed a million different times.
+I was pretty confused at first because I could tell which service was the malicious one, I got the PID of it, `2464`, and the service was `wmpnetwk.exe` as that's not a typical service, but it's listed a million different times.
 
 ![As you can see, there are multiple listings of that service](wmpnetwk.png)
 
-Eventually, I found it listed at the beginning of the services list with the **port 5005** and running on **UDP**, so I put that in and I guess it was right. Not entirely sure how that's more right than the others, but it is. Maybe because it's the first listing of the process? 
+Eventually, I found it listed at the beginning of the services list, so I put that in and I guess it was right. Not entirely sure how that's more right than the others. 
+
+My assumption is that specific one is correct because it's the primary instance that that service is running from.
 
 ![Here is where I saw the correct port and protocol](netscan-result.png)
 
@@ -109,13 +109,15 @@ I still don't entirely get what we are looking at with this stuff. I'm assuming 
 I'm still not entirely sure what Virtual Address Descriptors (Vad) are, so that'll have to go into the backlog of things to research. But I had learned enough to get what I needed.
 
 #### Solution
-My plan was to parse out the nodes with `PAGE_EXECUTE_READWRITE`. Then I would see if that process contained a MZ or PE file, or if it had a JMP, RET, or CALL instruction. In reality, with this problem, the malicious processes were the only ones that had `PAGE_EXECUTE_READWRITE`.
+My plan was to parse out the nodes with `PAGE_EXECUTE_READWRITE`. Then I would see if that process contained a MZ or PE file, or if it had a JMP, RET, or CALL instruction. 
 
-For some reason it wasn't inputting the result. The above method found the right PIDs, but the instructions implied a different method of solving.
+In reality, with this problem, the malicious processes were the only ones that had `PAGE_EXECUTE_READWRITE`.
 
-I put in the answer `1860;1820;2426` when the answer was `2426;1820;1860`. I guess they wanted them in order of how they were listed, so maybe it makes sense for them to specify. But also I don't think it should matter.
+For some reason it the room wasn't taking the PIDs in the order I was giving them. They had to be in a specific order to be considered correct. 
 
-Anyway, the method that the challenge was implying wanted you to look for two things. If the node had a `Protection: *_EXECUTE_*` in it, plus the Vad Tag was VadS. 
+The above method found the right PIDs, but the instructions implied a different method of solving, so I thought maybe I had gotten the wrong PIDs because I had used the wrong method, but that wasn't the case.
+
+The method that the challenge was implying wanted you to look for two things. If the node had a `Protection: *_EXECUTE_*` in it, plus the Vad Tag was VadS. 
 
 ![This is an example of what they wanted you to search. You can see in the middle where I highlighted the proper VAD node with the VadS tag and an execute protection](first-find-search.png)
 
@@ -125,13 +127,15 @@ The method where you solely look for `PAGE_EXECUTE_READWRITE` works much better 
 
 There were a lot that had `PAGE_EXECUTE_WRITECOPY` but weren't under a malicious service, so parsing through each and keeping an eye on if it had an associated VadS tag was kind of tedious. Parsing out the `PAGE_EXECUTE_READWRITE` was a much faster method.
 
+I'm assuming the required order had to do with the order the processes were listed as the order it required was the order in which the processes appeared on the report.
+
 I was thoroughly confused on what was being referred to with the vad s tag and execute protection, but I'm glad I learned about this. It's good to learn different IOC, and I'm glad to know this one and have seen it in practice.
 
 ---
 
 ## Task 3
 ### Websites
-Next, I'm going to use my Volatility Workstation that has all the processes running at the time of the memory dump to look and see what services these PID are associated with. Then, I'll research these services on virus total to find the next question answers.
+Next, I'm going to use my Volatility Workstation that has all the processes listed that were running at the time of the memory dump to look and see what services these PID are associated with. Then, I'll research these services on virus total to find the next question answers.
 
 (At least, that was my initial plan)
 
@@ -165,7 +169,7 @@ I used `strings <service>.dmp | grep www.go.*.ru`. I tried it on all the dump fi
 
 ![The output of that query](go-result.png)
 
-I did have to use a hint to figure out which one it might be as there were just way too many options. It seems like the hints just give you an idea as which site in the list of sites it might be. In this case the hint was "The site is kind of naughty". So the answer for the first question in this last task is `www.goporn.ru`.
+I did have to use a hint to figure out which one it might be as there were just way too many options. It seems like the hints just give you an idea as which site in the list of sites it might be. From that. I figured out which one was the correct URL.
 
 Next question is:
 
@@ -175,9 +179,9 @@ So, I'm assuming that all the answers will be in the 1820 service, but if I coul
 
 ![Here is the result after parsing through 1820's strings](i-result.png)
 
-The hint for this one said "Do you like football?" so I'm assuming that the website will relate to football in some way. There are also four characters after the 'i' which helps us narrow it down a bit.
+The next hint wasn't useful at all for me as I couldn't tell which websites were related to the topic it gave me. There are also four characters after the 'i' which helps us narrow it down a bit.
 
-The hint didn't really help in this case as I didn't recognize the site as a football site or anything related, but there was only one result with four letters after the 'i', so I went with that one, which was `www.ikaka.com`.
+I had to use the amount of characters to figure it out since there was only one result with four letters after the 'i', so I went with that one.
 
 Next:
 
@@ -185,7 +189,7 @@ Next:
 
 We already kind of got this one by doing the 'i' wild card, but I'm going to rerun the query with the added 'c' to narrow down the results so I don't have to manually. In this one there should be six characters after the 'ic'.
 
-There was only one that fit that criteria, and it was the first result, `www.icsalabs.com`
+There was only one that fit that criteria, and it was the first result.
 
 ![Here are what that queries results looked like](ic-result.png)
 
@@ -194,11 +198,11 @@ Now we move onto finding the different IP addresses. Since I know how to properl
 
 > `202.***.233.*** (Write full IP)`
 
-So I did `strings 1820.dmp | grep 202..*.233..*` and only got one result back (thankfully) which was `202.107.233.211`.
+So I did `strings 1820.dmp | grep 202..*.233..*` and only got one result back (thankfully).
 
 > `***.200.**.164 (Write full IP)`
 
-And again we do `strings 1820.dmp | grep .*.200..*.164` which gives us `209.200.12.164` and... this mess...
+And again we do `strings 1820.dmp | grep .*.200..*.164` which gives us the flag and... this mess...
 
 ![This was startling to see!](second-ip.png)
 
@@ -206,7 +210,7 @@ And again we do `strings 1820.dmp | grep .*.200..*.164` which gives us `209.200.
 
 > `209.190.***.***`
 
-So, one last time, we do `strings 1820.dmp | grep 209.190..*..*` which gives us `209.190.122.186` along with another weird URL.
+So, one last time, we do `strings 1820.dmp | grep 209.190..*..*` which gives us this flag along with another weird URL.
 
 ![They're looking up some weird stuff!](third-ip.png)
 
@@ -220,7 +224,7 @@ Come to find out, volatility has a plugin exactly for that. It's called ***envar
 
 I used this command, `vol.py -f victim.raw --profile=Win7SP1x64 -p 2464 envars --silent`, to look up the environmental variable for the 2464 process. 
 
-You have to do `--silent` if you want the *unique* variable for that process, which was `OANOCACHE`
+You have to do `--silent` if you want the *unique* variable for that process.
 
 ## Conclusion
 
