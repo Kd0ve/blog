@@ -25,7 +25,7 @@ This site is where I'll be putting... well... everything! I want to use it as a 
 ---
 
 ## Resume
-First, I want to direct you to my resume [here](https://kd0ve.github.io/resume).
+First, I want to direct you to my resume [here](katrinadube_resume.pdf).
 
 ---
 
