@@ -1,9 +1,9 @@
 ---
 title: "Portswigger Academy Day Three"
 description: "Notes about third (ish) day working on portswigger academy"
-date: '2024-04-27'
+date: '2024-05-15'
 draft: false
-lastmod: '2024-05-15'
+lastmod: '2024-05-16'
 categories:
 - Learning
 tags:
