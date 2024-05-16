@@ -46,7 +46,7 @@ This lab was straight forward you just had to go to `/api` and utilize the `DELE
 
 ## Identifying and Interacting with API Endpoints
 ### Identifying
-This section starts off with finding and identifying API endpoints. You'd do this by essentially just crawling applications that use the API. While doing this, you would want to look for patterns that suggest ASI endpoints such as `/api/`. 
+This section starts off with finding and identifying API endpoints. You'd do this by essentially just crawling applications that use the API. While doing this, you would want to look for patterns that suggest API endpoints such as `/api/`. 
 
 You want to keep an eye out for JavaScript files particularly. These can contain calls to API endpoints that you may not have triggered yet. Burp Scanner automatically extracts some endpoints while its craws, but for more in-depth extraction, you can use JS Link Finder BApp, or you can manually review the JavaScript files.
 
