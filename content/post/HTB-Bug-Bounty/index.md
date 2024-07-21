@@ -1,11 +1,15 @@
 ---
 title: "HTB Bug Bounty - HTTP Fundamentals"
-description: ""
+description: "Notes on my hack the box learning"
 date: 2024-06-06T20:24:43-04:00
 lastmod: 2024-06-06T20:24:43-04:00
 draft: false
 categories:
+- Learning
 tags:
+- post
+- HTB
+- 'Hack The Box'
 license: CC BY-NC-ND
 comments: true
 image: 'hack-the-box-e1694085620820.png'
