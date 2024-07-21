@@ -23,8 +23,7 @@ Apologies if it seems everywhere! I didn't go through and clean anything up :3
 
 ---
 
-## HTTP Fundamentals
-### HyperText Transfer Protocol (HTTP)
+## HyperText Transfer Protocol (HTTP)
 **Fully Qualified Domain Name (FQDN)** - essentially the domain name of the website
 **Uniform Resource Locator** - this includes the FQDN as well as different parts like the top-layer domain, subdomain, query string, and fragment.
 
@@ -55,7 +54,7 @@ This is a really important command, as you can send HTTP requests and see the re
 
 Calling the `index.html` file for say `hackthebox.com` would look like `curl -O hackthebox.com/index.html`, and you should have created a copy of that domain's `index.html` file that's been requested. You can also do the `-s` flag to silence the status and the `-O` flag in conjunction to just straight grab the `index.html` file without the status.
 
-### HyperText Transfer Protocol Secure (HTTPS)
+## HyperText Transfer Protocol Secure (HTTPS)
 One drawback to HTTP is that it sends everything over plaintext, which is pretty dangerous. This is why HTTPS was created. It utilizes TLS/SSL to encrypt traffic sent over the protocol. This even includes login credentials if they aren't hashed client-side. 
 
 If someone intercepts HTTPS traffic, they won't be able to see the data within that request. You can tell if a website is using HTTPS as it will have `https://` in the beginning of the URL. Most browsers will also warn you now before you visit a website only using HTTP.
@@ -65,7 +64,7 @@ HTTPS is where the three-way-handshake is employed. This is to make sure that th
 **cURL For HTTPS**
 Using curl with HTTPS, there might be an issue where there will be an SSL Certificate problem saying that the certificate is invalid. To bypass this, when you are doing the cURL command, you can add on the `-k` flag to the curl command. 
 
-### HTTP Requests and Responses
+## HTTP Requests and Responses
 HTTP requests and responses are structured in particular ways that are consistent. The send request information will cause certain responses, so they must be formatted correctly to get the intended response back. Browsers will craft these automatically.
 
 
@@ -89,7 +88,7 @@ Basically, we're talking about inspect element. I typically like using the FireF
 
 You'll mainly want to focus on the `Network` tab to grab files being transferred and requests being performed. Here is where you'll be able to find the requests to alter. You can apparently use the `Filter` to filter out and search certain requests if a website loads too many to parse through.
 
-### HTTP Headers
+## HTTP Headers
 Since we didn't discuss them before, they're covered here thankfully (somewhat). We're going to go over a few different kinds of headers that you'll typically encounter. There are general, entity, response, request, and security headers. 
 
 For general headers, you'll either encounter the date, or the connection status. The date is well, the date. The connection status will either be `close` or `keep-alive`. It will commonly look like `Connection: close` or `Connection: keep-alive`.
