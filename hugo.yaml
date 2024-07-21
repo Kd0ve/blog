@@ -65,8 +65,8 @@ params:
         emoji: 
         subtitle: I like breaking things :)
         avatar:
-            enabled: true
-            local: true
+            enabled: false
+            local: false
             src: img/kdove.jpg
 
     article:
