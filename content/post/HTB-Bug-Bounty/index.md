@@ -1,8 +1,8 @@
 ---
 title: "HTB Bug Bounty - HTTP Fundamentals"
 description: "Notes on my hack the box learning"
-date: 2024-06-06T20:24:43-04:00
-lastmod: 2024-06-06T20:24:43-04:00
+date: 2024-07-21T17:51:00-00:00
+lastmod: 2024-07-21T20:17:51-00:00
 draft: false
 categories:
 - Learning
