@@ -3,16 +3,6 @@ title: "Portswigger Academy Day Two"
 description: "Notes about second day working on portswigger academy"
 date: '2024-04-26'
 lastmod: '2024-04-26'
-categories:
-- Learning
-tags:
-- portswigger
-- post
-license: CC BY-NC-ND
-comments: true
-showToc: true 
-TocOpen: true
-image: "portswigger-02.jpg"
 ---
 
 ---
