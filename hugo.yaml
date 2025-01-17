@@ -209,10 +209,18 @@ menu:
     main: 
         - identifier: main
           name: Landing Page
-          url: http://kd0ve.github.io/
+          url: https://kd0ve.github.io/
           weight: -100
           params:
             icon: infinity
+            newTab: false
+
+        - identifier: main
+          name: Resources
+          url: https://kdove.moe/blog/resources/
+          weight: -100
+          params:
+            icon: book
             newTab: false
 
     social:
