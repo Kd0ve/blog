@@ -20,7 +20,7 @@ TocOpen: true # open contents automantically
 hidemeta: false # hide information (author, create date, etc.)
 disableShare: true	# do not show share button
 showbreadcrumbs: true # show current path
-image: "Untitled-01.png"
+image: "Untitled-1.png"
 ---
 
 ## Getting Things Set Up
@@ -37,7 +37,7 @@ Once I got that set up, I needed to create an account on the website.
 
 The register screen for the challenge.
 
-From there, I went to the “secure” file storage system and uploaded a file with the name `iijiijiijflag.txt` .
+From there, I went to the "secure" file storage system and uploaded a file with the name `iijiijiijflag.txt` .
 
 ![Adding the properly named file to the secure file storage system.](Untitled-2.png)
 
@@ -45,7 +45,7 @@ Adding the properly named file to the secure file storage system.
 
 ## Gathering The Info
 
-Once it’s uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.
+Once it's uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.
 
 ![Here you can see that the edited request was changed to a post request which displays the contents of the file specified.](Untitled-3.png)
 
@@ -59,9 +59,9 @@ This is the post request we created previously now in a text document.
 
 I then took that text document and passed it through `sqlmap` using the command `sqlmap -r request.txt --dump --batch --where "id=<file_id>" --threads 10 -T file` where `<file_id>` is the file I uploaded, which I got at the end of the intercepted download request. This gave me the database entry of the file I uploaded.
 
-![At the bottom you can see the table where the ‘getflag’ file is listed. ](Untitled-5.png)
+![At the bottom you can see the table where the 'getflag' file is listed. ](Untitled-5.png)
 
-At the bottom you can see the table where the ‘getflag’ file is listed. 
+At the bottom you can see the table where the 'getflag' file is listed. 
 
 I made sure to take note of the `user_id`, `filename` , and `filepath` as those are what are going to be input into the sql injection.
 
