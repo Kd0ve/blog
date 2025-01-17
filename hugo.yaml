@@ -218,7 +218,7 @@ menu:
         - identifier: main
           name: Resources
           url: https://kdove.moe/blog/resources/
-          weight: -100
+          weight: -90
           params:
             icon: book
             newTab: false
