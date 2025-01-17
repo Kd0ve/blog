@@ -220,7 +220,7 @@ menu:
           url: https://kdove.moe/blog/resources/
           weight: -90
           params:
-            icon: book
+            icon: messages
             newTab: false
 
     social:
