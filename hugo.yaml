@@ -215,10 +215,10 @@ menu:
             icon: infinity
             newTab: false
 
-        - identifier: main
+        - identifier: resources
           name: Resources
           url: https://kdove.moe/blog/resources/
-          weight: -90
+          weight: -80
           params:
             icon: messages
             newTab: false
