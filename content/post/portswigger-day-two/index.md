@@ -3,6 +3,7 @@ title: "Portswigger Academy Day Two"
 description: "Notes about second day working on portswigger academy"
 date: '2024-04-26'
 lastmod: '2024-04-26'
+image: 'portswigger-02.jpg'
 ---
 
 ---
