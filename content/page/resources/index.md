@@ -61,6 +61,7 @@ lastmod: '2024-04-17'
 ## Forensics
 <ul>
     <a href="https://cybersources.glide.page/dl/ddecb1"><li>Stegonography - FHR</li></a>
+    <a href="https://www.thehacker.recipes/"><li>The Hacker Recipes</li></a>
     <a href="https://www.aperisolve.com/96a7f666c0bf82891135e98c8c2e5bea"><li>Aperi Solve</li></a> 
     <a href="https://www.kali.org/tools/binwalk/"><li>Binwalk</li></a>
     <a href="https://exifinfo.org/"><li>Exif</li></a>
