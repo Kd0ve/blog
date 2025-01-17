@@ -10,6 +10,7 @@ lastmod: '2024-04-17'
 ## General/Misc
 <ul>
     <a href="https://cybersources.glide.page/dl/da19fa"><li>Learning - FHR</li></a> 
+    <a href="https://github.com/JohnHammond/security-resources"><li>John Hammond Security Resources</li></a>
     <a href="https://gchq.github.io/CyberChef/"><li>CyberChef</li></a> 
     <a href="https://csbygb.gitbook.io/pentips"><li>CSByGB PenTips</li></a> 
     <a href="https://cobalt.tools/"><li>Cobalt Socialmedia Conversion Tool</li></a>
@@ -17,9 +18,26 @@ lastmod: '2024-04-17'
 
 ---
 
+## Full-Pwn
+<ul>
+    <a href="https://highon.coffee/blog/reverse-shell-cheat-sheet/"><li>Reverse Shell Cheat Sheet</li></a>
+    <a href="https://xorond.com/posts/2021/04/windows-local-privilege-escalation/"><li>Windows PrivEsc</li></a>
+    <a href="https://github.com/SpecterOps/BloodHound"><li>Bloodhound</li></a>
+    <a href="https://github.com/yaap7/ldapsearch-ad"><li>ldapsearch-ad</li></a>
+    <a href="https://github.com/CravateRouge/bloodyAD"><li>bloodyAD</li></a>
+    <a href="https://github.com/fortra/impacket"><li>Impacket</li></a>
+    <a href="https://github.com/ly4k/Certipy"><li>Certipy</li></a>
+</ul>
+
+---
+
 ## OSINT
 <ul>
     <a href="https://intellfusion.medium.com/the-best-open-source-intelligence-osint-tools-and-techniques-a275fb134da0"><li>List Of OSINT Resources</li></a>
+    <a href="https://ohshint.gitbook.io/oh-shint-its-a-blog"><li>OH SHINT</li></a>
+    <a href="https://bellingcat.gitbook.io/toolkit"><li>Bellingcat's Online OSINT Toolkit</li></a>
+    <a href="https://www.zoomeye.ai/"><li>ZoomEye</li></a>
+    <a href="https://www.shodan.io/dashboard"><li>Shodan</li></a>
     <a href="https://what3words.com/products/what3words-app"><li>What 3 Words</li></a> 
     <a href="https://www.epochconverter.com/"><li>Epoch Converter</li></a>
     <a href="https://www.blockchain.com/"><li>Blockchain Lookup</li></a>
@@ -77,6 +95,9 @@ lastmod: '2024-04-17'
 
 ## Web App Exploitation
 <ul>
+    <a href="https://github.com/swisskyrepo/PayloadsAllTheThings">PayloadAllTheThings</a>
+    <a href="https://token.dev/">JWT Encode or Decode</a>
+    <a href="https://dnsdumpster.com/">DNS Dumpster</a>
     <a href="https://portswigger.net/web-security/all-labs#sql-injection"><li>SQL Injection Labs</li></a> 
     <a href="https://owasp.org/www-project-top-ten/"><li>OWASP Top Ten</li></a> 
     <a href="https://cheatsheetseries.owasp.org/IndexTopTen.html"><li>OWASP Top Ten Cheatsheet</li></a>
@@ -89,6 +110,7 @@ lastmod: '2024-04-17'
 
 ## Cryptography
 <ul>
+    <a href="https://github.com/jvdsn/crypto-attacks/tree/master">Crypto Attacks</a>
     <a href="https://www.cachesleuth.com/multidecoder/"><li>CacheSleuth</li></a>
     <a href="https://www.dcode.fr/"><li>Dcode.fr</li></a>
     <a href="https://blog.cryptohack.org/twitter-secrets "><li>Recover PEM Keys</li></a>
