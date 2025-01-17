@@ -2,7 +2,7 @@
 
 title: "Secure File Storage"
 date: '2025-01=17'
-lastmod: '2024-01-17'
+lastmod: '2025-01-17'
 author: ["Kat"]
 categories: 
 - Write-Ups
@@ -20,7 +20,7 @@ TocOpen: true # open contents automantically
 hidemeta: false # hide information (author, create date, etc.)
 disableShare: true	# do not show share button
 showbreadcrumbs: true # show current path
-image: "Untitled 01.png"
+image: "Untitled-01.png"
 ---
 
 ## Getting Things Set Up
@@ -33,13 +33,13 @@ Burp Suite intercepting traffic from the website.
 
 Once I got that set up, I needed to create an account on the website.
 
-![The register screen for the challenge.](Untitled%201.png)
+![The register screen for the challenge.](Untitled-1.png)
 
 The register screen for the challenge.
 
 From there, I went to the “secure” file storage system and uploaded a file with the name `iijiijiijflag.txt` .
 
-![Adding the properly named file to the secure file storage system.](Untitled%202.png)
+![Adding the properly named file to the secure file storage system.](Untitled-2.png)
 
 Adding the properly named file to the secure file storage system.
 
@@ -47,19 +47,19 @@ Adding the properly named file to the secure file storage system.
 
 Once it’s uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.
 
-![Here you can see that the edited request was changed to a post request which displays the contents of the file specified.](Untitled%203.png)
+![Here you can see that the edited request was changed to a post request which displays the contents of the file specified.](Untitled-3.png)
 
 Here you can see that the edited request was changed to a post request which displays the contents of the file specified.
 
 From there, I copied the created post request and saved it into a text document.
 
-![This is the post request we created previously now in a text document.](Untitled%204.png)
+![This is the post request we created previously now in a text document.](Untitled-4.png)
 
 This is the post request we created previously now in a text document.
 
 I then took that text document and passed it through `sqlmap` using the command `sqlmap -r request.txt --dump --batch --where "id=<file_id>" --threads 10 -T file` where `<file_id>` is the file I uploaded, which I got at the end of the intercepted download request. This gave me the database entry of the file I uploaded.
 
-![At the bottom you can see the table where the ‘getflag’ file is listed. ](Untitled%205.png)
+![At the bottom you can see the table where the ‘getflag’ file is listed. ](Untitled-5.png)
 
 At the bottom you can see the table where the ‘getflag’ file is listed. 
 
@@ -99,12 +99,12 @@ From there, I created an sql injection that I injected into the `/api/files/down
 
 For the sql injection, I did the following query: `UNION SELECT 1,user_id,title,filename,filepath` , and with all of the proper values in place, the request looked something like: `UNION SELECT 1,130,'getflag','xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT','b+YXVpogrJoGsjPTdQQTud0kMiX7I2ei8BATNwKpXGhtZuRYnT0vJbcMkK7PoZuk'` with the final query looking like what’s shown below once everything was properly encoded.
 
-![Properly encoded post request.](Untitled%206.png)
+![Properly encoded post request.](Untitled-6.png)
 
 Properly encoded post request.
 
 And once I sent that request, I got the flag!
 
-![Untitled](Untitled%207.png)
+![Untitled](Untitled-7.png)
 
 ---
