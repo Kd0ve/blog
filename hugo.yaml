@@ -210,7 +210,7 @@ menu:
         - identifier: main
           name: Landing Page
           url: http://kd0ve.github.io/
-          weight: -150
+          weight: -100
           params:
             icon: infinity
             newTab: false
