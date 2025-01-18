@@ -1,7 +1,7 @@
 baseurl: https://kd0ve.github.io
 languageCode: en-us
 theme: hugo-theme-stack
-paginate: 3
+paginate: 5
 title: Dove
 copyright: Kat
 
