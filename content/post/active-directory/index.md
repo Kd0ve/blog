@@ -119,7 +119,7 @@ And then execute the following command:
 impacket-ntlmrelayx -tf targets.txt -smb2support
 ```
 
-This will dump the NTLMv1 hashes of all users on the machine.
+This will dump the SAM hashes of all users on the machine.
 
 ![The hashes of the vulnerable machines being dumped](image5.png)
 
