@@ -1,6 +1,7 @@
 ---
 
 title: "Secure File Storage"
+description: "Walkthrough of a challenge from the US Cyber Combine."
 date: '2025-01=17'
 lastmod: '2025-01-17'
 author: ["Kat"]
