@@ -40,8 +40,6 @@ I also installed a Kali Linux machine that the attacks will be coming from. To e
 
 ![You need to go into the settings of your virtual machine to change this.](image.png)
 
-You need to go into the settings of your virtual machine to change this.
-
 I also installed PimpMyKali onto the Kali box to add some extra features that will be used.
 
 The tools you will need present on your Kali box are:
