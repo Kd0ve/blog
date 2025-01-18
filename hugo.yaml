@@ -54,7 +54,7 @@ params:
     favicon: /apple-touch-icon.png # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
-        since: 2025
+        since: 2024
         customText:
 
     dateFormat:
@@ -78,7 +78,15 @@ params:
             default: 
 
     comments:
-        enabled: false
+        enabled: true
+        provider: disqus
+
+        disqusjs:
+            shortname: kd0ve
+            apiUrl: https://disqus.com/api/oauth/2.0/authorize/
+            apiKey: Owe8C1AItMUbwC2ucPrVqpTzGm8NFHx5IFuOu9nCCqUNk1cMM2bkRtQcyBa08reJ
+            admin: kd0v33
+            adminLabel: Kat
 
         utterances:
             repo:
