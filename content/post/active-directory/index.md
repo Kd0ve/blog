@@ -1,4 +1,16 @@
-# Active Directory
+---
+title: "Attacking Active Directory With responder and ntlmrelayx"
+description: "Going over ways you can initially exploit an AD environemnt and pull credentials"
+date: '2025-01-17'
+lastmod: '2025-01-17'
+categories:
+- Write-Ups
+tags:
+- Post
+license: CC BY-NC-ND
+comments: true
+image: 'image1.png'
+---
 
 # Description
 
@@ -6,23 +18,17 @@ This project goes over the process of attacking an Active Directory environment.
 
 # Utilities Used
 
-responder
+- responder
+- hashcat
+- impacket
+- evil-winrm
 
-hashcat
+# Environment Used
 
-impacket
-
-evil-winrm
-
-# Environments Used
-
-VMWare Workstation
-
-Microsoft Windows Server 2022 Standard
-
-x2 Microsoft Windows 10 Enterprise
-
-Kali Linux with [PimpMyKali](https://github.com/Dewalt-arch/pimpmykali)
+- VMWare Workstation 
+- Microsoft Windows Server 2022 Standard
+- x2 Microsoft Windows 10 Enterprise
+- Kali Linux with [PimpMyKali](https://github.com/Dewalt-arch/pimpmykali)
 
 # Project Walkthrough
 
@@ -59,21 +65,15 @@ Because we have control over the workstations, we can simulate this event oursel
 responder -I eth0 -dP -v
 ```
 
-![This shows me running the command.](image%201.png)
-
-This shows me running the command.
+![This shows me running the command.](image1.png)
 
 Once you run responder, you need to go over to your Windows 10 workstation and attempt to access a fake SMB share.
 
-![I just typed in \\fake into file explorer.](image%202.png)
-
-I just typed in \\fake into file explorer.
+![I just typed in \\fake into file explorer.](image2.png)
 
 This should drop the NTLMv2 hash of the user who attempted the connection onto your Kali box with the listening responder tool.
 
-![This shows responder dropping the NTLMv2 hash of the fcastle user.](image%203.png)
-
-This shows responder dropping the NTLMv2 hash of the fcastle user.
+![This shows responder dropping the NTLMv2 hash of the fcastle user.](image3.png)
 
 From here, you can put the hash into a text file and use hashcat to attempt to crack the password.
 
@@ -81,9 +81,7 @@ From here, you can put the hash into a text file and use hashcat to attempt to c
 hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
 ```
 
-![This shows Hashcat cracking that user’s password](image%204.png)
-
-This shows Hashcat cracking that user’s password
+![This shows Hashcat cracking that user's password](image4.png)
 
 ### Remediation/Mitigation
 
@@ -99,7 +97,7 @@ This shows Hashcat cracking that user’s password
 
 ## SMB Relay Using Impacket-ntlmrelayx And Responder
 
-This attack can be performed utilizing both impacket-ntlmrelayx and responder in conjunction. It’s very similar to the NR spoofing attack, but allows us to relay the captured NTLM hash and authenticate as that user. This can allow us to dump SAM hashes or gain shell access.
+This attack can be performed utilizing both impacket-ntlmrelayx and responder in conjunction. It's very similar to the NR spoofing attack, but allows us to relay the captured NTLM hash and authenticate as that user. This can allow us to dump SAM hashes or gain shell access.
 
 For this attack to work, there needs to be multiple machines with SMB signing disabled. Make sure to include all of the machines in a target.txt file, or else the attack will not work [[1](https://github.com/fortra/impacket/issues/1010)]
 
@@ -125,9 +123,7 @@ impacket-ntlmrelayx -tf targets.txt -smb2support
 
 This will dump the NTLMv1 hashes of all users on the machine.
 
-![The hashes of the vulnerable machines being dumped](image%205.png)
-
-The hashes of the vulnerable machines being dumped
+![The hashes of the vulnerable machines being dumped](image5.png)
 
 You should also be able to use ntlmrelayx to open smb shells on the machine. If you do the following command:
 
@@ -137,7 +133,7 @@ impacket-ntlmrelayx -tf targets.txt -smb2support -i
 
 And then netcat into the session spawned. You will be able to access the machine through SMB.
 
-![image.png](image%206.png)
+![Accessing shell using netcat](image6.png)
 
 Theoretically, this can then be used to perform a PtH attack utilizing something like evil-winrm. However, for this to work with evil-winrm, you need to configure your Windows Remote Management settings.
 
@@ -160,7 +156,7 @@ evil-winrm -i <ip> -u 'administrator' -H <hash>
 
 # Conclusion
 
-Here I’ve shown just two very basic attacks that can be performed on an Active Directory environment. Later on, I will show some other attacks utilizing ldapdomaindump, ldapsearch, bloodhound, crackmapexec, netexec and more. There are a variety of attacks the AD is vulnerable to, here is just an intro.
+Here I've shown just two very basic attacks that can be performed on an Active Directory environment. Later on, I will show some other attacks utilizing ldapdomaindump, ldapsearch, bloodhound, crackmapexec, netexec and more. There are a variety of attacks the AD is vulnerable to, here is just an intro.
 
 I will also show an example of utilizing evil-winrm practically and how you can use this tool to your advantage when exploiting an environment.
 
