@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Learning on Dove</title>
-        <link>http://localhost:1313/categories/learning/</link>
+        <link>http://localhost:1313/blog/categories/learning/</link>
         <description>Recent content in Learning on Dove</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Kat</copyright>
-        <lastBuildDate>Sun, 21 Jul 2024 20:17:51 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/learning/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 21 Jul 2024 20:17:51 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/categories/learning/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HTB Bug Bounty - HTTP Fundamentals</title>
-        <link>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</link>
+        <link>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</link>
         <pubDate>Sun, 21 Jul 2024 17:51:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</guid>
-        <description>&lt;img src="http://localhost:1313/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
 &lt;p&gt;This is just some notes I took while going through the Bug Bounty course in Hack The Box Academy. I figured I would post it in case it would help others learn.&lt;/p&gt;
 &lt;p&gt;Apologies if it seems everywhere! I didn&amp;rsquo;t go through and clean anything up :3&lt;/p&gt;
 &lt;hr&gt;
@@ -74,11 +74,11 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
         </item>
         <item>
         <title>Portswigger Academy Day Three</title>
-        <link>http://localhost:1313/p/portswigger-academy-day-three/</link>
+        <link>http://localhost:1313/blog/p/portswigger-academy-day-three/</link>
         <pubDate>Wed, 15 May 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/portswigger-academy-day-three/</guid>
-        <description>&lt;img src="http://localhost:1313/p/portswigger-academy-day-three/portswigger-03.jpg" alt="Featured image of post Portswigger Academy Day Three" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/portswigger-academy-day-three/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/portswigger-academy-day-three/portswigger-03.jpg" alt="Featured image of post Portswigger Academy Day Three" /&gt;&lt;hr&gt;
 &lt;p&gt;This took a while for me to get through. I kept working on small sections at a time but wanted enough content for a post before I posted. So, although it says, &amp;ldquo;Day Three&amp;rdquo;, it&amp;rsquo;s more like day 6 or 7.&lt;/p&gt;
 &lt;p&gt;In this post, we&amp;rsquo;re going to be covering part of the API Testing module. This is all about utilizing API on web apps to force changes to be made to content on the website, or potentially leak valuable information.&lt;/p&gt;
 &lt;hr&gt;

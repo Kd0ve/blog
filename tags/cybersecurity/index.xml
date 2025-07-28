@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Cybersecurity on Dove</title>
-        <link>http://localhost:1313/tags/cybersecurity/</link>
+        <link>http://localhost:1313/blog/tags/cybersecurity/</link>
         <description>Recent content in Cybersecurity on Dove</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Kat</copyright>
-        <lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/cybersecurity/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/cybersecurity/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Setting Up GOAD On Windows</title>
-        <link>http://localhost:1313/p/setting-up-goad-on-windows/</link>
+        <link>http://localhost:1313/blog/p/setting-up-goad-on-windows/</link>
         <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/setting-up-goad-on-windows/</guid>
-        <description>&lt;img src="http://localhost:1313/p/setting-up-goad-on-windows/image.png" alt="Featured image of post Setting Up GOAD On Windows" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+        <guid>http://localhost:1313/blog/p/setting-up-goad-on-windows/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/setting-up-goad-on-windows/image.png" alt="Featured image of post Setting Up GOAD On Windows" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
 &lt;/h2&gt;&lt;p&gt;We will be going over the process of getting the Game Of Active Directory set up on a Windows device. I am going to be using VMWare workstation for this.&lt;/p&gt;
 &lt;h2 id=&#34;environment&#34;&gt;Environment
 &lt;/h2&gt;&lt;ul&gt;
@@ -70,10 +70,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;And you should get the following screen:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image.png&#34;
 	width=&#34;821&#34;
 	height=&#34;323&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of the GOAD menu that should spawn after the command&#34;
@@ -112,10 +112,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;What helped me was assigning an IP to my machine for the adaptor that was being used for the machines. I go over later on how to figure out which adaptor is the one your lab is using. You can skip the the &amp;ldquo;Getting Kali Configured&amp;rdquo; section to see how I did that and then come back here.&lt;/p&gt;
 &lt;p&gt;To get to the adaptors, you need to go to the Control Panel in your host machine and go to &amp;ldquo;Network and Internet.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image1.png&#34;
 	width=&#34;751&#34;
 	height=&#34;495&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click for Network and Internet&#34;
@@ -127,10 +127,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;You then want to go to &amp;ldquo;Network and Sharing Center.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image2.png&#34;
 	width=&#34;749&#34;
 	height=&#34;371&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click for Network and Sharing Center&#34;
@@ -142,10 +142,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;And then you&amp;rsquo;ll want to click &amp;ldquo;Change adaptor settings.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image3.png&#34;
 	width=&#34;755&#34;
 	height=&#34;448&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click for adaptor settings&#34;
@@ -157,10 +157,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Then you want to right click the adaptor you need to configure and select properties. A window will pop up where you will want to go down to &amp;ldquo;Internet Protocol Version 4.&amp;rdquo; From here you will select &amp;ldquo;Properties.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image4.png&#34;
 	width=&#34;350&#34;
 	height=&#34;460&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click to get into IPv4 properties&#34;
@@ -172,10 +172,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From here, you will edit the configuration similarly to what I have below depending on your IP range you set.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image5.png&#34;
 	width=&#34;391&#34;
 	height=&#34;446&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of the network adaptor configurations&#34;
@@ -193,10 +193,10 @@
 &lt;h2 id=&#34;getting-kali-configured&#34;&gt;Getting Kali Configured
 &lt;/h2&gt;&lt;p&gt;To get Kali to be able to communicate with all the machines on the network, you need to add the adaptor to the machine.&lt;/p&gt;
 &lt;p&gt;First, you need to find what adaptor is hosting the IP range you specified. To do that you can go to &amp;ldquo;Edit&amp;rdquo; and then &amp;ldquo;Virtual Network Editor&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image6.png&#34;
 	width=&#34;596&#34;
 	height=&#34;550&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Image of the Virtual Network Editor window&#34;
@@ -209,10 +209,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;You can see here I have multiple adaptors, but the one with the range &amp;ldquo;192.168.74.0&amp;rdquo; is the one I need to connect to. That would be VMnet1.&lt;/p&gt;
 &lt;p&gt;Next you want to right click on the Kali box in VMWare and click &amp;ldquo;Settings&amp;rdquo;. From here, you can edit the adaptor.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image7.png&#34;
 	width=&#34;753&#34;
 	height=&#34;725&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating how your settings should be configured&#34;
@@ -225,10 +225,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;Where I have highlighted in red, you should have set and selected the VMnet adaptor that corresponds to the one for your GOAD network.&lt;/p&gt;
 &lt;p&gt;After saving these settings and booting into Kali, you may have to set a static IP for the box. To do this, click the upper left corner Kali menu and search &amp;ldquo;Network&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image8.png&#34;
 	width=&#34;562&#34;
 	height=&#34;476&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of searching Network in kali menu&#34;
@@ -240,10 +240,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Click the &amp;ldquo;Advanced Network Configuration&amp;rdquo; option. This will open up your network configurations, where you want to click on the Wired Connection and click the gear icon.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image9.png&#34;
 	width=&#34;598&#34;
 	height=&#34;425&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;showing where to click the gear icon after selecting the wired connection&#34;
@@ -255,10 +255,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;You then want to click into the IPv4 settings window, and add your IP address within the range of your lab. I also just set the DNS to 8.8.8.8 for good measure and to prevent any name resolution issues.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image10.png&#34;
 	width=&#34;693&#34;
 	height=&#34;543&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where you should click and what you should set&#34;

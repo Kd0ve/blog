@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Webdev on Dove</title>
-        <link>http://localhost:1313/tags/webdev/</link>
+        <link>http://localhost:1313/blog/tags/webdev/</link>
         <description>Recent content in Webdev on Dove</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Kat</copyright>
-        <lastBuildDate>Wed, 17 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/webdev/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 17 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/webdev/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Overview of Hugo Site Setup</title>
-        <link>http://localhost:1313/p/overview-of-hugo-site-setup/</link>
+        <link>http://localhost:1313/blog/p/overview-of-hugo-site-setup/</link>
         <pubDate>Wed, 17 Apr 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/overview-of-hugo-site-setup/</guid>
-        <description>&lt;img src="http://localhost:1313/p/overview-of-hugo-site-setup/hugo-logo.png" alt="Featured image of post Overview of Hugo Site Setup" /&gt;&lt;p&gt;This post is going to be about how I would go about setting up a website like mine now that I’ve done it. I’ve learned a lot, and ran into a lot of specific issues, and figured I could be helpful to others who run into these weird little issues too, as it was difficult to find information on them online.&lt;/p&gt;
+        <guid>http://localhost:1313/blog/p/overview-of-hugo-site-setup/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/overview-of-hugo-site-setup/hugo-logo.png" alt="Featured image of post Overview of Hugo Site Setup" /&gt;&lt;p&gt;This post is going to be about how I would go about setting up a website like mine now that I’ve done it. I’ve learned a lot, and ran into a lot of specific issues, and figured I could be helpful to others who run into these weird little issues too, as it was difficult to find information on them online.&lt;/p&gt;
 &lt;p&gt;I’m not going to be going over the specifics of Hugo or really going into detail certain terms I am using. I would recommend getting a basic idea of how Hugo works by reading the Hugo &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/about/introduction/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;documentation&lt;/a&gt;. This is always going to be a great reference to have.&lt;/p&gt;
 &lt;h2 id=&#34;hugo&#34;&gt;Hugo
@@ -24,10 +24,10 @@
 &lt;p&gt;I’ve found this to be the best route, as &lt;code&gt;winget&lt;/code&gt; is on every Windows 10 and 11 device by default, so it will typically just work. If you have a different host system, go &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/installation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;here&lt;/a&gt; to get the appropriate instruction for your system.&lt;/p&gt;
 &lt;h2 id=&#34;creating-first-site&#34;&gt;Creating First Site
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/root-folder.png&#34;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/root-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/root-folder_hu1154808637891486140.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/root-folder_hu16124952820340381237.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/root-folder_hu1154808637891486140.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/root-folder_hu16124952820340381237.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what a root folder might look like&#34;
@@ -41,10 +41,10 @@
 &lt;p&gt;When you run &lt;code&gt;hugo new site &amp;lt;sitename&amp;gt; -f “yaml”&lt;/code&gt; Hugo generates certain default files that are in a YAML format. For me, working with YAML instead of their default format is much more straight forward, and a lot of themes come by default with yaml configs.&lt;/p&gt;
 &lt;p&gt;I’ve found many tutorials recommending running this command and then adding in the theme to the “themes” folder that’s generated, and then putting in the theme name into your config file that is generated. Although this works, there are a few more steps that could (and should) be taken.&lt;/p&gt;
 &lt;h2 id=&#34;adding-theme&#34;&gt;Adding Theme
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder.png&#34;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/theme-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;449&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder_hu3159321689814680720.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder_hu17815554162465711669.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/theme-folder_hu3159321689814680720.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/theme-folder_hu17815554162465711669.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what a theme folder might look like&#34;
@@ -64,10 +64,10 @@
 &lt;h2 id=&#34;folder-layout&#34;&gt;Folder Layout
 &lt;/h2&gt;&lt;p&gt;Now you should be able to run &lt;code&gt;hugo serve&lt;/code&gt; or &lt;code&gt;hugo server&lt;/code&gt; and get a display of the website on &lt;code&gt;localhost:1313&lt;/code&gt;. This should be the example site being displayed in your browser. From here, let’s look at the folders and how they’re laid out.
 First, you’ll have your content folder. This is the most important folder, and one of the ones that confused me the most.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/content-folder.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/content-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;110&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/content-folder_hu16183800506701782520.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/content-folder_hu9833812900818557534.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/content-folder_hu16183800506701782520.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/content-folder_hu9833812900818557534.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what a contents folder might look like&#34;
@@ -79,10 +79,10 @@ First, you’ll have your content folder. This is the most important folder, and
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;This is an example of what your content page might look like. Each folder is a type of content on your website. You can make exclusive respects of their front matter and put that markdown file into your archetypes folder. If an archetypes folder wasn’t generated by default, you can take the one from the theme and copy it into your root directory.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/archetype-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;119&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder_hu12226516954040258921.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder_hu867295626708893591.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/archetype-folder_hu12226516954040258921.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/archetype-folder_hu867295626708893591.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what an archetypes folder might look like&#34;
@@ -288,10 +288,10 @@ First, you’ll have your content folder. This is the most important folder, and
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;In the api application, once you’ve filled it out, you should get a settings page. From there, you should see the OAuth section:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/oauth-settings.png&#34;
 	width=&#34;624&#34;
 	height=&#34;485&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings_hu3699585885600222782.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings_hu3024140871151274822.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/oauth-settings_hu3699585885600222782.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/oauth-settings_hu3024140871151274822.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;An example of what the OAuth panel looks like&#34;
@@ -304,10 +304,10 @@ First, you’ll have your content folder. This is the most important folder, and
 &gt;&lt;/p&gt;
 &lt;p&gt;You will want to grab the API Key and put that where it says apiKey in the configuration. Then, grab the authorization URL, and put that where it says apiUrl. Of course, you should already have your shortname.&lt;/p&gt;
 &lt;p&gt;To get your admin name and label, you can go to your profile and look over to where it says your name.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/profile.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/profile.png&#34;
 	width=&#34;365&#34;
 	height=&#34;478&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/profile_hu13748880007032729729.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/profile_hu15095057623397430318.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/profile_hu13748880007032729729.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/profile_hu15095057623397430318.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;What a Disqus profile looks like&#34;

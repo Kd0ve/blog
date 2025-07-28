@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+    <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="My writeup of the Try Hack Me Forensics challenge">
 <title>Forensics Using Volatility</title>
 
-<link rel='canonical' href='http://localhost:1313/p/forensics-using-volatility/'>
+<link rel='canonical' href='http://localhost:1313/blog/p/forensics-using-volatility/'>
 
-<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Forensics Using Volatility">
+<link rel="stylesheet" href="/blog/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Forensics Using Volatility">
 <meta property='og:description' content="My writeup of the Try Hack Me Forensics challenge">
-<meta property='og:url' content='http://localhost:1313/p/forensics-using-volatility/'>
+<meta property='og:url' content='http://localhost:1313/blog/p/forensics-using-volatility/'>
 <meta property='og:site_name' content='Dove'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:tag' content='Practice' /><meta property='article:tag' content='Try Hack Me' /><meta property='article:published_time' content='2024-04-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-04-19T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/forensics-using-volatility/shellbags-output.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:tag' content='Practice' /><meta property='article:tag' content='Try Hack Me' /><meta property='article:published_time' content='2024-04-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-04-19T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/blog/p/forensics-using-volatility/shellbags-output.png' />
 <meta name="twitter:title" content="Forensics Using Volatility">
 <meta name="twitter:description" content="My writeup of the Try Hack Me Forensics challenge"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/forensics-using-volatility/shellbags-output.png' />
+    <meta name="twitter:image" content='http://localhost:1313/blog/p/forensics-using-volatility/shellbags-output.png' />
     <link rel="shortcut icon" href="/apple-touch-icon.png" />
 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
@@ -69,7 +69,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h1 class="site-name"><a href="/blog">Dove</a></h1>
             <h2 class="site-description">I like breaking things :)</h2>
         </div>
     </header><ol class="menu-social">
@@ -119,7 +119,7 @@
         
         
         <li >
-            <a href='/' >
+            <a href='/blog/' >
                 
                 
                 
@@ -176,7 +176,7 @@
         
         
         <li >
-            <a href='/archives/' >
+            <a href='/blog/archives/' >
                 
                 
                 
@@ -196,7 +196,7 @@
         
         
         <li >
-            <a href='/search/' >
+            <a href='/blog/search/' >
                 
                 
                 
@@ -215,7 +215,7 @@
         
         
         <li >
-            <a href='/links/' >
+            <a href='/blog/links/' >
                 
                 
                 
@@ -249,11 +249,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>English</option>
+                                    <option value="http://localhost:1313/blog/" selected>English</option>
                                 
-                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                    <option value="http://localhost:1313/blog/zh-cn/" >中文</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="http://localhost:1313/blog/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -352,9 +352,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/forensics-using-volatility/">
-                <img src="/p/forensics-using-volatility/shellbags-output_hu14212206533703573229.png"
-                        srcset="/p/forensics-using-volatility/shellbags-output_hu14212206533703573229.png 800w, /p/forensics-using-volatility/shellbags-output_hu15234368375304345487.png 1600w"
+            <a href="/blog/p/forensics-using-volatility/">
+                <img src="/blog/p/forensics-using-volatility/shellbags-output_hu14212206533703573229.png"
+                        srcset="/blog/p/forensics-using-volatility/shellbags-output_hu14212206533703573229.png 800w, /blog/p/forensics-using-volatility/shellbags-output_hu15234368375304345487.png 1600w"
                         width="800" 
                         height="521" 
                         loading="lazy"
@@ -368,7 +368,7 @@
     
     <header class="article-category">
         
-            <a href="/categories/write-ups/" >
+            <a href="/blog/categories/write-ups/" >
                 Write-Ups
             </a>
         
@@ -377,7 +377,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/forensics-using-volatility/">Forensics Using Volatility</a>
+            <a href="/blog/p/forensics-using-volatility/">Forensics Using Volatility</a>
         </h2>
     
         
@@ -439,10 +439,10 @@
 <h2 id="task-1">Task 1
 </h2><h3 id="getting-started">Getting Started
 </h3><p>My first instinct is to open up autopsy and pull the image into that program to analyze. Completely incorrect method. Well, not completely. I was able to see the hex dump of the image, but it was listing as two unallocated partitions that showed as deleted.</p>
-<p><img src="/p/forensics-using-volatility/victim-in-autopsy.png"
+<p><img src="/blog/p/forensics-using-volatility/victim-in-autopsy.png"
 	width="720"
 	height="354"
-	srcset="/p/forensics-using-volatility/victim-in-autopsy_hu6615383126371338041.png 480w, /p/forensics-using-volatility/victim-in-autopsy_hu7746855299507895947.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/victim-in-autopsy_hu6615383126371338041.png 480w, /blog/p/forensics-using-volatility/victim-in-autopsy_hu7746855299507895947.png 1024w"
 	loading="lazy"
 	
 		alt="This is what it looked like"
@@ -459,10 +459,10 @@
 <p>What is the Operating System of this Dump file? (OS name)</p>
 </blockquote>
 <p>This was pretty straight forward as the extracted files all were referencing the OS.</p>
-<p><img src="/p/forensics-using-volatility/showing-os.png"
+<p><img src="/blog/p/forensics-using-volatility/showing-os.png"
 	width="867"
 	height="152"
-	srcset="/p/forensics-using-volatility/showing-os_hu15148400491427510130.png 480w, /p/forensics-using-volatility/showing-os_hu6798963205246644304.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/showing-os_hu15148400491427510130.png 480w, /blog/p/forensics-using-volatility/showing-os_hu6798963205246644304.png 1024w"
 	loading="lazy"
 	
 		alt="Here is an example of where the OS was referenced"
@@ -482,10 +482,10 @@
 <p>What is the PID of SearchIndexer.</p>
 </blockquote>
 <p>In Volatility Workbench, there is an option to view processes once you specify the memory dump. So, I dumped the memory processes, which gave me all the processes on the target system.</p>
-<p><img src="/p/forensics-using-volatility/proccesses-list.png"
+<p><img src="/blog/p/forensics-using-volatility/proccesses-list.png"
 	width="715"
 	height="393"
-	srcset="/p/forensics-using-volatility/proccesses-list_hu15649192347604938192.png 480w, /p/forensics-using-volatility/proccesses-list_hu2098123926504729295.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/proccesses-list_hu15649192347604938192.png 480w, /blog/p/forensics-using-volatility/proccesses-list_hu2098123926504729295.png 1024w"
 	loading="lazy"
 	
 		alt="Here is was the processes list looked like"
@@ -499,10 +499,10 @@
 <h3 id="files-upon-files">Files Upon Files&hellip;
 </h3><p>In the meantime, my Autopsy scan was still running away. I decided to check up on that as it seemed some more files were uncovered as the image was being analyzed.</p>
 <p>It showed a bunch of carved files, and a potentially malicious zip file, but nothing of importance. The real helper here would be Volatility.</p>
-<p><img src="/p/forensics-using-volatility/carved.png"
+<p><img src="/blog/p/forensics-using-volatility/carved.png"
 	width="1498"
 	height="727"
-	srcset="/p/forensics-using-volatility/carved_hu1859101180031224459.png 480w, /p/forensics-using-volatility/carved_hu4148708545286126835.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/carved_hu1859101180031224459.png 480w, /blog/p/forensics-using-volatility/carved_hu4148708545286126835.png 1024w"
 	loading="lazy"
 	
 		alt="Here is what Autopsy was showing me"
@@ -521,10 +521,10 @@
 <p>That didn&rsquo;t end up giving me what I needed. I decided to cave and just use Volatility in wsl. Volatility Workbench didn&rsquo;t have everything on it I needed, plus it was based in Volatility 3 and I need Volatility 2 to run the shellbags plugin.</p>
 <p>The shellbags plugin was supposed to give a list of accessed directories and their last access time, which would give me exactly what I needed.</p>
 <p>Getting Volatility working is always a pain, especially when it&rsquo;s Volatility 2. But I got it installed and working, and ran <code>vol.py -f victim.raw imageinfo</code> to get the profile I should run.</p>
-<p><img src="/p/forensics-using-volatility/volatility-profile.png"
+<p><img src="/blog/p/forensics-using-volatility/volatility-profile.png"
 	width="1098"
 	height="330"
-	srcset="/p/forensics-using-volatility/volatility-profile_hu17444467872235278850.png 480w, /p/forensics-using-volatility/volatility-profile_hu12922377535795468152.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/volatility-profile_hu17444467872235278850.png 480w, /blog/p/forensics-using-volatility/volatility-profile_hu12922377535795468152.png 1024w"
 	loading="lazy"
 	
 		alt="This was the output for running that command"
@@ -536,10 +536,10 @@
 	
 ></p>
 <p>Then I ran <code>vol.py -f victim.raw --profile=&lt;profile&gt; shellbags</code> to hopefully get the last accessed directory. The profile given for me to run was <code>Win7SP1x64</code> so I ran <code>vol.py -f victim.raw --profile=Win7SP1x64 shellbags</code></p>
-<p><img src="/p/forensics-using-volatility/shellbags-output.png"
+<p><img src="/blog/p/forensics-using-volatility/shellbags-output.png"
 	width="733"
 	height="477"
-	srcset="/p/forensics-using-volatility/shellbags-output_hu8737139027612271929.png 480w, /p/forensics-using-volatility/shellbags-output_hu15817912649029364909.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/shellbags-output_hu8737139027612271929.png 480w, /blog/p/forensics-using-volatility/shellbags-output_hu15817912649029364909.png 1024w"
 	loading="lazy"
 	
 		alt="Here is the output for running the shellbags plugin against the image"
@@ -552,10 +552,10 @@
 ></p>
 <p>It&rsquo;s not sorted, obviously, so I did the same command but had it output to a text document. I was hoping to be able to put it into an excel spreadsheet. The command I did was <code>vol.py -f victim.raw --profile=Win7SP1x64 shellbags &gt; access.txt</code> (This took forever to run).</p>
 <p>I decided to look through the output manually and just parse it out since there weren&rsquo;t a whole lot, and I ended up finding the directory.</p>
-<p><img src="/p/forensics-using-volatility/shellbags-last-accessed.png"
+<p><img src="/blog/p/forensics-using-volatility/shellbags-last-accessed.png"
 	width="1101"
 	height="273"
-	srcset="/p/forensics-using-volatility/shellbags-last-accessed_hu14802295084782932999.png 480w, /p/forensics-using-volatility/shellbags-last-accessed_hu6327837449283835280.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/shellbags-last-accessed_hu14802295084782932999.png 480w, /blog/p/forensics-using-volatility/shellbags-last-accessed_hu6327837449283835280.png 1024w"
 	loading="lazy"
 	
 		alt="Here is where I found the listing for the last accessed directory"
@@ -571,10 +571,10 @@
 </h2><h3 id="netscan">Netscan
 </h3><p>Next question is about malicious services on different ports, so I&rsquo;ll be running <code>vol.py -f victim.raw --profile=Win7SP1x64 netscan</code> to get the running services and their associated ports</p>
 <p>I was pretty confused at first because I could tell which service was the malicious one, I got the PID of it, <code>2464</code>, and the service was <code>wmpnetwk.exe</code> as that&rsquo;s not a typical service, but it&rsquo;s listed a million different times.</p>
-<p><img src="/p/forensics-using-volatility/wmpnetwk.png"
+<p><img src="/blog/p/forensics-using-volatility/wmpnetwk.png"
 	width="1092"
 	height="481"
-	srcset="/p/forensics-using-volatility/wmpnetwk_hu1478260537105056053.png 480w, /p/forensics-using-volatility/wmpnetwk_hu11549894565849730128.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/wmpnetwk_hu1478260537105056053.png 480w, /blog/p/forensics-using-volatility/wmpnetwk_hu11549894565849730128.png 1024w"
 	loading="lazy"
 	
 		alt="As you can see, there are multiple listings of that service"
@@ -587,10 +587,10 @@
 ></p>
 <p>Eventually, I found it listed at the beginning of the services list, so I put that in and I guess it was right. Not entirely sure how that&rsquo;s more right than the others.</p>
 <p>My assumption is that specific one is correct because it&rsquo;s the primary instance that that service is running from.</p>
-<p><img src="/p/forensics-using-volatility/netscan-result.png"
+<p><img src="/blog/p/forensics-using-volatility/netscan-result.png"
 	width="1373"
 	height="447"
-	srcset="/p/forensics-using-volatility/netscan-result_hu17147190146339257021.png 480w, /p/forensics-using-volatility/netscan-result_hu12883370454199770980.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/netscan-result_hu17147190146339257021.png 480w, /blog/p/forensics-using-volatility/netscan-result_hu12883370454199770980.png 1024w"
 	loading="lazy"
 	
 		alt="Here is where I saw the correct port and protocol"
@@ -615,10 +615,10 @@
 <p>For some reason it the room wasn&rsquo;t taking the PIDs in the order I was giving them. They had to be in a specific order to be considered correct.</p>
 <p>The above method found the right PIDs, but the instructions implied a different method of solving, so I thought maybe I had gotten the wrong PIDs because I had used the wrong method, but that wasn&rsquo;t the case.</p>
 <p>The method that the challenge was implying wanted you to look for two things. If the node had a <code>Protection: *_EXECUTE_*</code> in it, plus the Vad Tag was VadS.</p>
-<p><img src="/p/forensics-using-volatility/first-find-search.png"
+<p><img src="/blog/p/forensics-using-volatility/first-find-search.png"
 	width="1468"
 	height="709"
-	srcset="/p/forensics-using-volatility/first-find-search_hu3047120135640698108.png 480w, /p/forensics-using-volatility/first-find-search_hu5236170536559308470.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/first-find-search_hu3047120135640698108.png 480w, /blog/p/forensics-using-volatility/first-find-search_hu5236170536559308470.png 1024w"
 	loading="lazy"
 	
 		alt="This is an example of what they wanted you to search. You can see in the middle where I highlighted the proper VAD node with the VadS tag and an execute protection"
@@ -630,10 +630,10 @@
 	
 ></p>
 <p>The method where you solely look for <code>PAGE_EXECUTE_READWRITE</code> works much better since only the services that were malicious had that specific protection.</p>
-<p><img src="/p/forensics-using-volatility/execute-readwrite.png"
+<p><img src="/blog/p/forensics-using-volatility/execute-readwrite.png"
 	width="1460"
 	height="688"
-	srcset="/p/forensics-using-volatility/execute-readwrite_hu9279843065373541427.png 480w, /p/forensics-using-volatility/execute-readwrite_hu15373687776768670415.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/execute-readwrite_hu9279843065373541427.png 480w, /blog/p/forensics-using-volatility/execute-readwrite_hu15373687776768670415.png 1024w"
 	loading="lazy"
 	
 		alt="Here you can see how narrowed down the search becomes, with only five instances of the PAGE_EXECUTE_READWRITE protection existing"
@@ -664,10 +664,10 @@
 <p>I am using WinDBG to analyze the 1860.dmp file. I&rsquo;m also going to dump the 1820 and 2464 processes.</p>
 <p>I messed with these files for a while. I used a bunch of different tools said to be able to analyze .dmp files, but I defaulted back to volatility to see if I can dump all the files and maybe just pop them into virus total.</p>
 <p>It took me way too long, but I found out that you can scan through the files and grep the service name file, and then download that specific file using the memory location.</p>
-<p><img src="/p/forensics-using-volatility/explorer.png"
+<p><img src="/blog/p/forensics-using-volatility/explorer.png"
 	width="787"
 	height="66"
-	srcset="/p/forensics-using-volatility/explorer_hu11410370584265761552.png 480w, /p/forensics-using-volatility/explorer_hu3358643737333255145.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/explorer_hu11410370584265761552.png 480w, /blog/p/forensics-using-volatility/explorer_hu3358643737333255145.png 1024w"
 	loading="lazy"
 	
 		alt="Heres what was run and the output"
@@ -684,10 +684,10 @@
 <p>So, I went back to my terminal, and tried printing out the strings of each service and greping the question using wildcards.</p>
 <p>I was looking up how to properly grep with wild cards, and you actually have to do <code>.*</code> to mean any character since grep works with regular expressions.</p>
 <p>I used <code>strings &lt;service&gt;.dmp | grep www.go.*.ru</code>. I tried it on all the dump files and the only one that came up with any results was the service with PID of 1820.</p>
-<p><img src="/p/forensics-using-volatility/go-result.png"
+<p><img src="/blog/p/forensics-using-volatility/go-result.png"
 	width="275"
 	height="348"
-	srcset="/p/forensics-using-volatility/go-result_hu654835869961324499.png 480w, /p/forensics-using-volatility/go-result_hu626789756994933499.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/go-result_hu654835869961324499.png 480w, /blog/p/forensics-using-volatility/go-result_hu626789756994933499.png 1024w"
 	loading="lazy"
 	
 		alt="The output of that query"
@@ -704,10 +704,10 @@
 <p>&lsquo;www.i****.com&rsquo; (write full URL without any quotation marks)</p>
 </blockquote>
 <p>So, I&rsquo;m assuming that all the answers will be in the 1820 service, but if I couldn&rsquo;t find them there I&rsquo;d parse through the others as well. Next query looked like <code>strings 1820.dmp | grep www.i.*.com</code>.</p>
-<p><img src="/p/forensics-using-volatility/i-result.png"
+<p><img src="/blog/p/forensics-using-volatility/i-result.png"
 	width="473"
 	height="457"
-	srcset="/p/forensics-using-volatility/i-result_hu4597706256267746876.png 480w, /p/forensics-using-volatility/i-result_hu13494881011300981915.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/i-result_hu4597706256267746876.png 480w, /blog/p/forensics-using-volatility/i-result_hu13494881011300981915.png 1024w"
 	loading="lazy"
 	
 		alt="Here is the result after parsing through 1820s strings"
@@ -726,10 +726,10 @@
 </blockquote>
 <p>We already kind of got this one by doing the &lsquo;i&rsquo; wild card, but I&rsquo;m going to rerun the query with the added &lsquo;c&rsquo; to narrow down the results so I don&rsquo;t have to manually. In this one there should be six characters after the &lsquo;ic&rsquo;.</p>
 <p>There was only one that fit that criteria, and it was the first result.</p>
-<p><img src="/p/forensics-using-volatility/ic-result.png"
+<p><img src="/blog/p/forensics-using-volatility/ic-result.png"
 	width="383"
 	height="123"
-	srcset="/p/forensics-using-volatility/ic-result_hu7360740634972445229.png 480w, /p/forensics-using-volatility/ic-result_hu1679968806069617779.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/ic-result_hu7360740634972445229.png 480w, /blog/p/forensics-using-volatility/ic-result_hu1679968806069617779.png 1024w"
 	loading="lazy"
 	
 		alt="Here are what that queries results looked like"
@@ -750,10 +750,10 @@
 <p><code>***.200.**.164 (Write full IP)</code></p>
 </blockquote>
 <p>And again we do <code>strings 1820.dmp | grep .*.200..*.164</code> which gives us the flag and&hellip; this mess&hellip;</p>
-<p><img src="/p/forensics-using-volatility/second-ip.png"
+<p><img src="/blog/p/forensics-using-volatility/second-ip.png"
 	width="1096"
 	height="159"
-	srcset="/p/forensics-using-volatility/second-ip_hu4005208163394762688.png 480w, /p/forensics-using-volatility/second-ip_hu5913733713831547407.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/second-ip_hu4005208163394762688.png 480w, /blog/p/forensics-using-volatility/second-ip_hu5913733713831547407.png 1024w"
 	loading="lazy"
 	
 		alt="This was startling to see!"
@@ -769,10 +769,10 @@
 <p><code>209.190.***.***</code></p>
 </blockquote>
 <p>So, one last time, we do <code>strings 1820.dmp | grep 209.190..*..*</code> which gives us this flag along with another weird URL.</p>
-<p><img src="/p/forensics-using-volatility/third-ip.png"
+<p><img src="/blog/p/forensics-using-volatility/third-ip.png"
 	width="464"
 	height="60"
-	srcset="/p/forensics-using-volatility/third-ip_hu12847627047245911863.png 480w, /p/forensics-using-volatility/third-ip_hu18270300220026707576.png 1024w"
+	srcset="/blog/p/forensics-using-volatility/third-ip_hu12847627047245911863.png 480w, /blog/p/forensics-using-volatility/third-ip_hu18270300220026707576.png 1024w"
 	loading="lazy"
 	
 		alt="Theyre looking up some weird stuff!"
@@ -802,11 +802,11 @@
     
     <section class="article-tags">
         
-            <a href="/tags/post/">Post</a>
+            <a href="/blog/tags/post/">Post</a>
         
-            <a href="/tags/practice/">Practice</a>
+            <a href="/blog/tags/practice/">Practice</a>
         
-            <a href="/tags/try-hack-me/">Try Hack Me</a>
+            <a href="/blog/tags/try-hack-me/">Try Hack Me</a>
         
     </section>
 
@@ -840,11 +840,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/active-directory-part-2-exploring-goad-environment/">
+    <a href="/blog/p/active-directory-part-2-exploring-goad-environment/">
         
         
             <div class="article-image">
-                <img src="/p/active-directory-part-2-exploring-goad-environment/image9.bb285e060c885b75be576e029e15ce9a_hu7111283274950451260.png" 
+                <img src="/blog/p/active-directory-part-2-exploring-goad-environment/image9.bb285e060c885b75be576e029e15ce9a_hu7111283274950451260.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -864,11 +864,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/attacking-active-directory-with-responder-and-ntlmrelayx/">
+    <a href="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/">
         
         
             <div class="article-image">
-                <img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.421982643a6ccebca12eb9f74586153a_hu5579727104158283614.png" 
+                <img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.421982643a6ccebca12eb9f74586153a_hu5579727104158283614.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -888,11 +888,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/secure-file-storage/">
+    <a href="/blog/p/secure-file-storage/">
         
         
             <div class="article-image">
-                <img src="/p/secure-file-storage/Untitled-1.f5228d55f03014c2570aed6f78901635_hu11265372550408182528.png" 
+                <img src="/blog/p/secure-file-storage/Untitled-1.f5228d55f03014c2570aed6f78901635_hu11265372550408182528.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -912,11 +912,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/crosslock/">
+    <a href="/blog/p/crosslock/">
         
         
             <div class="article-image">
-                <img src="/p/crosslock/decompiler.4615533bc2c12007d7e3fa1be7bb481e_hu1303265344836878652.png" 
+                <img src="/blog/p/crosslock/decompiler.4615533bc2c12007d7e3fa1be7bb481e_hu1303265344836878652.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1083,7 +1083,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+            </script><script type="text/javascript" src="/blog/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

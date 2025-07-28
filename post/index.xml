@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Dove</title>
-        <link>http://localhost:1313/post/</link>
+        <link>http://localhost:1313/blog/post/</link>
         <description>Recent content in Posts on Dove</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Kat</copyright>
-        <lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Active Directory Part 2 - Exploring GOAD Environment</title>
-        <link>http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/</link>
+        <link>http://localhost:1313/blog/p/active-directory-part-2-exploring-goad-environment/</link>
         <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/</guid>
-        <description>&lt;img src="http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9.png" alt="Featured image of post Active Directory Part 2 - Exploring GOAD Environment" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+        <guid>http://localhost:1313/blog/p/active-directory-part-2-exploring-goad-environment/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/active-directory-part-2-exploring-goad-environment/image9.png" alt="Featured image of post Active Directory Part 2 - Exploring GOAD Environment" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
 &lt;/h2&gt;&lt;p&gt;In this writeup, I&amp;rsquo;m going to be going through my exploitation process with GOAD. This process was through my own investigation. I noticed the Castelblack machine was very insecure. It even had a file upload page when you visited the IP on a browser. I will go into how I exploited this and then gained higher privileges on the machine.&lt;/p&gt;
 &lt;h2 id=&#34;environments-used&#34;&gt;Environments Used
 &lt;/h2&gt;&lt;ul&gt;
@@ -176,10 +176,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;The machine seems to have a web page that can be visited, so I went to the IP in my brower.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image.png&#34;
 	width=&#34;523&#34;
 	height=&#34;228&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image_hu3644789445165404818.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image_hu16964745395945124413.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image_hu3644789445165404818.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image_hu16964745395945124413.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;showing the landing page of the castelblack website&#34;
@@ -191,10 +191,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;I clicked the link, and there was a file upload tool that told you where the files were being uploaded to. This was a clear way to get shell.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image1.png&#34;
 	width=&#34;577&#34;
 	height=&#34;219&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image1_hu7094727347148938969.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image1_hu13306337009676980623.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image1_hu7094727347148938969.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image1_hu13306337009676980623.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;the upload files page of the castelblack website&#34;
@@ -239,10 +239,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;exploitation&#34;&gt;Exploitation
 &lt;/h3&gt;&lt;p&gt;Now you can visit the shell uploaded, and a meterpreter session should spawn after a bit.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image2.png&#34;
 	width=&#34;871&#34;
 	height=&#34;156&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image2_hu12764891538223497744.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image2_hu11282707203168226287.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image2_hu12764891538223497744.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image2_hu11282707203168226287.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;the meterpreter shell spawning&#34;
@@ -255,10 +255,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;The reason I went this route is there is a variety of things you can do with a meterpreter shell. Specifically, it makes it much easier to upload and download files. You can also spawn into a normal shell this way and then back out of it to use meterpreter commands.&lt;/p&gt;
 &lt;p&gt;From here there are a variety of routes you can take. First, it&amp;rsquo;s best to elevate privileges. If you check the user you spawn as and their privileges, you will see an interesting one:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image3.png&#34;
 	width=&#34;747&#34;
 	height=&#34;355&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image3_hu14934653119392812267.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image3_hu10955280322680254665.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image3_hu14934653119392812267.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image3_hu10955280322680254665.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;whoami command and whoami /priv command results&#34;
@@ -282,10 +282,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;This should spawn an elevated shell.&lt;/p&gt;
 &lt;p&gt;With meterpreter, all you need to do is go back into the meterpreter shell and type &lt;code&gt;getsystem&lt;/code&gt; and it will elevate you to nt authority.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image4.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image4.png&#34;
 	width=&#34;672&#34;
 	height=&#34;284&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image4_hu9971879519910405219.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image4_hu17037212203224852074.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image4_hu9971879519910405219.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image4_hu17037212203224852074.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using meterpreter to gain elevated privileges&#34;
@@ -297,10 +297,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From here, you should be able to just type &lt;code&gt;hashdump&lt;/code&gt; into the meterpreter window, and all the user hashes should drop:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image5.png&#34;
 	width=&#34;766&#34;
 	height=&#34;157&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image5_hu15713556040192987483.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image5_hu12768770563393929339.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image5_hu15713556040192987483.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image5_hu12768770563393929339.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using meterpreter to dump hashes&#34;
@@ -312,10 +312,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From here, you can spawn a shell using evil-winrm with the Administrator hash.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image6.png&#34;
 	width=&#34;1101&#34;
 	height=&#34;218&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image6_hu10856134132132352402.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image6_hu15234053413621800816.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image6_hu10856134132132352402.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image6_hu15234053413621800816.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using evil-winrm to remote access the machine&#34;
@@ -328,10 +328,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;Evil-winrm is good in the same way that meterpreter is helpful as it allows you to easily upload and download files. This can be useful when trying to get domain information using SharpHound to exfiltrate the zip that is generated.&lt;/p&gt;
 &lt;p&gt;I was having trouble doing this through Evil-WinRM, so we&amp;rsquo;ll move over to meterpreter with the nt authority privileges and attempt to run SharpHound that way.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image7.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image7.png&#34;
 	width=&#34;1543&#34;
 	height=&#34;510&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image7_hu14070463673214676447.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image7_hu17346771357068749891.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image7_hu14070463673214676447.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image7_hu17346771357068749891.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using SharpHound to enumerate the domain&#34;
@@ -343,10 +343,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;And from here you can use meterpreter to download the zip file.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image8.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image8.png&#34;
 	width=&#34;1235&#34;
 	height=&#34;126&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image8_hu2914436305173271639.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image8_hu3239327131353080161.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image8_hu2914436305173271639.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image8_hu3239327131353080161.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using meterpreter to download sharphound zip file&#34;
@@ -371,10 +371,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;And this was the result.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image9.png&#34;
 	width=&#34;1906&#34;
 	height=&#34;875&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9_hu2143932145989030627.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9_hu1719818039209523258.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image9_hu2143932145989030627.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image9_hu1719818039209523258.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;users being displayed in bloodhound&#34;
@@ -388,10 +388,10 @@
 &lt;p&gt;From here, you can make a list of users. These we will use to test for credentials. In the GOAD guide, his methods of collecting user credentials were very useful.&lt;/p&gt;
 &lt;h3 id=&#34;credential-gathering&#34;&gt;Credential Gathering
 &lt;/h3&gt;&lt;p&gt;First, I made a list containing all the users we&amp;rsquo;ve captured.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image10.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image10.png&#34;
 	width=&#34;264&#34;
 	height=&#34;365&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image10_hu894458065874602397.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image10_hu17707513776483341517.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image10_hu894458065874602397.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image10_hu17707513776483341517.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of user.txt file&#34;
@@ -403,10 +403,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;You can also click through all the users in BloodHound and look at their privileges. Particularly, sometimes users will leave credentials in their descriptions. We find this with the samwell.tarly user.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image11.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image11.png&#34;
 	width=&#34;462&#34;
 	height=&#34;448&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image11_hu18075759676135983452.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image11_hu4214800668469146469.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image11_hu18075759676135983452.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image11_hu4214800668469146469.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;user samwell.tarly having password in description&#34;
@@ -426,10 +426,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crackmapexec smb 192.168.74.11 -u users.txt -p users.txt --no-bruteforce --continue-on-success
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image12.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image12.png&#34;
 	width=&#34;1498&#34;
 	height=&#34;325&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image12_hu3563041467773216095.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image12_hu12695700638234472659.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image12_hu3563041467773216095.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image12_hu12695700638234472659.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;checking for users using their username as thier password&#34;
@@ -449,10 +449,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;impacket-GetNPUsers -usersfile users.txt -request -format hashcat -outputfile aspreroastables.txt -dc-ip 192.168.74.11 &amp;#39;north.sevenkingdoms.local/&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image13.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image13.png&#34;
 	width=&#34;1898&#34;
 	height=&#34;408&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image13_hu17524711549465745187.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image13_hu2749505488518197694.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image13_hu17524711549465745187.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image13_hu2749505488518197694.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using getnpusers to dump kerberos hashes&#34;
@@ -472,10 +472,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hashcat -m 18200 aspreroastables.txt /usr/share/wordlists/rockyou.txt
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image14.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image14.png&#34;
 	width=&#34;1285&#34;
 	height=&#34;792&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image14_hu1265579132568998943.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image14_hu9313923710402397754.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image14_hu1265579132568998943.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image14_hu9313923710402397754.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;using hashcat to crack hash dumped&#34;
@@ -487,10 +487,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;We now should have four credentials:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image15.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image15.png&#34;
 	width=&#34;180&#34;
 	height=&#34;163&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image15_hu7438753817952733884.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image15_hu9809159397793653376.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image15_hu7438753817952733884.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image15_hu9809159397793653376.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of all the passwords collected so far&#34;
@@ -510,10 +510,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crackmapexec smb 192.168.74.11 -u users.txt -p passwords.txt --continue-on-success
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image16.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image16.png&#34;
 	width=&#34;1210&#34;
 	height=&#34;791&#34;
-	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image16_hu1193053282102765574.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image16_hu11490271401530542278.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image16_hu1193053282102765574.png 480w, http://localhost:1313/blog/blog/p/active-directory-part-2-exploring-goad-environment/image16_hu11490271401530542278.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image using crackmap to perform password spray&#34;
@@ -540,11 +540,11 @@
         </item>
         <item>
         <title>Setting Up GOAD On Windows</title>
-        <link>http://localhost:1313/p/setting-up-goad-on-windows/</link>
+        <link>http://localhost:1313/blog/p/setting-up-goad-on-windows/</link>
         <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/setting-up-goad-on-windows/</guid>
-        <description>&lt;img src="http://localhost:1313/p/setting-up-goad-on-windows/image.png" alt="Featured image of post Setting Up GOAD On Windows" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+        <guid>http://localhost:1313/blog/p/setting-up-goad-on-windows/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/setting-up-goad-on-windows/image.png" alt="Featured image of post Setting Up GOAD On Windows" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
 &lt;/h2&gt;&lt;p&gt;We will be going over the process of getting the Game Of Active Directory set up on a Windows device. I am going to be using VMWare workstation for this.&lt;/p&gt;
 &lt;h2 id=&#34;environment&#34;&gt;Environment
 &lt;/h2&gt;&lt;ul&gt;
@@ -601,10 +601,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;And you should get the following screen:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image.png&#34;
 	width=&#34;821&#34;
 	height=&#34;323&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of the GOAD menu that should spawn after the command&#34;
@@ -643,10 +643,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;What helped me was assigning an IP to my machine for the adaptor that was being used for the machines. I go over later on how to figure out which adaptor is the one your lab is using. You can skip the the &amp;ldquo;Getting Kali Configured&amp;rdquo; section to see how I did that and then come back here.&lt;/p&gt;
 &lt;p&gt;To get to the adaptors, you need to go to the Control Panel in your host machine and go to &amp;ldquo;Network and Internet.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image1.png&#34;
 	width=&#34;751&#34;
 	height=&#34;495&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click for Network and Internet&#34;
@@ -658,10 +658,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;You then want to go to &amp;ldquo;Network and Sharing Center.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image2.png&#34;
 	width=&#34;749&#34;
 	height=&#34;371&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click for Network and Sharing Center&#34;
@@ -673,10 +673,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;And then you&amp;rsquo;ll want to click &amp;ldquo;Change adaptor settings.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image3.png&#34;
 	width=&#34;755&#34;
 	height=&#34;448&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click for adaptor settings&#34;
@@ -688,10 +688,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Then you want to right click the adaptor you need to configure and select properties. A window will pop up where you will want to go down to &amp;ldquo;Internet Protocol Version 4.&amp;rdquo; From here you will select &amp;ldquo;Properties.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image4.png&#34;
 	width=&#34;350&#34;
 	height=&#34;460&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where to click to get into IPv4 properties&#34;
@@ -703,10 +703,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From here, you will edit the configuration similarly to what I have below depending on your IP range you set.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image5.png&#34;
 	width=&#34;391&#34;
 	height=&#34;446&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of the network adaptor configurations&#34;
@@ -724,10 +724,10 @@
 &lt;h2 id=&#34;getting-kali-configured&#34;&gt;Getting Kali Configured
 &lt;/h2&gt;&lt;p&gt;To get Kali to be able to communicate with all the machines on the network, you need to add the adaptor to the machine.&lt;/p&gt;
 &lt;p&gt;First, you need to find what adaptor is hosting the IP range you specified. To do that you can go to &amp;ldquo;Edit&amp;rdquo; and then &amp;ldquo;Virtual Network Editor&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image6.png&#34;
 	width=&#34;596&#34;
 	height=&#34;550&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Image of the Virtual Network Editor window&#34;
@@ -740,10 +740,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;You can see here I have multiple adaptors, but the one with the range &amp;ldquo;192.168.74.0&amp;rdquo; is the one I need to connect to. That would be VMnet1.&lt;/p&gt;
 &lt;p&gt;Next you want to right click on the Kali box in VMWare and click &amp;ldquo;Settings&amp;rdquo;. From here, you can edit the adaptor.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image7.png&#34;
 	width=&#34;753&#34;
 	height=&#34;725&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating how your settings should be configured&#34;
@@ -756,10 +756,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;Where I have highlighted in red, you should have set and selected the VMnet adaptor that corresponds to the one for your GOAD network.&lt;/p&gt;
 &lt;p&gt;After saving these settings and booting into Kali, you may have to set a static IP for the box. To do this, click the upper left corner Kali menu and search &amp;ldquo;Network&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image8.png&#34;
 	width=&#34;562&#34;
 	height=&#34;476&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image of searching Network in kali menu&#34;
@@ -771,10 +771,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Click the &amp;ldquo;Advanced Network Configuration&amp;rdquo; option. This will open up your network configurations, where you want to click on the Wired Connection and click the gear icon.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image9.png&#34;
 	width=&#34;598&#34;
 	height=&#34;425&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;showing where to click the gear icon after selecting the wired connection&#34;
@@ -786,10 +786,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;You then want to click into the IPv4 settings window, and add your IP address within the range of your lab. I also just set the DNS to 8.8.8.8 for good measure and to prevent any name resolution issues.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image10.png&#34;
 	width=&#34;693&#34;
 	height=&#34;543&#34;
-	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, http://localhost:1313/blog/blog/p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image indicating where you should click and what you should set&#34;
@@ -819,11 +819,11 @@
         </item>
         <item>
         <title>Attacking Active Directory With Responder and NTLMrelayX</title>
-        <link>http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/</link>
+        <link>http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/</link>
         <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/</guid>
-        <description>&lt;img src="http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png" alt="Featured image of post Attacking Active Directory With Responder and NTLMrelayX" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+        <guid>http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png" alt="Featured image of post Attacking Active Directory With Responder and NTLMrelayX" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
 &lt;/h2&gt;&lt;p&gt;This project goes over the process of attacking an Active Directory environment. Remediation process for each attack are suggested as well.&lt;/p&gt;
 &lt;h2 id=&#34;utilities-used&#34;&gt;Utilities Used
 &lt;/h2&gt;&lt;ul&gt;
@@ -846,10 +846,10 @@
     &gt;this&lt;/a&gt; YouTube video for instructions, or go through &lt;a class=&#34;link&#34; href=&#34;https://academy.tcm-sec.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;TCM Academy’s Practical Ethical Hacking&lt;/a&gt; course for proper instructions to get set up.&lt;/p&gt;
 &lt;p&gt;I also installed a Kali Linux machine that the attacks will be coming from. To ensure that you have everything communicating, make sure to change the NIC to NAT for all devices in the lab.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image.png&#34;
 	width=&#34;770&#34;
 	height=&#34;742&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu541003602711950912.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu5110351976956320300.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu541003602711950912.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu5110351976956320300.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;You need to go into the settings of your virtual machine to change this.&#34;
@@ -881,10 +881,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;responder -I eth0 -dP -v
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png&#34;
 	width=&#34;599&#34;
 	height=&#34;402&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu8665747502234018022.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu7641434726893931978.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu8665747502234018022.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu7641434726893931978.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This shows me running the command.&#34;
@@ -896,10 +896,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Once you run responder, you need to go over to your Windows 10 workstation and attempt to access a fake SMB share.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2.png&#34;
 	width=&#34;1147&#34;
 	height=&#34;605&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu11040455925392250640.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu16035247352997422634.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu11040455925392250640.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu16035247352997422634.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;I just typed in \\fake into file explorer.&#34;
@@ -911,10 +911,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;This should drop the NTLMv2 hash of the user who attempted the connection onto your Kali box with the listening responder tool.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3.png&#34;
 	width=&#34;1696&#34;
 	height=&#34;308&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu2081107371195551120.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu8826220879783261373.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu2081107371195551120.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu8826220879783261373.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This shows responder dropping the NTLMv2 hash of the fcastle user.&#34;
@@ -934,10 +934,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4.png&#34;
 	width=&#34;1700&#34;
 	height=&#34;468&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu15088337985485688939.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu11117333335762910878.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu15088337985485688939.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu11117333335762910878.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This shows Hashcat cracking that users password&#34;
@@ -995,10 +995,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;This will dump the SAM hashes of all users on the machine.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5.png&#34;
 	width=&#34;1005&#34;
 	height=&#34;597&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu4590528738589566931.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu10197468966877164379.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu4590528738589566931.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu10197468966877164379.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;The hashes of the vulnerable machines being dumped&#34;
@@ -1019,10 +1019,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;And then netcat into the session spawned. You will be able to access the machine through SMB.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6.png&#34;
 	width=&#34;640&#34;
 	height=&#34;393&#34;
-	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu6735008951734560127.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu13157138618738047387.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu6735008951734560127.png 480w, http://localhost:1313/blog/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu13157138618738047387.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Accessing shell using netcat&#34;
@@ -1064,16 +1064,16 @@
         </item>
         <item>
         <title>Secure File Storage</title>
-        <link>http://localhost:1313/p/secure-file-storage/</link>
+        <link>http://localhost:1313/blog/p/secure-file-storage/</link>
         <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/secure-file-storage/</guid>
-        <description>&lt;img src="http://localhost:1313/p/secure-file-storage/Untitled-1.png" alt="Featured image of post Secure File Storage" /&gt;&lt;h2 id=&#34;getting-things-set-up&#34;&gt;Getting Things Set Up
+        <guid>http://localhost:1313/blog/p/secure-file-storage/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/secure-file-storage/Untitled-1.png" alt="Featured image of post Secure File Storage" /&gt;&lt;h2 id=&#34;getting-things-set-up&#34;&gt;Getting Things Set Up
 &lt;/h2&gt;&lt;p&gt;First, I made sure that Burp Suite was booted and was intercepting traffic from the website. This was to capture the requests required to perform the attack, and send the proper request to get the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled.png&#34;
 	width=&#34;1912&#34;
 	height=&#34;1033&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled_hu8708339546714078171.png 480w, http://localhost:1313/p/secure-file-storage/Untitled_hu16040047717687189859.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled_hu8708339546714078171.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled_hu16040047717687189859.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Burp Suite intercepting traffic from the website.&#34;
@@ -1086,10 +1086,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;Burp Suite intercepting traffic from the website.&lt;/p&gt;
 &lt;p&gt;Once I got that set up, I needed to create an account on the website.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-1.png&#34;
 	width=&#34;821&#34;
 	height=&#34;471&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1_hu13082086393921325514.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-1_hu13927918957335702100.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-1_hu13082086393921325514.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-1_hu13927918957335702100.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;The register screen for the challenge.&#34;
@@ -1101,10 +1101,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From there, I went to the &amp;ldquo;secure&amp;rdquo; file storage system and uploaded a file with the name &lt;code&gt;iijiijiijflag.txt&lt;/code&gt; .&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-2.png&#34;
 	width=&#34;696&#34;
 	height=&#34;575&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2_hu3494323345839865992.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-2_hu2322878352701868316.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-2_hu3494323345839865992.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-2_hu2322878352701868316.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Adding the properly named file to the secure file storage system.&#34;
@@ -1117,10 +1117,10 @@
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;gathering-the-info&#34;&gt;Gathering The Info
 &lt;/h2&gt;&lt;p&gt;Once it&amp;rsquo;s uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-3.png&#34;
 	width=&#34;1610&#34;
 	height=&#34;591&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3_hu5695182741532988172.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-3_hu13782544642988094065.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-3_hu5695182741532988172.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-3_hu13782544642988094065.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here you can see that the edited request was changed to a post request which displays the contents of the file specified.&#34;
@@ -1132,10 +1132,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From there, I copied the created post request and saved it into a text document.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-4.png&#34;
 	width=&#34;899&#34;
 	height=&#34;411&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4_hu2176805122822229802.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-4_hu5410540565036132984.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-4_hu2176805122822229802.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-4_hu5410540565036132984.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is the post request we created previously now in a text document.&#34;
@@ -1147,10 +1147,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;I then took that text document and passed it through &lt;code&gt;sqlmap&lt;/code&gt; using the command &lt;code&gt;sqlmap -r request.txt --dump --batch --where &amp;quot;id=&amp;lt;file_id&amp;gt;&amp;quot; --threads 10 -T file&lt;/code&gt; where &lt;code&gt;&amp;lt;file_id&amp;gt;&lt;/code&gt; is the file I uploaded, which I got at the end of the intercepted download request. This gave me the database entry of the file I uploaded.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-5.png&#34;
 	width=&#34;1535&#34;
 	height=&#34;605&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5_hu3466528253857258389.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-5_hu18070670953508124357.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-5_hu3466528253857258389.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-5_hu18070670953508124357.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;At the bottom you can see the table where the getflag file is listed. &#34;
@@ -1209,10 +1209,10 @@
 &lt;h2 id=&#34;sql-injection&#34;&gt;SQL Injection
 &lt;/h2&gt;&lt;p&gt;From there, I created an sql injection that I injected into the &lt;code&gt;/api/files/download&lt;/code&gt; endpoint, which was going to hopefully give me the proper &lt;code&gt;flag.txt&lt;/code&gt; file I was trying to get.&lt;/p&gt;
 &lt;p&gt;For the sql injection, I did the following query: &lt;code&gt;UNION SELECT 1,user_id,title,filename,filepath&lt;/code&gt; , and with all of the proper values in place, the request looked something like: &lt;code&gt;UNION SELECT 1,130,&#39;getflag&#39;,&#39;xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT&#39;,&#39;b+YXVpogrJoGsjPTdQQTud0kMiX7I2ei8BATNwKpXGhtZuRYnT0vJbcMkK7PoZuk&#39;&lt;/code&gt; with the final query looking like what’s shown below once everything was properly encoded.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-6.png&#34;
 	width=&#34;795&#34;
 	height=&#34;551&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6_hu12905364989308725110.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-6_hu10776018997271022657.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-6_hu12905364989308725110.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-6_hu10776018997271022657.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Properly encoded post request.&#34;
@@ -1224,10 +1224,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;And once I sent that request, I got the flag!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-7.png&#34;
 	width=&#34;1604&#34;
 	height=&#34;579&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7_hu15204540454405027036.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-7_hu15139924458626487559.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-7_hu15204540454405027036.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-7_hu15139924458626487559.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Untitled&#34;
@@ -1243,11 +1243,11 @@
         </item>
         <item>
         <title>HTB Bug Bounty - HTTP Fundamentals</title>
-        <link>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</link>
+        <link>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</link>
         <pubDate>Sun, 21 Jul 2024 17:51:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</guid>
-        <description>&lt;img src="http://localhost:1313/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
 &lt;p&gt;This is just some notes I took while going through the Bug Bounty course in Hack The Box Academy. I figured I would post it in case it would help others learn.&lt;/p&gt;
 &lt;p&gt;Apologies if it seems everywhere! I didn&amp;rsquo;t go through and clean anything up :3&lt;/p&gt;
 &lt;hr&gt;
@@ -1308,11 +1308,11 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
         </item>
         <item>
         <title>Portswigger Academy Day Three</title>
-        <link>http://localhost:1313/p/portswigger-academy-day-three/</link>
+        <link>http://localhost:1313/blog/p/portswigger-academy-day-three/</link>
         <pubDate>Wed, 15 May 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/portswigger-academy-day-three/</guid>
-        <description>&lt;img src="http://localhost:1313/p/portswigger-academy-day-three/portswigger-03.jpg" alt="Featured image of post Portswigger Academy Day Three" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/portswigger-academy-day-three/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/portswigger-academy-day-three/portswigger-03.jpg" alt="Featured image of post Portswigger Academy Day Three" /&gt;&lt;hr&gt;
 &lt;p&gt;This took a while for me to get through. I kept working on small sections at a time but wanted enough content for a post before I posted. So, although it says, &amp;ldquo;Day Three&amp;rdquo;, it&amp;rsquo;s more like day 6 or 7.&lt;/p&gt;
 &lt;p&gt;In this post, we&amp;rsquo;re going to be covering part of the API Testing module. This is all about utilizing API on web apps to force changes to be made to content on the website, or potentially leak valuable information.&lt;/p&gt;
 &lt;hr&gt;
@@ -1365,11 +1365,11 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
         </item>
         <item>
         <title>Portswigger Academy Day Two</title>
-        <link>http://localhost:1313/p/portswigger-academy-day-two/</link>
+        <link>http://localhost:1313/blog/p/portswigger-academy-day-two/</link>
         <pubDate>Fri, 26 Apr 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/portswigger-academy-day-two/</guid>
-        <description>&lt;img src="http://localhost:1313/p/portswigger-academy-day-two/portswigger-02.jpg" alt="Featured image of post Portswigger Academy Day Two" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/portswigger-academy-day-two/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/portswigger-academy-day-two/portswigger-02.jpg" alt="Featured image of post Portswigger Academy Day Two" /&gt;&lt;hr&gt;
 &lt;p&gt;Today is my second day going through the PortSwigger Academy learning paths! We&amp;rsquo;re continuing with the Server-side Vulnerabilities pathway, where we will finish up with OS Command Injection and SQL Injection.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;os-command-injection&#34;&gt;OS Command Injection
@@ -1459,11 +1459,11 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
         </item>
         <item>
         <title>Portswigger Academy Day One</title>
-        <link>http://localhost:1313/p/portswigger-academy-day-one/</link>
+        <link>http://localhost:1313/blog/p/portswigger-academy-day-one/</link>
         <pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/portswigger-academy-day-one/</guid>
-        <description>&lt;img src="http://localhost:1313/p/portswigger-academy-day-one/portswigger-01.png" alt="Featured image of post Portswigger Academy Day One" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/portswigger-academy-day-one/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/portswigger-academy-day-one/portswigger-01.png" alt="Featured image of post Portswigger Academy Day One" /&gt;&lt;hr&gt;
 &lt;p&gt;Today I&amp;rsquo;m making my first entry in what I hope will be a series of posts on my daily learning at Portswigger Academy! Please let me know if you enjoyed this post, and without further ado, here are my notes for day one!&lt;/p&gt;
 &lt;h2 id=&#34;path-traversal&#34;&gt;Path Traversal
 &lt;/h2&gt;&lt;p&gt;Starting off I&amp;rsquo;m going down the server-side vulnerabilities path, which covers a variety of common server-side exploits.&lt;/p&gt;
@@ -1545,20 +1545,20 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
         </item>
         <item>
         <title>Forensics Using Volatility</title>
-        <link>http://localhost:1313/p/forensics-using-volatility/</link>
+        <link>http://localhost:1313/blog/p/forensics-using-volatility/</link>
         <pubDate>Thu, 18 Apr 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/forensics-using-volatility/</guid>
-        <description>&lt;img src="http://localhost:1313/p/forensics-using-volatility/shellbags-output.png" alt="Featured image of post Forensics Using Volatility" /&gt;&lt;p&gt;Today, I&amp;rsquo;m going to walk through how I solved &lt;a class=&#34;link&#34; href=&#34;https://tryhackme.com/r/room/forensics&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/blog/p/forensics-using-volatility/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/forensics-using-volatility/shellbags-output.png" alt="Featured image of post Forensics Using Volatility" /&gt;&lt;p&gt;Today, I&amp;rsquo;m going to walk through how I solved &lt;a class=&#34;link&#34; href=&#34;https://tryhackme.com/r/room/forensics&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Try Hack Me&amp;rsquo;s Forensics&lt;/a&gt; practice challenge. The task is to analyze a memory dump of a target system and find the malicious files. It largely focuses on identifying different IOC.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;task-1&#34;&gt;Task 1
 &lt;/h2&gt;&lt;h3 id=&#34;getting-started&#34;&gt;Getting Started
 &lt;/h3&gt;&lt;p&gt;My first instinct is to open up autopsy and pull the image into that program to analyze. Completely incorrect method. Well, not completely. I was able to see the hex dump of the image, but it was listing as two unallocated partitions that showed as deleted.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/victim-in-autopsy.png&#34;
 	width=&#34;720&#34;
 	height=&#34;354&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy_hu6615383126371338041.png 480w, http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy_hu7746855299507895947.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/victim-in-autopsy_hu6615383126371338041.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/victim-in-autopsy_hu7746855299507895947.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what it looked like&#34;
@@ -1575,10 +1575,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;What is the Operating System of this Dump file? (OS name)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;This was pretty straight forward as the extracted files all were referencing the OS.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/showing-os.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/showing-os.png&#34;
 	width=&#34;867&#34;
 	height=&#34;152&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/showing-os_hu15148400491427510130.png 480w, http://localhost:1313/p/forensics-using-volatility/showing-os_hu6798963205246644304.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/showing-os_hu15148400491427510130.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/showing-os_hu6798963205246644304.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is an example of where the OS was referenced&#34;
@@ -1598,10 +1598,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;What is the PID of SearchIndexer.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In Volatility Workbench, there is an option to view processes once you specify the memory dump. So, I dumped the memory processes, which gave me all the processes on the target system.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/proccesses-list.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/proccesses-list.png&#34;
 	width=&#34;715&#34;
 	height=&#34;393&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/proccesses-list_hu15649192347604938192.png 480w, http://localhost:1313/p/forensics-using-volatility/proccesses-list_hu2098123926504729295.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/proccesses-list_hu15649192347604938192.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/proccesses-list_hu2098123926504729295.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is was the processes list looked like&#34;
@@ -1615,10 +1615,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;h3 id=&#34;files-upon-files&#34;&gt;Files Upon Files&amp;hellip;
 &lt;/h3&gt;&lt;p&gt;In the meantime, my Autopsy scan was still running away. I decided to check up on that as it seemed some more files were uncovered as the image was being analyzed.&lt;/p&gt;
 &lt;p&gt;It showed a bunch of carved files, and a potentially malicious zip file, but nothing of importance. The real helper here would be Volatility.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/carved.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/carved.png&#34;
 	width=&#34;1498&#34;
 	height=&#34;727&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/carved_hu1859101180031224459.png 480w, http://localhost:1313/p/forensics-using-volatility/carved_hu4148708545286126835.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/carved_hu1859101180031224459.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/carved_hu4148708545286126835.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is what Autopsy was showing me&#34;
@@ -1637,10 +1637,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;That didn&amp;rsquo;t end up giving me what I needed. I decided to cave and just use Volatility in wsl. Volatility Workbench didn&amp;rsquo;t have everything on it I needed, plus it was based in Volatility 3 and I need Volatility 2 to run the shellbags plugin.&lt;/p&gt;
 &lt;p&gt;The shellbags plugin was supposed to give a list of accessed directories and their last access time, which would give me exactly what I needed.&lt;/p&gt;
 &lt;p&gt;Getting Volatility working is always a pain, especially when it&amp;rsquo;s Volatility 2. But I got it installed and working, and ran &lt;code&gt;vol.py -f victim.raw imageinfo&lt;/code&gt; to get the profile I should run.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/volatility-profile.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/volatility-profile.png&#34;
 	width=&#34;1098&#34;
 	height=&#34;330&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/volatility-profile_hu17444467872235278850.png 480w, http://localhost:1313/p/forensics-using-volatility/volatility-profile_hu12922377535795468152.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/volatility-profile_hu17444467872235278850.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/volatility-profile_hu12922377535795468152.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This was the output for running that command&#34;
@@ -1652,10 +1652,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Then I ran &lt;code&gt;vol.py -f victim.raw --profile=&amp;lt;profile&amp;gt; shellbags&lt;/code&gt; to hopefully get the last accessed directory. The profile given for me to run was &lt;code&gt;Win7SP1x64&lt;/code&gt; so I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 shellbags&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-output.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/shellbags-output.png&#34;
 	width=&#34;733&#34;
 	height=&#34;477&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-output_hu8737139027612271929.png 480w, http://localhost:1313/p/forensics-using-volatility/shellbags-output_hu15817912649029364909.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/shellbags-output_hu8737139027612271929.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/shellbags-output_hu15817912649029364909.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is the output for running the shellbags plugin against the image&#34;
@@ -1668,10 +1668,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &gt;&lt;/p&gt;
 &lt;p&gt;It&amp;rsquo;s not sorted, obviously, so I did the same command but had it output to a text document. I was hoping to be able to put it into an excel spreadsheet. The command I did was &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 shellbags &amp;gt; access.txt&lt;/code&gt; (This took forever to run).&lt;/p&gt;
 &lt;p&gt;I decided to look through the output manually and just parse it out since there weren&amp;rsquo;t a whole lot, and I ended up finding the directory.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/shellbags-last-accessed.png&#34;
 	width=&#34;1101&#34;
 	height=&#34;273&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed_hu14802295084782932999.png 480w, http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed_hu6327837449283835280.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/shellbags-last-accessed_hu14802295084782932999.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/shellbags-last-accessed_hu6327837449283835280.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is where I found the listing for the last accessed directory&#34;
@@ -1687,10 +1687,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;/h2&gt;&lt;h3 id=&#34;netscan&#34;&gt;Netscan
 &lt;/h3&gt;&lt;p&gt;Next question is about malicious services on different ports, so I&amp;rsquo;ll be running &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 netscan&lt;/code&gt; to get the running services and their associated ports&lt;/p&gt;
 &lt;p&gt;I was pretty confused at first because I could tell which service was the malicious one, I got the PID of it, &lt;code&gt;2464&lt;/code&gt;, and the service was &lt;code&gt;wmpnetwk.exe&lt;/code&gt; as that&amp;rsquo;s not a typical service, but it&amp;rsquo;s listed a million different times.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/wmpnetwk.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/wmpnetwk.png&#34;
 	width=&#34;1092&#34;
 	height=&#34;481&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/wmpnetwk_hu1478260537105056053.png 480w, http://localhost:1313/p/forensics-using-volatility/wmpnetwk_hu11549894565849730128.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/wmpnetwk_hu1478260537105056053.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/wmpnetwk_hu11549894565849730128.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;As you can see, there are multiple listings of that service&#34;
@@ -1703,10 +1703,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &gt;&lt;/p&gt;
 &lt;p&gt;Eventually, I found it listed at the beginning of the services list, so I put that in and I guess it was right. Not entirely sure how that&amp;rsquo;s more right than the others.&lt;/p&gt;
 &lt;p&gt;My assumption is that specific one is correct because it&amp;rsquo;s the primary instance that that service is running from.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/netscan-result.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/netscan-result.png&#34;
 	width=&#34;1373&#34;
 	height=&#34;447&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/netscan-result_hu17147190146339257021.png 480w, http://localhost:1313/p/forensics-using-volatility/netscan-result_hu12883370454199770980.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/netscan-result_hu17147190146339257021.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/netscan-result_hu12883370454199770980.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is where I saw the correct port and protocol&#34;
@@ -1731,10 +1731,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;For some reason it the room wasn&amp;rsquo;t taking the PIDs in the order I was giving them. They had to be in a specific order to be considered correct.&lt;/p&gt;
 &lt;p&gt;The above method found the right PIDs, but the instructions implied a different method of solving, so I thought maybe I had gotten the wrong PIDs because I had used the wrong method, but that wasn&amp;rsquo;t the case.&lt;/p&gt;
 &lt;p&gt;The method that the challenge was implying wanted you to look for two things. If the node had a &lt;code&gt;Protection: *_EXECUTE_*&lt;/code&gt; in it, plus the Vad Tag was VadS.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/first-find-search.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/first-find-search.png&#34;
 	width=&#34;1468&#34;
 	height=&#34;709&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/first-find-search_hu3047120135640698108.png 480w, http://localhost:1313/p/forensics-using-volatility/first-find-search_hu5236170536559308470.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/first-find-search_hu3047120135640698108.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/first-find-search_hu5236170536559308470.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is an example of what they wanted you to search. You can see in the middle where I highlighted the proper VAD node with the VadS tag and an execute protection&#34;
@@ -1746,10 +1746,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;The method where you solely look for &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt; works much better since only the services that were malicious had that specific protection.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/execute-readwrite.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/execute-readwrite.png&#34;
 	width=&#34;1460&#34;
 	height=&#34;688&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/execute-readwrite_hu9279843065373541427.png 480w, http://localhost:1313/p/forensics-using-volatility/execute-readwrite_hu15373687776768670415.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/execute-readwrite_hu9279843065373541427.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/execute-readwrite_hu15373687776768670415.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here you can see how narrowed down the search becomes, with only five instances of the PAGE_EXECUTE_READWRITE protection existing&#34;
@@ -1780,10 +1780,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;I am using WinDBG to analyze the 1860.dmp file. I&amp;rsquo;m also going to dump the 1820 and 2464 processes.&lt;/p&gt;
 &lt;p&gt;I messed with these files for a while. I used a bunch of different tools said to be able to analyze .dmp files, but I defaulted back to volatility to see if I can dump all the files and maybe just pop them into virus total.&lt;/p&gt;
 &lt;p&gt;It took me way too long, but I found out that you can scan through the files and grep the service name file, and then download that specific file using the memory location.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/explorer.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/explorer.png&#34;
 	width=&#34;787&#34;
 	height=&#34;66&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/explorer_hu11410370584265761552.png 480w, http://localhost:1313/p/forensics-using-volatility/explorer_hu3358643737333255145.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/explorer_hu11410370584265761552.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/explorer_hu3358643737333255145.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Heres what was run and the output&#34;
@@ -1800,10 +1800,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;So, I went back to my terminal, and tried printing out the strings of each service and greping the question using wildcards.&lt;/p&gt;
 &lt;p&gt;I was looking up how to properly grep with wild cards, and you actually have to do &lt;code&gt;.*&lt;/code&gt; to mean any character since grep works with regular expressions.&lt;/p&gt;
 &lt;p&gt;I used &lt;code&gt;strings &amp;lt;service&amp;gt;.dmp | grep www.go.*.ru&lt;/code&gt;. I tried it on all the dump files and the only one that came up with any results was the service with PID of 1820.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/go-result.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/go-result.png&#34;
 	width=&#34;275&#34;
 	height=&#34;348&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/go-result_hu654835869961324499.png 480w, http://localhost:1313/p/forensics-using-volatility/go-result_hu626789756994933499.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/go-result_hu654835869961324499.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/go-result_hu626789756994933499.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;The output of that query&#34;
@@ -1820,10 +1820,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;&amp;lsquo;www.i****.com&amp;rsquo; (write full URL without any quotation marks)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;So, I&amp;rsquo;m assuming that all the answers will be in the 1820 service, but if I couldn&amp;rsquo;t find them there I&amp;rsquo;d parse through the others as well. Next query looked like &lt;code&gt;strings 1820.dmp | grep www.i.*.com&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/i-result.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/i-result.png&#34;
 	width=&#34;473&#34;
 	height=&#34;457&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/i-result_hu4597706256267746876.png 480w, http://localhost:1313/p/forensics-using-volatility/i-result_hu13494881011300981915.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/i-result_hu4597706256267746876.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/i-result_hu13494881011300981915.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here is the result after parsing through 1820s strings&#34;
@@ -1842,10 +1842,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;/blockquote&gt;
 &lt;p&gt;We already kind of got this one by doing the &amp;lsquo;i&amp;rsquo; wild card, but I&amp;rsquo;m going to rerun the query with the added &amp;lsquo;c&amp;rsquo; to narrow down the results so I don&amp;rsquo;t have to manually. In this one there should be six characters after the &amp;lsquo;ic&amp;rsquo;.&lt;/p&gt;
 &lt;p&gt;There was only one that fit that criteria, and it was the first result.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/ic-result.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/ic-result.png&#34;
 	width=&#34;383&#34;
 	height=&#34;123&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/ic-result_hu7360740634972445229.png 480w, http://localhost:1313/p/forensics-using-volatility/ic-result_hu1679968806069617779.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/ic-result_hu7360740634972445229.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/ic-result_hu1679968806069617779.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here are what that queries results looked like&#34;
@@ -1866,10 +1866,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;&lt;code&gt;***.200.**.164 (Write full IP)&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;And again we do &lt;code&gt;strings 1820.dmp | grep .*.200..*.164&lt;/code&gt; which gives us the flag and&amp;hellip; this mess&amp;hellip;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/second-ip.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/second-ip.png&#34;
 	width=&#34;1096&#34;
 	height=&#34;159&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/second-ip_hu4005208163394762688.png 480w, http://localhost:1313/p/forensics-using-volatility/second-ip_hu5913733713831547407.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/second-ip_hu4005208163394762688.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/second-ip_hu5913733713831547407.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This was startling to see!&#34;
@@ -1885,10 +1885,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;&lt;code&gt;209.190.***.***&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;So, one last time, we do &lt;code&gt;strings 1820.dmp | grep 209.190..*..*&lt;/code&gt; which gives us this flag along with another weird URL.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/third-ip.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/third-ip.png&#34;
 	width=&#34;464&#34;
 	height=&#34;60&#34;
-	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/third-ip_hu12847627047245911863.png 480w, http://localhost:1313/p/forensics-using-volatility/third-ip_hu18270300220026707576.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/forensics-using-volatility/third-ip_hu12847627047245911863.png 480w, http://localhost:1313/blog/blog/p/forensics-using-volatility/third-ip_hu18270300220026707576.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Theyre looking up some weird stuff!&#34;
@@ -1914,11 +1914,11 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
         </item>
         <item>
         <title>Overview of Hugo Site Setup</title>
-        <link>http://localhost:1313/p/overview-of-hugo-site-setup/</link>
+        <link>http://localhost:1313/blog/p/overview-of-hugo-site-setup/</link>
         <pubDate>Wed, 17 Apr 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/overview-of-hugo-site-setup/</guid>
-        <description>&lt;img src="http://localhost:1313/p/overview-of-hugo-site-setup/hugo-logo.png" alt="Featured image of post Overview of Hugo Site Setup" /&gt;&lt;p&gt;This post is going to be about how I would go about setting up a website like mine now that I’ve done it. I’ve learned a lot, and ran into a lot of specific issues, and figured I could be helpful to others who run into these weird little issues too, as it was difficult to find information on them online.&lt;/p&gt;
+        <guid>http://localhost:1313/blog/p/overview-of-hugo-site-setup/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/overview-of-hugo-site-setup/hugo-logo.png" alt="Featured image of post Overview of Hugo Site Setup" /&gt;&lt;p&gt;This post is going to be about how I would go about setting up a website like mine now that I’ve done it. I’ve learned a lot, and ran into a lot of specific issues, and figured I could be helpful to others who run into these weird little issues too, as it was difficult to find information on them online.&lt;/p&gt;
 &lt;p&gt;I’m not going to be going over the specifics of Hugo or really going into detail certain terms I am using. I would recommend getting a basic idea of how Hugo works by reading the Hugo &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/about/introduction/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;documentation&lt;/a&gt;. This is always going to be a great reference to have.&lt;/p&gt;
 &lt;h2 id=&#34;hugo&#34;&gt;Hugo
@@ -1929,10 +1929,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;I’ve found this to be the best route, as &lt;code&gt;winget&lt;/code&gt; is on every Windows 10 and 11 device by default, so it will typically just work. If you have a different host system, go &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/installation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;here&lt;/a&gt; to get the appropriate instruction for your system.&lt;/p&gt;
 &lt;h2 id=&#34;creating-first-site&#34;&gt;Creating First Site
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/root-folder.png&#34;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/root-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;413&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/root-folder_hu1154808637891486140.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/root-folder_hu16124952820340381237.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/root-folder_hu1154808637891486140.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/root-folder_hu16124952820340381237.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what a root folder might look like&#34;
@@ -1946,10 +1946,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;p&gt;When you run &lt;code&gt;hugo new site &amp;lt;sitename&amp;gt; -f “yaml”&lt;/code&gt; Hugo generates certain default files that are in a YAML format. For me, working with YAML instead of their default format is much more straight forward, and a lot of themes come by default with yaml configs.&lt;/p&gt;
 &lt;p&gt;I’ve found many tutorials recommending running this command and then adding in the theme to the “themes” folder that’s generated, and then putting in the theme name into your config file that is generated. Although this works, there are a few more steps that could (and should) be taken.&lt;/p&gt;
 &lt;h2 id=&#34;adding-theme&#34;&gt;Adding Theme
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder.png&#34;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/theme-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;449&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder_hu3159321689814680720.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder_hu17815554162465711669.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/theme-folder_hu3159321689814680720.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/theme-folder_hu17815554162465711669.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what a theme folder might look like&#34;
@@ -1969,10 +1969,10 @@ Basically, we&amp;rsquo;re talking about inspect element. I typically like using
 &lt;h2 id=&#34;folder-layout&#34;&gt;Folder Layout
 &lt;/h2&gt;&lt;p&gt;Now you should be able to run &lt;code&gt;hugo serve&lt;/code&gt; or &lt;code&gt;hugo server&lt;/code&gt; and get a display of the website on &lt;code&gt;localhost:1313&lt;/code&gt;. This should be the example site being displayed in your browser. From here, let’s look at the folders and how they’re laid out.
 First, you’ll have your content folder. This is the most important folder, and one of the ones that confused me the most.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/content-folder.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/content-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;110&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/content-folder_hu16183800506701782520.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/content-folder_hu9833812900818557534.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/content-folder_hu16183800506701782520.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/content-folder_hu9833812900818557534.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what a contents folder might look like&#34;
@@ -1984,10 +1984,10 @@ First, you’ll have your content folder. This is the most important folder, and
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;This is an example of what your content page might look like. Each folder is a type of content on your website. You can make exclusive respects of their front matter and put that markdown file into your archetypes folder. If an archetypes folder wasn’t generated by default, you can take the one from the theme and copy it into your root directory.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/archetype-folder.png&#34;
 	width=&#34;624&#34;
 	height=&#34;119&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder_hu12226516954040258921.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder_hu867295626708893591.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/archetype-folder_hu12226516954040258921.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/archetype-folder_hu867295626708893591.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is what an archetypes folder might look like&#34;
@@ -2193,10 +2193,10 @@ First, you’ll have your content folder. This is the most important folder, and
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;In the api application, once you’ve filled it out, you should get a settings page. From there, you should see the OAuth section:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/oauth-settings.png&#34;
 	width=&#34;624&#34;
 	height=&#34;485&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings_hu3699585885600222782.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings_hu3024140871151274822.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/oauth-settings_hu3699585885600222782.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/oauth-settings_hu3024140871151274822.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;An example of what the OAuth panel looks like&#34;
@@ -2209,10 +2209,10 @@ First, you’ll have your content folder. This is the most important folder, and
 &gt;&lt;/p&gt;
 &lt;p&gt;You will want to grab the API Key and put that where it says apiKey in the configuration. Then, grab the authorization URL, and put that where it says apiUrl. Of course, you should already have your shortname.&lt;/p&gt;
 &lt;p&gt;To get your admin name and label, you can go to your profile and look over to where it says your name.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/profile.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/profile.png&#34;
 	width=&#34;365&#34;
 	height=&#34;478&#34;
-	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/profile_hu13748880007032729729.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/profile_hu15095057623397430318.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/profile_hu13748880007032729729.png 480w, http://localhost:1313/blog/blog/p/overview-of-hugo-site-setup/profile_hu15095057623397430318.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;What a Disqus profile looks like&#34;
@@ -2234,11 +2234,11 @@ First, you’ll have your content folder. This is the most important folder, and
         </item>
         <item>
         <title>Crosslock</title>
-        <link>http://localhost:1313/p/crosslock/</link>
+        <link>http://localhost:1313/blog/p/crosslock/</link>
         <pubDate>Tue, 16 Apr 2024 00:20:04 -0400</pubDate>
         
-        <guid>http://localhost:1313/p/crosslock/</guid>
-        <description>&lt;img src="http://localhost:1313/p/crosslock/decompiler.png" alt="Featured image of post Crosslock" /&gt;&lt;h2 id=&#34;uintrou&#34;&gt;&lt;u&gt;Intro&lt;/u&gt;
+        <guid>http://localhost:1313/blog/p/crosslock/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/crosslock/decompiler.png" alt="Featured image of post Crosslock" /&gt;&lt;h2 id=&#34;uintrou&#34;&gt;&lt;u&gt;Intro&lt;/u&gt;
 &lt;/h2&gt;&lt;p&gt;So, I need to be vaguer about this write-up, but I wanted to put out something regarding a recent competition I did. It was a lot of fun. How I did was significantly better than it had been. I went from getting 717th place to 244th place. So that means I met my goal this year!! Anyway, I&amp;rsquo;m going to do a quick write-up of one of their sections.&lt;/p&gt;
 &lt;p&gt;This section was under their &amp;ldquo;Enumeration and Exploitation&amp;rdquo; category. It was the medium challenge and was indeed quite the challenge. I want to write about this one because I had to write some Python scripts for it, which I found to be a lot of fun.&lt;/p&gt;
 &lt;h2 id=&#34;umethodologyu&#34;&gt;&lt;u&gt;Methodology&lt;/u&gt;
@@ -2248,10 +2248,10 @@ First, you’ll have your content folder. This is the most important folder, and
     &gt;dotPeek&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;taking-action&#34;&gt;Taking Action
 &lt;/h3&gt;&lt;p&gt;Once I got all that up and running, I opened the .dll in the decompiler and started digging around. This is what I saw:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/crosslock/decompiler.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/crosslock/decompiler.png&#34;
 	width=&#34;1019&#34;
 	height=&#34;769&#34;
-	srcset=&#34;http://localhost:1313/p/crosslock/decompiler_hu9697201512961060961.png 480w, http://localhost:1313/p/crosslock/decompiler_hu11672442361879305685.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/crosslock/decompiler_hu9697201512961060961.png 480w, http://localhost:1313/blog/blog/p/crosslock/decompiler_hu11672442361879305685.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;.dll in DotPeek decompiler&#34;
@@ -2263,10 +2263,10 @@ First, you’ll have your content folder. This is the most important folder, and
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;I then clicked the dropdown next to the crosslock app and one function &lt;em&gt;immediately&lt;/em&gt; stuck out to me.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/crosslock/securelock.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/crosslock/securelock.png&#34;
 	width=&#34;306&#34;
 	height=&#34;235&#34;
-	srcset=&#34;http://localhost:1313/p/crosslock/securelock_hu3263772355609296365.png 480w, http://localhost:1313/p/crosslock/securelock_hu9995482378265093650.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/crosslock/securelock_hu3263772355609296365.png 480w, http://localhost:1313/blog/blog/p/crosslock/securelock_hu9995482378265093650.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Securelock function&#34;
@@ -2313,11 +2313,11 @@ First, you’ll have your content folder. This is the most important folder, and
         </item>
         <item>
         <title>Hello World</title>
-        <link>http://localhost:1313/p/hello-world/</link>
+        <link>http://localhost:1313/blog/p/hello-world/</link>
         <pubDate>Mon, 15 Apr 2024 17:44:04 -0400</pubDate>
         
-        <guid>http://localhost:1313/p/hello-world/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hello-world/9b5b6cd046b649410f79928cd3fc7295.jpg" alt="Featured image of post Hello World" /&gt;&lt;h2 id=&#34;first-post&#34;&gt;First post
+        <guid>http://localhost:1313/blog/p/hello-world/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/hello-world/9b5b6cd046b649410f79928cd3fc7295.jpg" alt="Featured image of post Hello World" /&gt;&lt;h2 id=&#34;first-post&#34;&gt;First post
 &lt;/h2&gt;&lt;p&gt;This is my first post! I&amp;rsquo;m excited for this new page because I finally seemed to manage to figure out a way to make a nice looking website. I was trying and trying forever to find something good, but could never seem to really find a good thing that stuck. If you want to learn about who I am, visit my &lt;a class=&#34;link&#34; href=&#34;http://kd0ve.github.io/blog/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;about&lt;/a&gt; page. I&amp;rsquo;ll go into more detail on who I am and why I&amp;rsquo;m even making this thing.&lt;/p&gt;
 &lt;p&gt;Expect a lot of writeups. I will probably make a seperate section for just random notes and stuff, but we will see if that happens.&lt;/p&gt;

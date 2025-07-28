@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+    <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Going over ways you can initially exploit an AD environemnt and pull credentials">
 <title>Attacking Active Directory With Responder and NTLMrelayX</title>
 
-<link rel='canonical' href='http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/'>
+<link rel='canonical' href='http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/'>
 
-<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Attacking Active Directory With Responder and NTLMrelayX">
+<link rel="stylesheet" href="/blog/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Attacking Active Directory With Responder and NTLMrelayX">
 <meta property='og:description' content="Going over ways you can initially exploit an AD environemnt and pull credentials">
-<meta property='og:url' content='http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/'>
+<meta property='og:url' content='http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/'>
 <meta property='og:site_name' content='Dove'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:published_time' content='2025-01-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-17T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:published_time' content='2025-01-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-17T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png' />
 <meta name="twitter:title" content="Attacking Active Directory With Responder and NTLMrelayX">
 <meta name="twitter:description" content="Going over ways you can initially exploit an AD environemnt and pull credentials"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png' />
+    <meta name="twitter:image" content='http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png' />
     <link rel="shortcut icon" href="/apple-touch-icon.png" />
 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
@@ -69,7 +69,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h1 class="site-name"><a href="/blog">Dove</a></h1>
             <h2 class="site-description">I like breaking things :)</h2>
         </div>
     </header><ol class="menu-social">
@@ -119,7 +119,7 @@
         
         
         <li >
-            <a href='/' >
+            <a href='/blog/' >
                 
                 
                 
@@ -176,7 +176,7 @@
         
         
         <li >
-            <a href='/archives/' >
+            <a href='/blog/archives/' >
                 
                 
                 
@@ -196,7 +196,7 @@
         
         
         <li >
-            <a href='/search/' >
+            <a href='/blog/search/' >
                 
                 
                 
@@ -215,7 +215,7 @@
         
         
         <li >
-            <a href='/links/' >
+            <a href='/blog/links/' >
                 
                 
                 
@@ -249,11 +249,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>English</option>
+                                    <option value="http://localhost:1313/blog/" selected>English</option>
                                 
-                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                    <option value="http://localhost:1313/blog/zh-cn/" >中文</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="http://localhost:1313/blog/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -347,9 +347,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/attacking-active-directory-with-responder-and-ntlmrelayx/">
-                <img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu17142852121702268524.png"
-                        srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu17142852121702268524.png 800w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu6342640693753214133.png 1600w"
+            <a href="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/">
+                <img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu17142852121702268524.png"
+                        srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu17142852121702268524.png 800w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu6342640693753214133.png 1600w"
                         width="800" 
                         height="537" 
                         loading="lazy"
@@ -363,7 +363,7 @@
     
     <header class="article-category">
         
-            <a href="/categories/write-ups/" >
+            <a href="/blog/categories/write-ups/" >
                 Write-Ups
             </a>
         
@@ -372,7 +372,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/attacking-active-directory-with-responder-and-ntlmrelayx/">Attacking Active Directory With Responder and NTLMrelayX</a>
+            <a href="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/">Attacking Active Directory With Responder and NTLMrelayX</a>
         </h2>
     
         
@@ -451,10 +451,10 @@
     >this</a> YouTube video for instructions, or go through <a class="link" href="https://academy.tcm-sec.com/"  target="_blank" rel="noopener"
     >TCM Academy’s Practical Ethical Hacking</a> course for proper instructions to get set up.</p>
 <p>I also installed a Kali Linux machine that the attacks will be coming from. To ensure that you have everything communicating, make sure to change the NIC to NAT for all devices in the lab.</p>
-<p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image.png"
+<p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image.png"
 	width="770"
 	height="742"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu541003602711950912.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu5110351976956320300.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu541003602711950912.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu5110351976956320300.png 1024w"
 	loading="lazy"
 	
 		alt="You need to go into the settings of your virtual machine to change this."
@@ -486,10 +486,10 @@
 <pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">responder -I eth0 -dP -v
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png"
+</div><p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png"
 	width="599"
 	height="402"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu8665747502234018022.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu7641434726893931978.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu8665747502234018022.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu7641434726893931978.png 1024w"
 	loading="lazy"
 	
 		alt="This shows me running the command."
@@ -501,10 +501,10 @@
 	
 ></p>
 <p>Once you run responder, you need to go over to your Windows 10 workstation and attempt to access a fake SMB share.</p>
-<p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2.png"
+<p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2.png"
 	width="1147"
 	height="605"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu11040455925392250640.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu16035247352997422634.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu11040455925392250640.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu16035247352997422634.png 1024w"
 	loading="lazy"
 	
 		alt="I just typed in \\fake into file explorer."
@@ -516,10 +516,10 @@
 	
 ></p>
 <p>This should drop the NTLMv2 hash of the user who attempted the connection onto your Kali box with the listening responder tool.</p>
-<p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3.png"
+<p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3.png"
 	width="1696"
 	height="308"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu2081107371195551120.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu8826220879783261373.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu2081107371195551120.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu8826220879783261373.png 1024w"
 	loading="lazy"
 	
 		alt="This shows responder dropping the NTLMv2 hash of the fcastle user."
@@ -539,10 +539,10 @@
 <pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4.png"
+</div><p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4.png"
 	width="1700"
 	height="468"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu15088337985485688939.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu11117333335762910878.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu15088337985485688939.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu11117333335762910878.png 1024w"
 	loading="lazy"
 	
 		alt="This shows Hashcat cracking that users password"
@@ -600,10 +600,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>This will dump the SAM hashes of all users on the machine.</p>
-<p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5.png"
+<p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5.png"
 	width="1005"
 	height="597"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu4590528738589566931.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu10197468966877164379.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu4590528738589566931.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu10197468966877164379.png 1024w"
 	loading="lazy"
 	
 		alt="The hashes of the vulnerable machines being dumped"
@@ -624,10 +624,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>And then netcat into the session spawned. You will be able to access the machine through SMB.</p>
-<p><img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6.png"
+<p><img src="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6.png"
 	width="640"
 	height="393"
-	srcset="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu6735008951734560127.png 480w, /p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu13157138618738047387.png 1024w"
+	srcset="/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu6735008951734560127.png 480w, /blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu13157138618738047387.png 1024w"
 	loading="lazy"
 	
 		alt="Accessing shell using netcat"
@@ -673,7 +673,7 @@
     
     <section class="article-tags">
         
-            <a href="/tags/post/">Post</a>
+            <a href="/blog/tags/post/">Post</a>
         
     </section>
 
@@ -695,11 +695,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/active-directory-part-2-exploring-goad-environment/">
+    <a href="/blog/p/active-directory-part-2-exploring-goad-environment/">
         
         
             <div class="article-image">
-                <img src="/p/active-directory-part-2-exploring-goad-environment/image9.bb285e060c885b75be576e029e15ce9a_hu7111283274950451260.png" 
+                <img src="/blog/p/active-directory-part-2-exploring-goad-environment/image9.bb285e060c885b75be576e029e15ce9a_hu7111283274950451260.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -719,11 +719,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/forensics-using-volatility/">
+    <a href="/blog/p/forensics-using-volatility/">
         
         
             <div class="article-image">
-                <img src="/p/forensics-using-volatility/shellbags-output.6e3c44ae9c4bed6f4236fd78f6d0153e_hu6728456964635033659.png" 
+                <img src="/blog/p/forensics-using-volatility/shellbags-output.6e3c44ae9c4bed6f4236fd78f6d0153e_hu6728456964635033659.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -743,11 +743,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/secure-file-storage/">
+    <a href="/blog/p/secure-file-storage/">
         
         
             <div class="article-image">
-                <img src="/p/secure-file-storage/Untitled-1.f5228d55f03014c2570aed6f78901635_hu11265372550408182528.png" 
+                <img src="/blog/p/secure-file-storage/Untitled-1.f5228d55f03014c2570aed6f78901635_hu11265372550408182528.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -767,11 +767,11 @@
             
                 
 <article class="has-image">
-    <a href="/p/crosslock/">
+    <a href="/blog/p/crosslock/">
         
         
             <div class="article-image">
-                <img src="/p/crosslock/decompiler.4615533bc2c12007d7e3fa1be7bb481e_hu1303265344836878652.png" 
+                <img src="/blog/p/crosslock/decompiler.4615533bc2c12007d7e3fa1be7bb481e_hu1303265344836878652.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -938,7 +938,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+            </script><script type="text/javascript" src="/blog/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

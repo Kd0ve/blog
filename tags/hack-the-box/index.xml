@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Hack the Box on Dove</title>
-        <link>http://localhost:1313/tags/hack-the-box/</link>
+        <link>http://localhost:1313/blog/tags/hack-the-box/</link>
         <description>Recent content in Hack the Box on Dove</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Kat</copyright>
-        <lastBuildDate>Sun, 21 Jul 2024 20:17:51 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/hack-the-box/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 21 Jul 2024 20:17:51 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/hack-the-box/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HTB Bug Bounty - HTTP Fundamentals</title>
-        <link>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</link>
+        <link>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</link>
         <pubDate>Sun, 21 Jul 2024 17:51:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</guid>
-        <description>&lt;img src="http://localhost:1313/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
+        <guid>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
 &lt;p&gt;This is just some notes I took while going through the Bug Bounty course in Hack The Box Academy. I figured I would post it in case it would help others learn.&lt;/p&gt;
 &lt;p&gt;Apologies if it seems everywhere! I didn&amp;rsquo;t go through and clean anything up :3&lt;/p&gt;
 &lt;hr&gt;

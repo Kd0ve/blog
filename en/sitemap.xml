@@ -2,152 +2,152 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:1313/blog/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/zh-cn/"
+                href="http://localhost:1313/blog/zh-cn/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/"
+                href="http://localhost:1313/blog/ar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/"
+                href="http://localhost:1313/blog/"
                 />
   </url><url>
-    <loc>http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/</loc>
+    <loc>http://localhost:1313/blog/p/active-directory-part-2-exploring-goad-environment/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:1313/blog/categories/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/zh-cn/categories/"
+                href="http://localhost:1313/blog/zh-cn/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/categories/"
+                href="http://localhost:1313/blog/ar/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/categories/"
+                href="http://localhost:1313/blog/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/post/</loc>
+    <loc>http://localhost:1313/blog/tags/post/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>http://localhost:1313/blog/post/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://localhost:1313/blog/tags/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/zh-cn/tags/"
+                href="http://localhost:1313/blog/zh-cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/tags/"
+                href="http://localhost:1313/blog/ar/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/"
+                href="http://localhost:1313/blog/tags/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/write-ups/</loc>
+    <loc>http://localhost:1313/blog/categories/write-ups/</loc>
     <lastmod>2025-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cybersecurity/</loc>
+    <loc>http://localhost:1313/blog/tags/cybersecurity/</loc>
     <lastmod>2025-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/guides/</loc>
+    <loc>http://localhost:1313/blog/categories/guides/</loc>
     <lastmod>2025-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/setting-up-goad-on-windows/</loc>
+    <loc>http://localhost:1313/blog/p/setting-up-goad-on-windows/</loc>
     <lastmod>2025-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/</loc>
+    <loc>http://localhost:1313/blog/p/attacking-active-directory-with-responder-and-ntlmrelayx/</loc>
     <lastmod>2025-01-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/ctf/</loc>
+    <loc>http://localhost:1313/blog/tags/ctf/</loc>
     <lastmod>2025-01-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cyber/</loc>
+    <loc>http://localhost:1313/blog/tags/cyber/</loc>
     <lastmod>2025-01-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/secure-file-storage/</loc>
+    <loc>http://localhost:1313/blog/p/secure-file-storage/</loc>
     <lastmod>2025-01-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/hack-the-box/</loc>
+    <loc>http://localhost:1313/blog/tags/hack-the-box/</loc>
     <lastmod>2024-07-21T20:17:51+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/htb/</loc>
+    <loc>http://localhost:1313/blog/tags/htb/</loc>
     <lastmod>2024-07-21T20:17:51+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</loc>
+    <loc>http://localhost:1313/blog/p/htb-bug-bounty-http-fundamentals/</loc>
     <lastmod>2024-07-21T20:17:51+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/learning/</loc>
+    <loc>http://localhost:1313/blog/categories/learning/</loc>
     <lastmod>2024-07-21T20:17:51+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/portswigger/</loc>
+    <loc>http://localhost:1313/blog/tags/portswigger/</loc>
     <lastmod>2024-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/portswigger-academy-day-three/</loc>
+    <loc>http://localhost:1313/blog/p/portswigger-academy-day-three/</loc>
     <lastmod>2024-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/portswigger-academy-day-two/</loc>
+    <loc>http://localhost:1313/blog/p/portswigger-academy-day-two/</loc>
     <lastmod>2024-04-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/portswigger-academy-day-one/</loc>
+    <loc>http://localhost:1313/blog/p/portswigger-academy-day-one/</loc>
     <lastmod>2024-04-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/forensics-using-volatility/</loc>
+    <loc>http://localhost:1313/blog/p/forensics-using-volatility/</loc>
     <lastmod>2024-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/practice/</loc>
+    <loc>http://localhost:1313/blog/tags/practice/</loc>
     <lastmod>2024-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/try-hack-me/</loc>
+    <loc>http://localhost:1313/blog/tags/try-hack-me/</loc>
     <lastmod>2024-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/overview-of-hugo-site-setup/</loc>
+    <loc>http://localhost:1313/blog/p/overview-of-hugo-site-setup/</loc>
     <lastmod>2024-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/page/</loc>
+    <loc>http://localhost:1313/blog/page/</loc>
     <lastmod>2024-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/resources/</loc>
+    <loc>http://localhost:1313/blog/resources/</loc>
     <lastmod>2024-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/webdev/</loc>
+    <loc>http://localhost:1313/blog/tags/webdev/</loc>
     <lastmod>2024-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/crosslock/</loc>
+    <loc>http://localhost:1313/blog/p/crosslock/</loc>
     <lastmod>2024-04-16T00:20:04-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://localhost:1313/blog/about/</loc>
     <lastmod>2024-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/hello-world/</loc>
+    <loc>http://localhost:1313/blog/p/hello-world/</loc>
     <lastmod>2024-04-15T17:44:04-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>http://localhost:1313/blog/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/links/</loc>
+    <loc>http://localhost:1313/blog/links/</loc>
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>http://localhost:1313/blog/search/</loc>
   </url>
 </urlset>

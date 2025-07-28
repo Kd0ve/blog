@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>CTF on Dove</title>
-        <link>http://localhost:1313/tags/ctf/</link>
+        <link>http://localhost:1313/blog/tags/ctf/</link>
         <description>Recent content in CTF on Dove</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Kat</copyright>
-        <lastBuildDate>Fri, 17 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/ctf/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 17 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blog/tags/ctf/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Secure File Storage</title>
-        <link>http://localhost:1313/p/secure-file-storage/</link>
+        <link>http://localhost:1313/blog/p/secure-file-storage/</link>
         <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/secure-file-storage/</guid>
-        <description>&lt;img src="http://localhost:1313/p/secure-file-storage/Untitled-1.png" alt="Featured image of post Secure File Storage" /&gt;&lt;h2 id=&#34;getting-things-set-up&#34;&gt;Getting Things Set Up
+        <guid>http://localhost:1313/blog/p/secure-file-storage/</guid>
+        <description>&lt;img src="http://localhost:1313/blog/p/secure-file-storage/Untitled-1.png" alt="Featured image of post Secure File Storage" /&gt;&lt;h2 id=&#34;getting-things-set-up&#34;&gt;Getting Things Set Up
 &lt;/h2&gt;&lt;p&gt;First, I made sure that Burp Suite was booted and was intercepting traffic from the website. This was to capture the requests required to perform the attack, and send the proper request to get the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled.png&#34;
 	width=&#34;1912&#34;
 	height=&#34;1033&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled_hu8708339546714078171.png 480w, http://localhost:1313/p/secure-file-storage/Untitled_hu16040047717687189859.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled_hu8708339546714078171.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled_hu16040047717687189859.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Burp Suite intercepting traffic from the website.&#34;
@@ -31,10 +31,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;Burp Suite intercepting traffic from the website.&lt;/p&gt;
 &lt;p&gt;Once I got that set up, I needed to create an account on the website.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-1.png&#34;
 	width=&#34;821&#34;
 	height=&#34;471&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1_hu13082086393921325514.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-1_hu13927918957335702100.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-1_hu13082086393921325514.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-1_hu13927918957335702100.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;The register screen for the challenge.&#34;
@@ -46,10 +46,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From there, I went to the &amp;ldquo;secure&amp;rdquo; file storage system and uploaded a file with the name &lt;code&gt;iijiijiijflag.txt&lt;/code&gt; .&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-2.png&#34;
 	width=&#34;696&#34;
 	height=&#34;575&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2_hu3494323345839865992.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-2_hu2322878352701868316.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-2_hu3494323345839865992.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-2_hu2322878352701868316.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Adding the properly named file to the secure file storage system.&#34;
@@ -62,10 +62,10 @@
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;gathering-the-info&#34;&gt;Gathering The Info
 &lt;/h2&gt;&lt;p&gt;Once it&amp;rsquo;s uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-3.png&#34;
 	width=&#34;1610&#34;
 	height=&#34;591&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3_hu5695182741532988172.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-3_hu13782544642988094065.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-3_hu5695182741532988172.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-3_hu13782544642988094065.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Here you can see that the edited request was changed to a post request which displays the contents of the file specified.&#34;
@@ -77,10 +77,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;From there, I copied the created post request and saved it into a text document.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-4.png&#34;
 	width=&#34;899&#34;
 	height=&#34;411&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4_hu2176805122822229802.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-4_hu5410540565036132984.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-4_hu2176805122822229802.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-4_hu5410540565036132984.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;This is the post request we created previously now in a text document.&#34;
@@ -92,10 +92,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;I then took that text document and passed it through &lt;code&gt;sqlmap&lt;/code&gt; using the command &lt;code&gt;sqlmap -r request.txt --dump --batch --where &amp;quot;id=&amp;lt;file_id&amp;gt;&amp;quot; --threads 10 -T file&lt;/code&gt; where &lt;code&gt;&amp;lt;file_id&amp;gt;&lt;/code&gt; is the file I uploaded, which I got at the end of the intercepted download request. This gave me the database entry of the file I uploaded.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-5.png&#34;
 	width=&#34;1535&#34;
 	height=&#34;605&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5_hu3466528253857258389.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-5_hu18070670953508124357.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-5_hu3466528253857258389.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-5_hu18070670953508124357.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;At the bottom you can see the table where the getflag file is listed. &#34;
@@ -154,10 +154,10 @@
 &lt;h2 id=&#34;sql-injection&#34;&gt;SQL Injection
 &lt;/h2&gt;&lt;p&gt;From there, I created an sql injection that I injected into the &lt;code&gt;/api/files/download&lt;/code&gt; endpoint, which was going to hopefully give me the proper &lt;code&gt;flag.txt&lt;/code&gt; file I was trying to get.&lt;/p&gt;
 &lt;p&gt;For the sql injection, I did the following query: &lt;code&gt;UNION SELECT 1,user_id,title,filename,filepath&lt;/code&gt; , and with all of the proper values in place, the request looked something like: &lt;code&gt;UNION SELECT 1,130,&#39;getflag&#39;,&#39;xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT&#39;,&#39;b+YXVpogrJoGsjPTdQQTud0kMiX7I2ei8BATNwKpXGhtZuRYnT0vJbcMkK7PoZuk&#39;&lt;/code&gt; with the final query looking like what’s shown below once everything was properly encoded.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-6.png&#34;
 	width=&#34;795&#34;
 	height=&#34;551&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6_hu12905364989308725110.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-6_hu10776018997271022657.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-6_hu12905364989308725110.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-6_hu10776018997271022657.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Properly encoded post request.&#34;
@@ -169,10 +169,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;And once I sent that request, I got the flag!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-7.png&#34;
 	width=&#34;1604&#34;
 	height=&#34;579&#34;
-	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7_hu15204540454405027036.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-7_hu15139924458626487559.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-7_hu15204540454405027036.png 480w, http://localhost:1313/blog/blog/p/secure-file-storage/Untitled-7_hu15139924458626487559.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Untitled&#34;
