@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Cyber on Dove</title>
+        <link>http://localhost:1313/tags/cyber/</link>
+        <description>Recent content in Cyber on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Fri, 17 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/cyber/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Secure File Storage</title>
+        <link>http://localhost:1313/p/secure-file-storage/</link>
+        <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/secure-file-storage/</guid>
+        <description>&lt;img src="http://localhost:1313/p/secure-file-storage/Untitled-1.png" alt="Featured image of post Secure File Storage" /&gt;&lt;h2 id=&#34;getting-things-set-up&#34;&gt;Getting Things Set Up
+&lt;/h2&gt;&lt;p&gt;First, I made sure that Burp Suite was booted and was intercepting traffic from the website. This was to capture the requests required to perform the attack, and send the proper request to get the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled.png&#34;
+	width=&#34;1912&#34;
+	height=&#34;1033&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled_hu8708339546714078171.png 480w, http://localhost:1313/p/secure-file-storage/Untitled_hu16040047717687189859.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Burp Suite intercepting traffic from the website.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;444px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Burp Suite intercepting traffic from the website.&lt;/p&gt;
+&lt;p&gt;Once I got that set up, I needed to create an account on the website.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1.png&#34;
+	width=&#34;821&#34;
+	height=&#34;471&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1_hu13082086393921325514.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-1_hu13927918957335702100.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The register screen for the challenge.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;174&#34;
+		data-flex-basis=&#34;418px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From there, I went to the &amp;ldquo;secure&amp;rdquo; file storage system and uploaded a file with the name &lt;code&gt;iijiijiijflag.txt&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2.png&#34;
+	width=&#34;696&#34;
+	height=&#34;575&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2_hu3494323345839865992.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-2_hu2322878352701868316.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Adding the properly named file to the secure file storage system.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;121&#34;
+		data-flex-basis=&#34;290px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gathering-the-info&#34;&gt;Gathering The Info
+&lt;/h2&gt;&lt;p&gt;Once it&amp;rsquo;s uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3.png&#34;
+	width=&#34;1610&#34;
+	height=&#34;591&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3_hu5695182741532988172.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-3_hu13782544642988094065.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here you can see that the edited request was changed to a post request which displays the contents of the file specified.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;272&#34;
+		data-flex-basis=&#34;653px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From there, I copied the created post request and saved it into a text document.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4.png&#34;
+	width=&#34;899&#34;
+	height=&#34;411&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4_hu2176805122822229802.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-4_hu5410540565036132984.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is the post request we created previously now in a text document.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;524px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I then took that text document and passed it through &lt;code&gt;sqlmap&lt;/code&gt; using the command &lt;code&gt;sqlmap -r request.txt --dump --batch --where &amp;quot;id=&amp;lt;file_id&amp;gt;&amp;quot; --threads 10 -T file&lt;/code&gt; where &lt;code&gt;&amp;lt;file_id&amp;gt;&lt;/code&gt; is the file I uploaded, which I got at the end of the intercepted download request. This gave me the database entry of the file I uploaded.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5.png&#34;
+	width=&#34;1535&#34;
+	height=&#34;605&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5_hu3466528253857258389.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-5_hu18070670953508124357.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;At the bottom you can see the table where the getflag file is listed. &#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;253&#34;
+		data-flex-basis=&#34;608px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I made sure to take note of the &lt;code&gt;user_id&lt;/code&gt;, &lt;code&gt;filename&lt;/code&gt; , and &lt;code&gt;filepath&lt;/code&gt; as those are what are going to be input into the sql injection.&lt;/p&gt;
+&lt;h2 id=&#34;bit-flipping&#34;&gt;Bit Flipping
+&lt;/h2&gt;&lt;p&gt;From there, I wrote a script that bit flipped the encrypted filename into the intended filename. What I wanted to do was to change what we uploaded when it is decrypted so that the system interpreted it as the &lt;code&gt;flag.txt&lt;/code&gt; in the root folder of the system.&lt;/p&gt;
+&lt;p&gt;This is the script I made to perform the bit flip:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;bitFlip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;posList&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b64decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#decodes base64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#seperates bytes into list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#looping through list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pos&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;posList&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pos&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pos&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bit&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#xors the char to the right char&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#turns list1 back into bytes object&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b64encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#turns raw into byte object and encodes back to base64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bit1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;i&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#gets the xor of &amp;#39;i&amp;#39; and &amp;#39;.&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bit2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;j&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#gets the xor of &amp;#39;/&amp;#39; and &amp;#39;j&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#Encrypted file name gathered&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bitFlip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bit1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#Here you will specify the index of each &amp;#39;i&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bitFlip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bit2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#Here you will specify the index of each &amp;#39;j&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Bit flipped: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Running this with the encrypted filename I got output &lt;code&gt;xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;sql-injection&#34;&gt;SQL Injection
+&lt;/h2&gt;&lt;p&gt;From there, I created an sql injection that I injected into the &lt;code&gt;/api/files/download&lt;/code&gt; endpoint, which was going to hopefully give me the proper &lt;code&gt;flag.txt&lt;/code&gt; file I was trying to get.&lt;/p&gt;
+&lt;p&gt;For the sql injection, I did the following query: &lt;code&gt;UNION SELECT 1,user_id,title,filename,filepath&lt;/code&gt; , and with all of the proper values in place, the request looked something like: &lt;code&gt;UNION SELECT 1,130,&#39;getflag&#39;,&#39;xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT&#39;,&#39;b+YXVpogrJoGsjPTdQQTud0kMiX7I2ei8BATNwKpXGhtZuRYnT0vJbcMkK7PoZuk&#39;&lt;/code&gt; with the final query looking like what’s shown below once everything was properly encoded.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6.png&#34;
+	width=&#34;795&#34;
+	height=&#34;551&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6_hu12905364989308725110.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-6_hu10776018997271022657.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Properly encoded post request.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;346px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And once I sent that request, I got the flag!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7.png&#34;
+	width=&#34;1604&#34;
+	height=&#34;579&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7_hu15204540454405027036.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-7_hu15139924458626487559.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Untitled&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;277&#34;
+		data-flex-basis=&#34;664px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>Crosslock</title>
+        <link>http://localhost:1313/p/crosslock/</link>
+        <pubDate>Tue, 16 Apr 2024 00:20:04 -0400</pubDate>
+        
+        <guid>http://localhost:1313/p/crosslock/</guid>
+        <description>&lt;img src="http://localhost:1313/p/crosslock/decompiler.png" alt="Featured image of post Crosslock" /&gt;&lt;h2 id=&#34;uintrou&#34;&gt;&lt;u&gt;Intro&lt;/u&gt;
+&lt;/h2&gt;&lt;p&gt;So, I need to be vaguer about this write-up, but I wanted to put out something regarding a recent competition I did. It was a lot of fun. How I did was significantly better than it had been. I went from getting 717th place to 244th place. So that means I met my goal this year!! Anyway, I&amp;rsquo;m going to do a quick write-up of one of their sections.&lt;/p&gt;
+&lt;p&gt;This section was under their &amp;ldquo;Enumeration and Exploitation&amp;rdquo; category. It was the medium challenge and was indeed quite the challenge. I want to write about this one because I had to write some Python scripts for it, which I found to be a lot of fun.&lt;/p&gt;
+&lt;h2 id=&#34;umethodologyu&#34;&gt;&lt;u&gt;Methodology&lt;/u&gt;
+&lt;/h2&gt;&lt;p&gt;This one involved a .dll file that we had to find the flag within. The whole point was to try to &amp;ldquo;unlock&amp;rdquo; the program. Figure out how to view the code and get into the thing. This was a whole process not only to do but to figure out &lt;em&gt;how&lt;/em&gt; to do it.&lt;/p&gt;
+&lt;h3 id=&#34;how&#34;&gt;How?
+&lt;/h3&gt;&lt;p&gt;My first thought was to try to run it, but I was worried about running a .dll on my device, for obvious reasons (still tried to though&amp;hellip; do not recommend it&amp;hellip; nothing happened it&amp;rsquo;s just a stupid idea). So, after going to other problems for a while, I came back to this one. After looking up &amp;ldquo;how to open .dll&amp;rdquo; and things like that, I eventually figured out that you needed to use a decompiler to look at the .dll code. So, I started looking up decompilers and eventually found a couple of opens. The main one I used was a JetBrains based decompiler called &lt;a class=&#34;link&#34; href=&#34;https://www.jetbrains.com/decompiler/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;dotPeek&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;taking-action&#34;&gt;Taking Action
+&lt;/h3&gt;&lt;p&gt;Once I got all that up and running, I opened the .dll in the decompiler and started digging around. This is what I saw:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/crosslock/decompiler.png&#34;
+	width=&#34;1019&#34;
+	height=&#34;769&#34;
+	srcset=&#34;http://localhost:1313/p/crosslock/decompiler_hu9697201512961060961.png 480w, http://localhost:1313/p/crosslock/decompiler_hu11672442361879305685.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;.dll in DotPeek decompiler&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;132&#34;
+		data-flex-basis=&#34;318px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I then clicked the dropdown next to the crosslock app and one function &lt;em&gt;immediately&lt;/em&gt; stuck out to me.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/crosslock/securelock.png&#34;
+	width=&#34;306&#34;
+	height=&#34;235&#34;
+	srcset=&#34;http://localhost:1313/p/crosslock/securelock_hu3263772355609296365.png 480w, http://localhost:1313/p/crosslock/securelock_hu9995482378265093650.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Securelock function&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;312px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;So, I opened it up, and, lo and behold, there was everything, although not exactly in the format I wanted. Firstly, this was an AES encrypted key, so I was provided with a key and an IV. On top of that, I was given the encrypted flag, however, it was&amp;hellip; well&amp;hellip; encrypted. So I had to do a little messing around&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;the-scripts&#34;&gt;The Scripts
+&lt;/h3&gt;&lt;p&gt;First, the key, IV, and secret were given in bytes. So I had to figure out how to get bytes into human-readable text. I found this solution to that:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;chr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Which outputs the key for me. It was pretty easy to notice without converting the IV, but the key and IV were the same. I could tell due to the bytes being the same. So I didn&amp;rsquo;t bother to go through the whole process with both. Once I had that, I needed to figure out how to get the encrypted flag.&lt;/p&gt;
+&lt;p&gt;I stumbled around a while trying to figure out how to best output this stuff as putting it into the same script I had for the key just output a garbled mess. So, I made a guess and tried to make a script that outputs hex for me. This is what I came up with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secret&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;02x&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;finding-the-flag&#34;&gt;Finding The Flag
+&lt;/h3&gt;&lt;p&gt;This gave me the flag in hex. The reason it was so garbled was that it was encrypted with AES, so I took the hex, went into &lt;a class=&#34;link&#34; href=&#34;https://gchq.github.io/CyberChef/#recipe=AES_Decrypt%28%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D,%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D,%27CBC%27,%27Hex%27,%27Raw%27,%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D,%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cyberchef&lt;/a&gt; and put in the AES Decrypt option (which that link should&amp;rsquo;ve led you to). From there, I put the hex in, input the key and IV, changed the format of the key and IV to UTF8, and baked! And that&amp;rsquo;s how I got the flag.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;If you want to see more writeups from me, feel free to comment, or send me a message either of the ways I have available in my &lt;a class=&#34;link&#34; href=&#34;http://kd0ve.github.io/about/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;about&lt;/a&gt;. Let me know if you&amp;rsquo;d like more!&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

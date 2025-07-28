@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Portswigger on Dove</title>
+        <link>http://localhost:1313/tags/portswigger/</link>
+        <description>Recent content in Portswigger on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Thu, 16 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/portswigger/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Portswigger Academy Day Three</title>
+        <link>http://localhost:1313/p/portswigger-academy-day-three/</link>
+        <pubDate>Wed, 15 May 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/portswigger-academy-day-three/</guid>
+        <description>&lt;img src="http://localhost:1313/p/portswigger-academy-day-three/portswigger-03.jpg" alt="Featured image of post Portswigger Academy Day Three" /&gt;&lt;hr&gt;
+&lt;p&gt;This took a while for me to get through. I kept working on small sections at a time but wanted enough content for a post before I posted. So, although it says, &amp;ldquo;Day Three&amp;rdquo;, it&amp;rsquo;s more like day 6 or 7.&lt;/p&gt;
+&lt;p&gt;In this post, we&amp;rsquo;re going to be covering part of the API Testing module. This is all about utilizing API on web apps to force changes to be made to content on the website, or potentially leak valuable information.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;api-recon&#34;&gt;API Recon
+&lt;/h2&gt;&lt;p&gt;Basically, you need to figure out as much as you can about the API. This starts with finding endpoints that can be interacted with.&lt;/p&gt;
+&lt;p&gt;Next, you need to determine how to interact with the API. This means determining some of the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What data does the API process?&lt;/li&gt;
+&lt;li&gt;What types of requests does the API accept?&lt;/li&gt;
+&lt;li&gt;What are the rate limits and authentication methods&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api-documentation&#34;&gt;API Documentation
+&lt;/h2&gt;&lt;p&gt;Another good place for recon is API documentation. It is there for developers to get a better understanding of how to utilize the API but can provide helpful information on the functionality of the API that might lead to possible exploitations.&lt;/p&gt;
+&lt;p&gt;If you are having trouble finding it publicly available, you may be able to crawl websites that use it and find the documentation there. Finding endpoints like &lt;code&gt;/api&lt;/code&gt;, &lt;code&gt;/swagger/index.md&lt;/code&gt;, or &lt;code&gt;/openapi.json&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you find an endpoint, make sure you investigate the base path. For example, if you find the endpoint &lt;code&gt;/api&lt;/code&gt;, you should explore all endpoints branching from there.&lt;/p&gt;
+&lt;p&gt;This might be something like &lt;code&gt;/api/swagger&lt;/code&gt; or &lt;code&gt;/api/swagger/v1&lt;/code&gt; etc.&lt;/p&gt;
+&lt;h3 id=&#34;lab&#34;&gt;Lab
+&lt;/h3&gt;&lt;p&gt;This lab was straight forward you just had to go to &lt;code&gt;/api&lt;/code&gt; and utilize the &lt;code&gt;DELETE&lt;/code&gt; tool from the tool kit present there.&lt;/p&gt;
+&lt;h2 id=&#34;identifying-and-interacting-with-api-endpoints&#34;&gt;Identifying and Interacting with API Endpoints
+&lt;/h2&gt;&lt;h3 id=&#34;identifying&#34;&gt;Identifying
+&lt;/h3&gt;&lt;p&gt;This section starts off with finding and identifying API endpoints. You&amp;rsquo;d do this by essentially just crawling applications that use the API. While doing this, you would want to look for patterns that suggest API endpoints such as &lt;code&gt;/api/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You want to keep an eye out for JavaScript files particularly. These can contain calls to API endpoints that you may not have triggered yet. Burp Scanner automatically extracts some endpoints while its craws, but for more in-depth extraction, you can use JS Link Finder BApp, or you can manually review the JavaScript files.&lt;/p&gt;
+&lt;h3 id=&#34;interacting&#34;&gt;Interacting
+&lt;/h3&gt;&lt;p&gt;To interact with API endpoints, you want to use Burp Repeater and Burp Intruder. These will allow you to observe the APIs behavior based on changes you make information sent to the API. This could be like observing what happens when you change the HTTP method and media type.&lt;/p&gt;
+&lt;p&gt;You want to keep an eye out for error messages while you do this as it could point in the direction of a valid request, which you could build and use to exploit the API.&lt;/p&gt;
+&lt;h3 id=&#34;identifying-supported-http-methods&#34;&gt;Identifying Supported HTTP Methods
+&lt;/h3&gt;&lt;p&gt;This section basically just goes over the different HTTP methods. So &lt;code&gt;GET&lt;/code&gt; retrieves resources, &lt;code&gt;PATCH&lt;/code&gt; applies partial changes to resources, and &lt;code&gt;OPTIONS&lt;/code&gt; gets information on the types of requests that can be used on resources.&lt;/p&gt;
+&lt;p&gt;API endpoints may support other methods such as &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;, and &lt;code&gt;DELETE&lt;/code&gt;. Burp Intruder has a list to automatically cycle through methods.&lt;/p&gt;
+&lt;h3 id=&#34;identifying-supported-content-types&#34;&gt;Identifying Supported Content Types
+&lt;/h3&gt;&lt;p&gt;You can exploit APIs by changing the content type. To change the type, you can change the &lt;code&gt;Content-Type&lt;/code&gt; header. You can use the Content Type converter BApp which converts data automatically between XML and JSON.&lt;/p&gt;
+&lt;h3 id=&#34;lab-1&#34;&gt;Lab
+&lt;/h3&gt;&lt;p&gt;Here, we must buy the jacket item for free. I can see that there&amp;rsquo;s an API endpoint at &lt;code&gt;/api/products/1/price&lt;/code&gt;. The only methods allowed are &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;PATCH&lt;/code&gt;. The &lt;code&gt;GET&lt;/code&gt; method outputs the price and message for the item.&lt;/p&gt;
+&lt;p&gt;My assumption is that &lt;code&gt;PATCH&lt;/code&gt; needs to be used somehow, but &lt;code&gt;PATCH&lt;/code&gt; outputs a message saying &amp;ldquo;Unauthorized&amp;rdquo;. I think maybe I must reformat the &lt;code&gt;PATCH&lt;/code&gt; request.&lt;/p&gt;
+&lt;p&gt;You basically had to use the BApp Content Type Converter to utilize the &lt;code&gt;PATCH&lt;/code&gt; method. You had to put in &lt;code&gt;{&amp;quot;price&amp;quot;: 0}&lt;/code&gt; to get the API to change the price of the jacket to &amp;ldquo;$0.00&amp;rdquo;.&lt;/p&gt;
+&lt;h3 id=&#34;using-intruder-to-find-hidden-endpoints&#34;&gt;Using Intruder To Find Hidden Endpoints
+&lt;/h3&gt;&lt;p&gt;You can utilize known endpoints to find other hidden endpoints. You can use Burp Repeater to parse through different common endpoint names and find possible hidden endpoints that could be exploited.&lt;/p&gt;
+&lt;h2 id=&#34;finding-hidden-parameters&#34;&gt;Finding Hidden Parameters
+&lt;/h2&gt;&lt;p&gt;It&amp;rsquo;s possible to find hidden undocumented API parameters that can be exploited. These can be used to change application behavior. Burp has a few tools to help find hidden API parameters.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Burp Intruder can be used to parse through common parameter names. You should also include potential parameter names based on API recon.&lt;/li&gt;
+&lt;li&gt;You can also use the Param Miner BApp to iterate through possible parameters.&lt;/li&gt;
+&lt;li&gt;The Content discovery tool can help to find hidden content, including possible parameters.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;This was all for this section. Although these are going to be labeled in order by &amp;ldquo;Days&amp;rdquo;, they aren&amp;rsquo;t really going to be just individual days. Each section might be a combination of multiple days of study.&lt;/p&gt;
+&lt;p&gt;This information has been valuable to learn in my opinion. I hadn&amp;rsquo;t ever considered exploiting API on a website, but now that I&amp;rsquo;ve done it, I get the idea behind it.&lt;/p&gt;
+&lt;p&gt;In the next post, we will continue exploiting websites utilizing API. I&amp;rsquo;m looking forward to learning more about this topic, and I hope you&amp;rsquo;re enjoying following along!&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Learning on Dove</title>
+        <link>http://localhost:1313/categories/learning/</link>
+        <description>Recent content in Learning on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Sun, 21 Jul 2024 20:17:51 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/learning/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>HTB Bug Bounty - HTTP Fundamentals</title>
+        <link>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</link>
+        <pubDate>Sun, 21 Jul 2024 17:51:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/htb-bug-bounty-http-fundamentals/</guid>
+        <description>&lt;img src="http://localhost:1313/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png" alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" /&gt;&lt;hr&gt;
+&lt;p&gt;This is just some notes I took while going through the Bug Bounty course in Hack The Box Academy. I figured I would post it in case it would help others learn.&lt;/p&gt;
+&lt;p&gt;Apologies if it seems everywhere! I didn&amp;rsquo;t go through and clean anything up :3&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hypertext-transfer-protocol-http&#34;&gt;HyperText Transfer Protocol (HTTP)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Fully Qualified Domain Name (FQDN)&lt;/strong&gt; - essentially the domain name of the website
+&lt;strong&gt;Uniform Resource Locator&lt;/strong&gt; - this includes the FQDN as well as different parts like the top-layer domain, subdomain, query string, and fragment.&lt;/p&gt;
+&lt;p&gt;There are different parts of a URL
+&lt;em&gt;Scheme&lt;/em&gt; - this is like &lt;code&gt;http://&lt;/code&gt; or &lt;code&gt;https://&lt;/code&gt;
+&lt;em&gt;User info&lt;/em&gt; - this would sometimes be a part of the url, but not always. It looks like &lt;code&gt;admin:password@&lt;/code&gt; and then the main domain name.
+&lt;em&gt;Host&lt;/em&gt; - this includes the domain name and sub domain. It looks like &lt;code&gt;hackthebox.com&lt;/code&gt;
+&lt;em&gt;Port&lt;/em&gt; - sometimes included, but not always necessary. Will look like &lt;code&gt;:80&lt;/code&gt; after the host.
+&lt;em&gt;Path&lt;/em&gt; - this immediately follows either the host or the port if the port is specified. Looks like &lt;code&gt;/dashboard.php&lt;/code&gt;
+&lt;em&gt;Query String&lt;/em&gt; - this is also sometimes included if needed to look up something. Will look like &lt;code&gt;?login=true&lt;/code&gt; or similar
+&lt;em&gt;Fragments&lt;/em&gt; - this is to specify a section within the main resource. Will look something like &lt;code&gt;#status&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP Flow&lt;/strong&gt;
+User -&amp;gt; DNS -&amp;gt; IP
+DNS sends IP -&amp;gt; User
+User -&amp;gt; Send HTTP Request to IP/Web Server
+IP/Web server -&amp;gt; Send HTTP Response to User&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Basically, the user requests the IP of the domain specified to the Domain Name Server. The DNS sends the IP of the web server to the User. The User then sends an HTTP or HTTPS request to that IP address. That web server at that IP address sends back an HTTP or HTTPS response.
+Request: GET /HTTP/1.1
+Response: HTTP/1.1 200 OK&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Side Note&lt;/strong&gt;
+Typically, on a Linux system, the browser will first look in &lt;code&gt;/etc/hosts&lt;/code&gt; to find the IP address associated with the domain name. You can use this to specify domain names for IP addresses that don&amp;rsquo;t necessarily have one assigned with a DNS. HTB wants this to be done quite a bit :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cURL&lt;/strong&gt;
+This is a really important command, as you can send HTTP requests and see the response in terminal. You can also do stuff like getting the &lt;code&gt;index.html&lt;/code&gt; file that is rendered when you first request the main website. You can do this using the &lt;code&gt;-O&lt;/code&gt; flag in curl. You can also use the &lt;code&gt;-o&lt;/code&gt; flag to specify just a general output file.&lt;/p&gt;
+&lt;p&gt;Calling the &lt;code&gt;index.html&lt;/code&gt; file for say &lt;code&gt;hackthebox.com&lt;/code&gt; would look like &lt;code&gt;curl -O hackthebox.com/index.html&lt;/code&gt;, and you should have created a copy of that domain&amp;rsquo;s &lt;code&gt;index.html&lt;/code&gt; file that&amp;rsquo;s been requested. You can also do the &lt;code&gt;-s&lt;/code&gt; flag to silence the status and the &lt;code&gt;-O&lt;/code&gt; flag in conjunction to just straight grab the &lt;code&gt;index.html&lt;/code&gt; file without the status.&lt;/p&gt;
+&lt;h2 id=&#34;hypertext-transfer-protocol-secure-https&#34;&gt;HyperText Transfer Protocol Secure (HTTPS)
+&lt;/h2&gt;&lt;p&gt;One drawback to HTTP is that it sends everything over plaintext, which is pretty dangerous. This is why HTTPS was created. It utilizes TLS/SSL to encrypt traffic sent over the protocol. This even includes login credentials if they aren&amp;rsquo;t hashed client-side.&lt;/p&gt;
+&lt;p&gt;If someone intercepts HTTPS traffic, they won&amp;rsquo;t be able to see the data within that request. You can tell if a website is using HTTPS as it will have &lt;code&gt;https://&lt;/code&gt; in the beginning of the URL. Most browsers will also warn you now before you visit a website only using HTTP.&lt;/p&gt;
+&lt;p&gt;HTTPS is where the three-way-handshake is employed. This is to make sure that the communication is secure and stable before transferring any information between the client and host. There are different response codes depending on the status of the requested page as well.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;cURL For HTTPS&lt;/strong&gt;
+Using curl with HTTPS, there might be an issue where there will be an SSL Certificate problem saying that the certificate is invalid. To bypass this, when you are doing the cURL command, you can add on the &lt;code&gt;-k&lt;/code&gt; flag to the curl command.&lt;/p&gt;
+&lt;h2 id=&#34;http-requests-and-responses&#34;&gt;HTTP Requests and Responses
+&lt;/h2&gt;&lt;p&gt;HTTP requests and responses are structured in particular ways that are consistent. The send request information will cause certain responses, so they must be formatted correctly to get the intended response back. Browsers will craft these automatically.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP Request&lt;/strong&gt;
+In a request, there are three main aspects of the header. There will be the &lt;code&gt;method&lt;/code&gt;, &lt;code&gt;path&lt;/code&gt;, and &lt;code&gt;version&lt;/code&gt;. The &lt;code&gt;method&lt;/code&gt; will be something like &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;, and more. There are a lot of different kinds of methods.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;path&lt;/code&gt; was somewhat covered earlier, but generally will look like &lt;code&gt;/index.html&lt;/code&gt; if you&amp;rsquo;re calling that particular file. The path is whatever resource you are requesting. The &lt;code&gt;version&lt;/code&gt; is the version of HTTP being used.&lt;/p&gt;
+&lt;p&gt;Following these, there tend to be a lot more parameters, but the important thing for now is those main three request parts.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP Response&lt;/strong&gt;
+With this, in the first line, there are two main fields returned. That will be the HTTP &lt;code&gt;version&lt;/code&gt;, and the response code. The response code denotes what ended up happening with the request. Typically, a &lt;code&gt;200 OK&lt;/code&gt; response means that the page was returned successfully. Something like a &lt;code&gt;404 ERROR&lt;/code&gt; response will be that the page doesn&amp;rsquo;t exist.&lt;/p&gt;
+&lt;p&gt;Again, there will be a lot more perameters in the header, but these two are the main things to pay attention to.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;cURL&lt;/strong&gt;
+Utilizing the &lt;code&gt;-v&lt;/code&gt; flag will show what is send more clearly. You can also use &lt;code&gt;-vvv&lt;/code&gt;, which will increase verbosity, or the information you are shown about the exchange.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Browser DevTools&lt;/strong&gt;
+Basically, we&amp;rsquo;re talking about inspect element. I typically like using the FireFox DevTools as you can much more easily edit requests right there in the toolkit. For Chrom or FireFox, you can press &lt;code&gt;CTRL+SHIFT+I&lt;/code&gt; or click &lt;code&gt;F12&lt;/code&gt; to pull up the toolkit.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll mainly want to focus on the &lt;code&gt;Network&lt;/code&gt; tab to grab files being transferred and requests being performed. Here is where you&amp;rsquo;ll be able to find the requests to alter. You can apparently use the &lt;code&gt;Filter&lt;/code&gt; to filter out and search certain requests if a website loads too many to parse through.&lt;/p&gt;
+&lt;h2 id=&#34;http-headers&#34;&gt;HTTP Headers
+&lt;/h2&gt;&lt;p&gt;Since we didn&amp;rsquo;t discuss them before, they&amp;rsquo;re covered here thankfully (somewhat). We&amp;rsquo;re going to go over a few different kinds of headers that you&amp;rsquo;ll typically encounter. There are general, entity, response, request, and security headers.&lt;/p&gt;
+&lt;p&gt;For general headers, you&amp;rsquo;ll either encounter the date, or the connection status. The date is well, the date. The connection status will either be &lt;code&gt;close&lt;/code&gt; or &lt;code&gt;keep-alive&lt;/code&gt;. It will commonly look like &lt;code&gt;Connection: close&lt;/code&gt; or &lt;code&gt;Connection: keep-alive&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For entity headers, there are quite a few. There&amp;rsquo;s content-type, media-type, boundary, content-length, and content-encoding. The content-type specifies the kind of content accepted. The media-type defines the data that&amp;rsquo;s being transferred. The boundary acts as a marker to seperate content.&lt;/p&gt;
+&lt;p&gt;The content length contains the size of what&amp;rsquo;s being passed. The content-encoding defines the kinds of transformations the data goes through. This means that, if the data being transferred is large, it will denote that the content-encoding was compressed, and what kind of compression was used.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Portswigger Academy Day Three</title>
+        <link>http://localhost:1313/p/portswigger-academy-day-three/</link>
+        <pubDate>Wed, 15 May 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/portswigger-academy-day-three/</guid>
+        <description>&lt;img src="http://localhost:1313/p/portswigger-academy-day-three/portswigger-03.jpg" alt="Featured image of post Portswigger Academy Day Three" /&gt;&lt;hr&gt;
+&lt;p&gt;This took a while for me to get through. I kept working on small sections at a time but wanted enough content for a post before I posted. So, although it says, &amp;ldquo;Day Three&amp;rdquo;, it&amp;rsquo;s more like day 6 or 7.&lt;/p&gt;
+&lt;p&gt;In this post, we&amp;rsquo;re going to be covering part of the API Testing module. This is all about utilizing API on web apps to force changes to be made to content on the website, or potentially leak valuable information.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;api-recon&#34;&gt;API Recon
+&lt;/h2&gt;&lt;p&gt;Basically, you need to figure out as much as you can about the API. This starts with finding endpoints that can be interacted with.&lt;/p&gt;
+&lt;p&gt;Next, you need to determine how to interact with the API. This means determining some of the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What data does the API process?&lt;/li&gt;
+&lt;li&gt;What types of requests does the API accept?&lt;/li&gt;
+&lt;li&gt;What are the rate limits and authentication methods&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api-documentation&#34;&gt;API Documentation
+&lt;/h2&gt;&lt;p&gt;Another good place for recon is API documentation. It is there for developers to get a better understanding of how to utilize the API but can provide helpful information on the functionality of the API that might lead to possible exploitations.&lt;/p&gt;
+&lt;p&gt;If you are having trouble finding it publicly available, you may be able to crawl websites that use it and find the documentation there. Finding endpoints like &lt;code&gt;/api&lt;/code&gt;, &lt;code&gt;/swagger/index.md&lt;/code&gt;, or &lt;code&gt;/openapi.json&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you find an endpoint, make sure you investigate the base path. For example, if you find the endpoint &lt;code&gt;/api&lt;/code&gt;, you should explore all endpoints branching from there.&lt;/p&gt;
+&lt;p&gt;This might be something like &lt;code&gt;/api/swagger&lt;/code&gt; or &lt;code&gt;/api/swagger/v1&lt;/code&gt; etc.&lt;/p&gt;
+&lt;h3 id=&#34;lab&#34;&gt;Lab
+&lt;/h3&gt;&lt;p&gt;This lab was straight forward you just had to go to &lt;code&gt;/api&lt;/code&gt; and utilize the &lt;code&gt;DELETE&lt;/code&gt; tool from the tool kit present there.&lt;/p&gt;
+&lt;h2 id=&#34;identifying-and-interacting-with-api-endpoints&#34;&gt;Identifying and Interacting with API Endpoints
+&lt;/h2&gt;&lt;h3 id=&#34;identifying&#34;&gt;Identifying
+&lt;/h3&gt;&lt;p&gt;This section starts off with finding and identifying API endpoints. You&amp;rsquo;d do this by essentially just crawling applications that use the API. While doing this, you would want to look for patterns that suggest API endpoints such as &lt;code&gt;/api/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You want to keep an eye out for JavaScript files particularly. These can contain calls to API endpoints that you may not have triggered yet. Burp Scanner automatically extracts some endpoints while its craws, but for more in-depth extraction, you can use JS Link Finder BApp, or you can manually review the JavaScript files.&lt;/p&gt;
+&lt;h3 id=&#34;interacting&#34;&gt;Interacting
+&lt;/h3&gt;&lt;p&gt;To interact with API endpoints, you want to use Burp Repeater and Burp Intruder. These will allow you to observe the APIs behavior based on changes you make information sent to the API. This could be like observing what happens when you change the HTTP method and media type.&lt;/p&gt;
+&lt;p&gt;You want to keep an eye out for error messages while you do this as it could point in the direction of a valid request, which you could build and use to exploit the API.&lt;/p&gt;
+&lt;h3 id=&#34;identifying-supported-http-methods&#34;&gt;Identifying Supported HTTP Methods
+&lt;/h3&gt;&lt;p&gt;This section basically just goes over the different HTTP methods. So &lt;code&gt;GET&lt;/code&gt; retrieves resources, &lt;code&gt;PATCH&lt;/code&gt; applies partial changes to resources, and &lt;code&gt;OPTIONS&lt;/code&gt; gets information on the types of requests that can be used on resources.&lt;/p&gt;
+&lt;p&gt;API endpoints may support other methods such as &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;, and &lt;code&gt;DELETE&lt;/code&gt;. Burp Intruder has a list to automatically cycle through methods.&lt;/p&gt;
+&lt;h3 id=&#34;identifying-supported-content-types&#34;&gt;Identifying Supported Content Types
+&lt;/h3&gt;&lt;p&gt;You can exploit APIs by changing the content type. To change the type, you can change the &lt;code&gt;Content-Type&lt;/code&gt; header. You can use the Content Type converter BApp which converts data automatically between XML and JSON.&lt;/p&gt;
+&lt;h3 id=&#34;lab-1&#34;&gt;Lab
+&lt;/h3&gt;&lt;p&gt;Here, we must buy the jacket item for free. I can see that there&amp;rsquo;s an API endpoint at &lt;code&gt;/api/products/1/price&lt;/code&gt;. The only methods allowed are &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;PATCH&lt;/code&gt;. The &lt;code&gt;GET&lt;/code&gt; method outputs the price and message for the item.&lt;/p&gt;
+&lt;p&gt;My assumption is that &lt;code&gt;PATCH&lt;/code&gt; needs to be used somehow, but &lt;code&gt;PATCH&lt;/code&gt; outputs a message saying &amp;ldquo;Unauthorized&amp;rdquo;. I think maybe I must reformat the &lt;code&gt;PATCH&lt;/code&gt; request.&lt;/p&gt;
+&lt;p&gt;You basically had to use the BApp Content Type Converter to utilize the &lt;code&gt;PATCH&lt;/code&gt; method. You had to put in &lt;code&gt;{&amp;quot;price&amp;quot;: 0}&lt;/code&gt; to get the API to change the price of the jacket to &amp;ldquo;$0.00&amp;rdquo;.&lt;/p&gt;
+&lt;h3 id=&#34;using-intruder-to-find-hidden-endpoints&#34;&gt;Using Intruder To Find Hidden Endpoints
+&lt;/h3&gt;&lt;p&gt;You can utilize known endpoints to find other hidden endpoints. You can use Burp Repeater to parse through different common endpoint names and find possible hidden endpoints that could be exploited.&lt;/p&gt;
+&lt;h2 id=&#34;finding-hidden-parameters&#34;&gt;Finding Hidden Parameters
+&lt;/h2&gt;&lt;p&gt;It&amp;rsquo;s possible to find hidden undocumented API parameters that can be exploited. These can be used to change application behavior. Burp has a few tools to help find hidden API parameters.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Burp Intruder can be used to parse through common parameter names. You should also include potential parameter names based on API recon.&lt;/li&gt;
+&lt;li&gt;You can also use the Param Miner BApp to iterate through possible parameters.&lt;/li&gt;
+&lt;li&gt;The Content discovery tool can help to find hidden content, including possible parameters.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;This was all for this section. Although these are going to be labeled in order by &amp;ldquo;Days&amp;rdquo;, they aren&amp;rsquo;t really going to be just individual days. Each section might be a combination of multiple days of study.&lt;/p&gt;
+&lt;p&gt;This information has been valuable to learn in my opinion. I hadn&amp;rsquo;t ever considered exploiting API on a website, but now that I&amp;rsquo;ve done it, I get the idea behind it.&lt;/p&gt;
+&lt;p&gt;In the next post, we will continue exploiting websites utilizing API. I&amp;rsquo;m looking forward to learning more about this topic, and I hope you&amp;rsquo;re enjoying following along!&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

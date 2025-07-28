@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Try Hack Me on Dove</title>
+        <link>http://localhost:1313/tags/try-hack-me/</link>
+        <description>Recent content in Try Hack Me on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Fri, 19 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/try-hack-me/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Forensics Using Volatility</title>
+        <link>http://localhost:1313/p/forensics-using-volatility/</link>
+        <pubDate>Thu, 18 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/forensics-using-volatility/</guid>
+        <description>&lt;img src="http://localhost:1313/p/forensics-using-volatility/shellbags-output.png" alt="Featured image of post Forensics Using Volatility" /&gt;&lt;p&gt;Today, I&amp;rsquo;m going to walk through how I solved &lt;a class=&#34;link&#34; href=&#34;https://tryhackme.com/r/room/forensics&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Try Hack Me&amp;rsquo;s Forensics&lt;/a&gt; practice challenge. The task is to analyze a memory dump of a target system and find the malicious files. It largely focuses on identifying different IOC.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;task-1&#34;&gt;Task 1
+&lt;/h2&gt;&lt;h3 id=&#34;getting-started&#34;&gt;Getting Started
+&lt;/h3&gt;&lt;p&gt;My first instinct is to open up autopsy and pull the image into that program to analyze. Completely incorrect method. Well, not completely. I was able to see the hex dump of the image, but it was listing as two unallocated partitions that showed as deleted.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy.png&#34;
+	width=&#34;720&#34;
+	height=&#34;354&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy_hu6615383126371338041.png 480w, http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy_hu7746855299507895947.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is what it looked like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;203&#34;
+		data-flex-basis=&#34;488px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;My next go-to is going to be using binwalk to extract the file system. I executed &lt;code&gt;binwalk -e victim.raw&lt;/code&gt; to extract the data and other information. This seemed to be extracting something.&lt;/p&gt;
+&lt;p&gt;The first question was:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the Operating System of this Dump file? (OS name)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This was pretty straight forward as the extracted files all were referencing the OS.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/showing-os.png&#34;
+	width=&#34;867&#34;
+	height=&#34;152&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/showing-os_hu15148400491427510130.png 480w, http://localhost:1313/p/forensics-using-volatility/showing-os_hu6798963205246644304.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is an example of where the OS was referenced&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;570&#34;
+		data-flex-basis=&#34;1368px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;digging-deeper&#34;&gt;Digging Deeper
+&lt;/h3&gt;&lt;p&gt;Extracting all those files via binwalk was unrealistic. I went back to Autopsy to see what options I had. Nothing still. It seemed to get stuck processing the image.&lt;/p&gt;
+&lt;p&gt;After researching other ways to analyze a memory dump, I ran into someone mentioning Volatility, which I vaguely remembered was good for analyzing system dumps. I also hadn&amp;rsquo;t paid attention to the room having the Volatility logo on it which would&amp;rsquo;ve saved me some time.&lt;/p&gt;
+&lt;p&gt;I hadn&amp;rsquo;t used it much up to this point, but I switched to a using Volatility. At first, I used Volatility Workbench.&lt;/p&gt;
+&lt;p&gt;This gave me the answer to the next question:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the PID of SearchIndexer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In Volatility Workbench, there is an option to view processes once you specify the memory dump. So, I dumped the memory processes, which gave me all the processes on the target system.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/proccesses-list.png&#34;
+	width=&#34;715&#34;
+	height=&#34;393&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/proccesses-list_hu15649192347604938192.png 480w, http://localhost:1313/p/forensics-using-volatility/proccesses-list_hu2098123926504729295.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is was the processes list looked like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;181&#34;
+		data-flex-basis=&#34;436px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;files-upon-files&#34;&gt;Files Upon Files&amp;hellip;
+&lt;/h3&gt;&lt;p&gt;In the meantime, my Autopsy scan was still running away. I decided to check up on that as it seemed some more files were uncovered as the image was being analyzed.&lt;/p&gt;
+&lt;p&gt;It showed a bunch of carved files, and a potentially malicious zip file, but nothing of importance. The real helper here would be Volatility.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/carved.png&#34;
+	width=&#34;1498&#34;
+	height=&#34;727&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/carved_hu1859101180031224459.png 480w, http://localhost:1313/p/forensics-using-volatility/carved_hu4148708545286126835.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is what Autopsy was showing me&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;206&#34;
+		data-flex-basis=&#34;494px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The next question and last question of the first task was&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the last directory accessed by the user.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now, I&amp;rsquo;ve never used Volatility that much, much less the GUI version, so it took some messing with. After digging around, I managed to figure out that selecting the &lt;code&gt;windows.cmdline.CmdLine&lt;/code&gt; command and running that output some of the last commands executed.&lt;/p&gt;
+&lt;p&gt;That didn&amp;rsquo;t end up giving me what I needed. I decided to cave and just use Volatility in wsl. Volatility Workbench didn&amp;rsquo;t have everything on it I needed, plus it was based in Volatility 3 and I need Volatility 2 to run the shellbags plugin.&lt;/p&gt;
+&lt;p&gt;The shellbags plugin was supposed to give a list of accessed directories and their last access time, which would give me exactly what I needed.&lt;/p&gt;
+&lt;p&gt;Getting Volatility working is always a pain, especially when it&amp;rsquo;s Volatility 2. But I got it installed and working, and ran &lt;code&gt;vol.py -f victim.raw imageinfo&lt;/code&gt; to get the profile I should run.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/volatility-profile.png&#34;
+	width=&#34;1098&#34;
+	height=&#34;330&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/volatility-profile_hu17444467872235278850.png 480w, http://localhost:1313/p/forensics-using-volatility/volatility-profile_hu12922377535795468152.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This was the output for running that command&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;332&#34;
+		data-flex-basis=&#34;798px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Then I ran &lt;code&gt;vol.py -f victim.raw --profile=&amp;lt;profile&amp;gt; shellbags&lt;/code&gt; to hopefully get the last accessed directory. The profile given for me to run was &lt;code&gt;Win7SP1x64&lt;/code&gt; so I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 shellbags&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-output.png&#34;
+	width=&#34;733&#34;
+	height=&#34;477&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-output_hu8737139027612271929.png 480w, http://localhost:1313/p/forensics-using-volatility/shellbags-output_hu15817912649029364909.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is the output for running the shellbags plugin against the image&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;153&#34;
+		data-flex-basis=&#34;368px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s not sorted, obviously, so I did the same command but had it output to a text document. I was hoping to be able to put it into an excel spreadsheet. The command I did was &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 shellbags &amp;gt; access.txt&lt;/code&gt; (This took forever to run).&lt;/p&gt;
+&lt;p&gt;I decided to look through the output manually and just parse it out since there weren&amp;rsquo;t a whole lot, and I ended up finding the directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed.png&#34;
+	width=&#34;1101&#34;
+	height=&#34;273&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed_hu14802295084782932999.png 480w, http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed_hu6327837449283835280.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is where I found the listing for the last accessed directory&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;403&#34;
+		data-flex-basis=&#34;967px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;task-2&#34;&gt;Task 2
+&lt;/h2&gt;&lt;h3 id=&#34;netscan&#34;&gt;Netscan
+&lt;/h3&gt;&lt;p&gt;Next question is about malicious services on different ports, so I&amp;rsquo;ll be running &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 netscan&lt;/code&gt; to get the running services and their associated ports&lt;/p&gt;
+&lt;p&gt;I was pretty confused at first because I could tell which service was the malicious one, I got the PID of it, &lt;code&gt;2464&lt;/code&gt;, and the service was &lt;code&gt;wmpnetwk.exe&lt;/code&gt; as that&amp;rsquo;s not a typical service, but it&amp;rsquo;s listed a million different times.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/wmpnetwk.png&#34;
+	width=&#34;1092&#34;
+	height=&#34;481&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/wmpnetwk_hu1478260537105056053.png 480w, http://localhost:1313/p/forensics-using-volatility/wmpnetwk_hu11549894565849730128.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;As you can see, there are multiple listings of that service&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;227&#34;
+		data-flex-basis=&#34;544px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Eventually, I found it listed at the beginning of the services list, so I put that in and I guess it was right. Not entirely sure how that&amp;rsquo;s more right than the others.&lt;/p&gt;
+&lt;p&gt;My assumption is that specific one is correct because it&amp;rsquo;s the primary instance that that service is running from.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/netscan-result.png&#34;
+	width=&#34;1373&#34;
+	height=&#34;447&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/netscan-result_hu17147190146339257021.png 480w, http://localhost:1313/p/forensics-using-volatility/netscan-result_hu12883370454199770980.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is where I saw the correct port and protocol&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;307&#34;
+		data-flex-basis=&#34;737px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;vad-and-protection&#34;&gt;Vad and Protection
+&lt;/h3&gt;&lt;h4 id=&#34;confusion&#34;&gt;Confusion
+&lt;/h4&gt;&lt;p&gt;The next question stumped me. It was asking to use Vad tags and execution protection to find IOCs (indicators of compromise), however I wasn&amp;rsquo;t sure how to go about doing that. I tried doing vadinfo, vadtree, and vaddump, and I just didn&amp;rsquo;t seem to be getting good information.&lt;/p&gt;
+&lt;p&gt;I didn&amp;rsquo;t know what I was looking for at all was the issue. I didn&amp;rsquo;t know what certain vad tags or execution protection would indicate an issue.&lt;/p&gt;
+&lt;p&gt;This guide by &lt;a class=&#34;link&#34; href=&#34;https://www.eyehatemalwares.com/digital-forensics/memory-analysis/volatility-vadinfo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;eyehatmalwares&lt;/a&gt; was incredibly helpful. I realized looking through this single guide what was being asked of me.&lt;/p&gt;
+&lt;p&gt;I still don&amp;rsquo;t entirely get what we are looking at with this stuff. I&amp;rsquo;m assuming it&amp;rsquo;s something to do with memory and ability to override what&amp;rsquo;s written in their processes or not, or what permission are allowed with that.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m still not entirely sure what Virtual Address Descriptors (Vad) are, so that&amp;rsquo;ll have to go into the backlog of things to research. But I had learned enough to get what I needed.&lt;/p&gt;
+&lt;h4 id=&#34;solution&#34;&gt;Solution
+&lt;/h4&gt;&lt;p&gt;My plan was to parse out the nodes with &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt;. Then I would see if that process contained a MZ or PE file, or if it had a JMP, RET, or CALL instruction.&lt;/p&gt;
+&lt;p&gt;In reality, with this problem, the malicious processes were the only ones that had &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For some reason it the room wasn&amp;rsquo;t taking the PIDs in the order I was giving them. They had to be in a specific order to be considered correct.&lt;/p&gt;
+&lt;p&gt;The above method found the right PIDs, but the instructions implied a different method of solving, so I thought maybe I had gotten the wrong PIDs because I had used the wrong method, but that wasn&amp;rsquo;t the case.&lt;/p&gt;
+&lt;p&gt;The method that the challenge was implying wanted you to look for two things. If the node had a &lt;code&gt;Protection: *_EXECUTE_*&lt;/code&gt; in it, plus the Vad Tag was VadS.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/first-find-search.png&#34;
+	width=&#34;1468&#34;
+	height=&#34;709&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/first-find-search_hu3047120135640698108.png 480w, http://localhost:1313/p/forensics-using-volatility/first-find-search_hu5236170536559308470.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is an example of what they wanted you to search. You can see in the middle where I highlighted the proper VAD node with the VadS tag and an execute protection&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;207&#34;
+		data-flex-basis=&#34;496px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The method where you solely look for &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt; works much better since only the services that were malicious had that specific protection.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/execute-readwrite.png&#34;
+	width=&#34;1460&#34;
+	height=&#34;688&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/execute-readwrite_hu9279843065373541427.png 480w, http://localhost:1313/p/forensics-using-volatility/execute-readwrite_hu15373687776768670415.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here you can see how narrowed down the search becomes, with only five instances of the PAGE_EXECUTE_READWRITE protection existing&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;212&#34;
+		data-flex-basis=&#34;509px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;There were a lot that had &lt;code&gt;PAGE_EXECUTE_WRITECOPY&lt;/code&gt; but weren&amp;rsquo;t under a malicious service, so parsing through each and keeping an eye on if it had an associated VadS tag was kind of tedious. Parsing out the &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt; was a much faster method.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m assuming the required order had to do with the order the processes were listed as the order it required was the order in which the processes appeared on the report.&lt;/p&gt;
+&lt;p&gt;I was thoroughly confused on what was being referred to with the vad s tag and execute protection, but I&amp;rsquo;m glad I learned about this. It&amp;rsquo;s good to learn different IOC, and I&amp;rsquo;m glad to know this one and have seen it in practice.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;task-3&#34;&gt;Task 3
+&lt;/h2&gt;&lt;h3 id=&#34;websites&#34;&gt;Websites
+&lt;/h3&gt;&lt;p&gt;Next, I&amp;rsquo;m going to use my Volatility Workstation that has all the processes listed that were running at the time of the memory dump to look and see what services these PID are associated with. Then, I&amp;rsquo;ll research these services on virus total to find the next question answers.&lt;/p&gt;
+&lt;p&gt;(At least, that was my initial plan)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In the previous task, you identified malicious processes, so let&amp;rsquo;s dig into them and find some Indicator of Compromise (IOC). You just need to find them and fill in the blanks (You may search for them on VirusTotal to discover more details).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The first hint for the URL looks like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;www.go****.ru&amp;rsquo; (write full URL without any quotation marks)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;wrong-direction&#34;&gt;Wrong Direction
+&lt;/h4&gt;&lt;p&gt;So, let&amp;rsquo;s go to virus total and do some digging. I am also doing a memdup of the specified PIDs since I think there are some questions about specifics within their memory. What I&amp;rsquo;m going to do is attempt to get a hash or something I can put into virus total and see what comes up.&lt;/p&gt;
+&lt;p&gt;I am using WinDBG to analyze the 1860.dmp file. I&amp;rsquo;m also going to dump the 1820 and 2464 processes.&lt;/p&gt;
+&lt;p&gt;I messed with these files for a while. I used a bunch of different tools said to be able to analyze .dmp files, but I defaulted back to volatility to see if I can dump all the files and maybe just pop them into virus total.&lt;/p&gt;
+&lt;p&gt;It took me way too long, but I found out that you can scan through the files and grep the service name file, and then download that specific file using the memory location.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/explorer.png&#34;
+	width=&#34;787&#34;
+	height=&#34;66&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/explorer_hu11410370584265761552.png 480w, http://localhost:1313/p/forensics-using-volatility/explorer_hu3358643737333255145.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Heres what was run and the output&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1192&#34;
+		data-flex-basis=&#34;2861px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;So to get the memory location of the explorer.exe file, I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 filescan | grep explorer.exe&lt;/code&gt; and then I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 dumpfiles -Q 0x000000005c5596e0 --name file -D 1860-memdump/&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;right-direction&#34;&gt;Right Direction
+&lt;/h4&gt;&lt;p&gt;After dumping these process images and messing with them in IDA for a while, I decided to just try and parse through the strings. Sometimes things aren&amp;rsquo;t as complicated as we try to make them.&lt;/p&gt;
+&lt;p&gt;So, I went back to my terminal, and tried printing out the strings of each service and greping the question using wildcards.&lt;/p&gt;
+&lt;p&gt;I was looking up how to properly grep with wild cards, and you actually have to do &lt;code&gt;.*&lt;/code&gt; to mean any character since grep works with regular expressions.&lt;/p&gt;
+&lt;p&gt;I used &lt;code&gt;strings &amp;lt;service&amp;gt;.dmp | grep www.go.*.ru&lt;/code&gt;. I tried it on all the dump files and the only one that came up with any results was the service with PID of 1820.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/go-result.png&#34;
+	width=&#34;275&#34;
+	height=&#34;348&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/go-result_hu654835869961324499.png 480w, http://localhost:1313/p/forensics-using-volatility/go-result_hu626789756994933499.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The output of that query&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;79&#34;
+		data-flex-basis=&#34;189px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I did have to use a hint to figure out which one it might be as there were just way too many options. It seems like the hints just give you an idea as which site in the list of sites it might be. From that. I figured out which one was the correct URL.&lt;/p&gt;
+&lt;p&gt;Next question is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;www.i****.com&amp;rsquo; (write full URL without any quotation marks)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, I&amp;rsquo;m assuming that all the answers will be in the 1820 service, but if I couldn&amp;rsquo;t find them there I&amp;rsquo;d parse through the others as well. Next query looked like &lt;code&gt;strings 1820.dmp | grep www.i.*.com&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/i-result.png&#34;
+	width=&#34;473&#34;
+	height=&#34;457&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/i-result_hu4597706256267746876.png 480w, http://localhost:1313/p/forensics-using-volatility/i-result_hu13494881011300981915.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is the result after parsing through 1820s strings&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;248px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The next hint wasn&amp;rsquo;t useful at all for me as I couldn&amp;rsquo;t tell which websites were related to the topic it gave me. There are also four characters after the &amp;lsquo;i&amp;rsquo; which helps us narrow it down a bit.&lt;/p&gt;
+&lt;p&gt;I had to use the amount of characters to figure it out since there was only one result with four letters after the &amp;lsquo;i&amp;rsquo;, so I went with that one.&lt;/p&gt;
+&lt;p&gt;Next:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;www.ic******.com&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We already kind of got this one by doing the &amp;lsquo;i&amp;rsquo; wild card, but I&amp;rsquo;m going to rerun the query with the added &amp;lsquo;c&amp;rsquo; to narrow down the results so I don&amp;rsquo;t have to manually. In this one there should be six characters after the &amp;lsquo;ic&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;There was only one that fit that criteria, and it was the first result.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/ic-result.png&#34;
+	width=&#34;383&#34;
+	height=&#34;123&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/ic-result_hu7360740634972445229.png 480w, http://localhost:1313/p/forensics-using-volatility/ic-result_hu1679968806069617779.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here are what that queries results looked like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;311&#34;
+		data-flex-basis=&#34;747px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ip-addresses&#34;&gt;IP Addresses
+&lt;/h3&gt;&lt;p&gt;Now we move onto finding the different IP addresses. Since I know how to properly use grep wildcards, this should be easy-peasy.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;202.***.233.*** (Write full IP)&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So I did &lt;code&gt;strings 1820.dmp | grep 202..*.233..*&lt;/code&gt; and only got one result back (thankfully).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;***.200.**.164 (Write full IP)&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And again we do &lt;code&gt;strings 1820.dmp | grep .*.200..*.164&lt;/code&gt; which gives us the flag and&amp;hellip; this mess&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/second-ip.png&#34;
+	width=&#34;1096&#34;
+	height=&#34;159&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/second-ip_hu4005208163394762688.png 480w, http://localhost:1313/p/forensics-using-volatility/second-ip_hu5913733713831547407.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This was startling to see!&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;689&#34;
+		data-flex-basis=&#34;1654px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&amp;hellip; Anyway, onto the next and final IP address query.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;209.190.***.***&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, one last time, we do &lt;code&gt;strings 1820.dmp | grep 209.190..*..*&lt;/code&gt; which gives us this flag along with another weird URL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/third-ip.png&#34;
+	width=&#34;464&#34;
+	height=&#34;60&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/third-ip_hu12847627047245911863.png 480w, http://localhost:1313/p/forensics-using-volatility/third-ip_hu18270300220026707576.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Theyre looking up some weird stuff!&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;773&#34;
+		data-flex-basis=&#34;1856px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Now, the final question&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the unique environmental variable of PID 2464?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I didn&amp;rsquo;t really know what a unique environmental variable was, so this was going to require some sleuthing.&lt;/p&gt;
+&lt;p&gt;Come to find out, volatility has a plugin exactly for that. It&amp;rsquo;s called &lt;em&gt;&lt;strong&gt;envars&lt;/strong&gt;&lt;/em&gt;, and you just need to pop in the command like all other plugins with volatility.&lt;/p&gt;
+&lt;p&gt;I used this command, &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 -p 2464 envars --silent&lt;/code&gt;, to look up the environmental variable for the 2464 process.&lt;/p&gt;
+&lt;p&gt;You have to do &lt;code&gt;--silent&lt;/code&gt; if you want the &lt;em&gt;unique&lt;/em&gt; variable for that process.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;That&amp;rsquo;s it! That&amp;rsquo;s how I went through solving the Try Hack Me Forensics Challenge! It was a lot of fun and I learned a lot along the way. If you have any questions about any steps I took during this process, leave them in the commends, or shoot me a message.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m more than willing to answer questions when I can. If you made it this far, thank you for reading. I had a really fun time writing this up, and I&amp;rsquo;m really appreciative when people take the time to read what I put work into. So thank you!&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

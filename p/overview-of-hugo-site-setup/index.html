@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="This is a general overview of how I got my site set up and little pointers">
+<title>Overview of Hugo Site Setup</title>
+
+<link rel='canonical' href='http://localhost:1313/p/overview-of-hugo-site-setup/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Overview of Hugo Site Setup">
+<meta property='og:description' content="This is a general overview of how I got my site set up and little pointers">
+<meta property='og:url' content='http://localhost:1313/p/overview-of-hugo-site-setup/'>
+<meta property='og:site_name' content='Dove'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:tag' content='Webdev' /><meta property='article:published_time' content='2024-04-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-04-17T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/overview-of-hugo-site-setup/hugo-logo.png' />
+<meta name="twitter:title" content="Overview of Hugo Site Setup">
+<meta name="twitter:description" content="This is a general overview of how I got my site set up and little pointers"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/overview-of-hugo-site-setup/hugo-logo.png' />
+    <link rel="shortcut icon" href="/apple-touch-icon.png" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TYMHMTK6Q6');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h2 class="site-description">I like breaking things :)</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/kd0ve'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/kat_ish_'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kd0ve.github.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+                
+                <span>Landing Page</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kdove.moe/blog/resources/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>Resources</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#hugo">Hugo</a></li>
+    <li><a href="#install-hugo">Install Hugo</a></li>
+    <li><a href="#creating-first-site">Creating First Site</a></li>
+    <li><a href="#adding-theme">Adding Theme</a></li>
+    <li><a href="#folder-layout">Folder Layout</a></li>
+    <li><a href="#the-config-file">The Config File</a></li>
+    <li><a href="#google-analytics-and-disqus-comments">Google Analytics and Disqus Comments</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/overview-of-hugo-site-setup/">
+                <img src="/p/overview-of-hugo-site-setup/hugo-logo_hu6415714750442210428.png"
+                        srcset="/p/overview-of-hugo-site-setup/hugo-logo_hu6415714750442210428.png 800w, /p/overview-of-hugo-site-setup/hugo-logo_hu14259061662136557691.png 1600w"
+                        width="800" 
+                        height="385" 
+                        loading="lazy"
+                        alt="Featured image of post Overview of Hugo Site Setup" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/guides/" >
+                Guides
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/overview-of-hugo-site-setup/">Overview of Hugo Site Setup</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            This is a general overview of how I got my site set up and little pointers
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 17, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>This post is going to be about how I would go about setting up a website like mine now that I’ve done it. I’ve learned a lot, and ran into a lot of specific issues, and figured I could be helpful to others who run into these weird little issues too, as it was difficult to find information on them online.</p>
+<p>I’m not going to be going over the specifics of Hugo or really going into detail certain terms I am using. I would recommend getting a basic idea of how Hugo works by reading the Hugo <a class="link" href="https://gohugo.io/about/introduction/"  target="_blank" rel="noopener"
+    >documentation</a>. This is always going to be a great reference to have.</p>
+<h2 id="hugo">Hugo
+</h2><p>Starting off, I decided to use the Hugo framework as opposed to Jekyll for a variety of reasons. The markdown support just feels better, and it’s actually a lot easier to get Github to run a Hugo website than it is to get it to run a Jekyll website even though Github advertises Jekyll primarily.</p>
+<p>I want to go over how a Hugo website even works regarding file systems, as it was difficult for me to get a grasp of initially. However, first I’m going to go over how to even get a website displaying on a local server with hugo, and then we’ll go over how to go about configuring things, as well as the function of the file system.</p>
+<h2 id="install-hugo">Install Hugo
+</h2><p>First, you’re going to want to install Hugo onto your system. You can do this easily on Windows by running <code>winget install Hugo.Hugo.Extended</code> in your terminal. This will automatically install Hugo.</p>
+<p>I’ve found this to be the best route, as <code>winget</code> is on every Windows 10 and 11 device by default, so it will typically just work. If you have a different host system, go <a class="link" href="https://gohugo.io/installation/"  target="_blank" rel="noopener"
+    >here</a> to get the appropriate instruction for your system.</p>
+<h2 id="creating-first-site">Creating First Site
+</h2><p><img src="/p/overview-of-hugo-site-setup/root-folder.png"
+	width="624"
+	height="413"
+	srcset="/p/overview-of-hugo-site-setup/root-folder_hu1154808637891486140.png 480w, /p/overview-of-hugo-site-setup/root-folder_hu16124952820340381237.png 1024w"
+	loading="lazy"
+	
+		alt="This is what a root folder might look like"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="362px"
+	
+></p>
+<p>When you run <code>hugo new site &lt;sitename&gt; -f “yaml”</code> Hugo generates certain default files that are in a YAML format. For me, working with YAML instead of their default format is much more straight forward, and a lot of themes come by default with yaml configs.</p>
+<p>I’ve found many tutorials recommending running this command and then adding in the theme to the “themes” folder that’s generated, and then putting in the theme name into your config file that is generated. Although this works, there are a few more steps that could (and should) be taken.</p>
+<h2 id="adding-theme">Adding Theme
+</h2><p><img src="/p/overview-of-hugo-site-setup/theme-folder.png"
+	width="624"
+	height="449"
+	srcset="/p/overview-of-hugo-site-setup/theme-folder_hu3159321689814680720.png 480w, /p/overview-of-hugo-site-setup/theme-folder_hu17815554162465711669.png 1024w"
+	loading="lazy"
+	
+		alt="This is what a theme folder might look like"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="138"
+		data-flex-basis="333px"
+	
+></p>
+<p>First, you want to go into your themes folder, and then do <code>git clone &lt;http clone link on repo&gt;</code>. This will generate a folder with the theme name, which you should at this point <code>cd</code> into.</p>
+<p>Once there, I recommend removing the <code>.git</code> folder, as this will make your personal repo associate that folder with the theme’s repo rather than what is in the theme’s folders.</p>
+<p>So if you try to configure the theme, and the .git folder is still in there, it won’t change anything. This is largely in relation to the css of the site.</p>
+<p>Lots of theme tutorials recommend adding in alterations into the provided root folders, however this doesn’t always work with every theme, and just integrating the theme’s folders into your website directly instead of attempting to configure them separately just tended to work more often for me.</p>
+<p>To do this you <em>need</em> to remove the <code>.git</code> folder in the theme’s directory.</p>
+<p>I would also recommend taking the files in their demo site, which is usually provided in a folder in the cloned repo, and copying them all over to your root directory, replacing the default ones generated by the <code>hugo new site</code> command. This will give you a base to mess with, with a proper configuration file that you can just change as you need.</p>
+<h2 id="folder-layout">Folder Layout
+</h2><p>Now you should be able to run <code>hugo serve</code> or <code>hugo server</code> and get a display of the website on <code>localhost:1313</code>. This should be the example site being displayed in your browser. From here, let’s look at the folders and how they’re laid out.
+First, you’ll have your content folder. This is the most important folder, and one of the ones that confused me the most.</p>
+<p><img src="/p/overview-of-hugo-site-setup/content-folder.png"
+	width="624"
+	height="110"
+	srcset="/p/overview-of-hugo-site-setup/content-folder_hu16183800506701782520.png 480w, /p/overview-of-hugo-site-setup/content-folder_hu9833812900818557534.png 1024w"
+	loading="lazy"
+	
+		alt="This is what a contents folder might look like"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="567"
+		data-flex-basis="1361px"
+	
+></p>
+<p>This is an example of what your content page might look like. Each folder is a type of content on your website. You can make exclusive respects of their front matter and put that markdown file into your archetypes folder. If an archetypes folder wasn’t generated by default, you can take the one from the theme and copy it into your root directory.</p>
+<p><img src="/p/overview-of-hugo-site-setup/archetype-folder.png"
+	width="624"
+	height="119"
+	srcset="/p/overview-of-hugo-site-setup/archetype-folder_hu12226516954040258921.png 480w, /p/overview-of-hugo-site-setup/archetype-folder_hu867295626708893591.png 1024w"
+	loading="lazy"
+	
+		alt="This is what an archetypes folder might look like"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="524"
+		data-flex-basis="1258px"
+	
+></p>
+<p>Here’s an example of what my <code>page.md</code> archetype looks like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ replace .Name &#34;</span>-<span class="s2">&#34; &#34;</span><span class="w"> </span><span class="s2">&#34; | title }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Date }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">lastmod</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Date }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">aliases</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">about-us</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">about-hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">contact</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l">CC BY-NC-ND</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">menu</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">main</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">weight</span><span class="p">:</span><span class="w"> </span>-<span class="m">90</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="l">user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">comments</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>And my <code>post.md</code> archetype file looks like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ replace .Name &#34;</span>-<span class="s2">&#34; &#34;</span><span class="w"> </span><span class="s2">&#34; | title }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Date }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">lastmod</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Date }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">categories</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l">CC BY-NC-ND</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">comments</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then, when you want to make a new post, you would do <code>hugo new content post/title.md</code> or for a new page you would do <code>hugo new content page/title.md</code>.</p>
+<p>This will generate a markdown file with the archetype skeleton you created already set up. From there, you can write a post or make a new page.</p>
+<p>I’m not going into specifics of configuring your site as that is dependent entirely on the theme you are working with, however I will provide some points that are important to know when configuring your website.</p>
+<h2 id="the-config-file">The Config File
+</h2><p>All website config files will generally work the same with Hugo, so these settings can be present in basically any Hugo site and still will work in some way.</p>
+<p>Some points, there will always be certain configurations that should be set. Firstly is the introductory information:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">baseurl</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">languageCode</span><span class="p">:</span><span class="w"> </span><span class="l">en-us</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;theme&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">paginate</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Website</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">copyright</span><span class="p">:</span><span class="w"> </span><span class="l">user</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>This will set the title, theme, language, and copyright information for your website. The following will be parameters that are included in almost all themes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">defaultTheme</span><span class="p">:</span><span class="w"> </span><span class="l">auto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">images</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cover.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">favicon</span><span class="p">:</span><span class="w"> </span><span class="l">apple-touch-icon.png</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">logo</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">icon</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">DateFormat</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2006-01-02&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mainSections</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">posts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">notes</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>There’s a lot that could be covered with the configuration file, and a lot of the settings largely depend on the theme, but these are just some examples.</p>
+<p>One article that helped me greatly with examples was from <a class="link" href="https://kyxie.github.io/en/blog/tech/papermod/"  target="_blank" rel="noopener"
+    >Kyrie</a> who’s website and specific configuration examples you can find by clicking their name.</p>
+<p>A lot of these instructions are done with the papermod theme in mind, but I utilized a different theme for my blog and noticed that a lot of the configuration can be applied to both sites. There are just some settings in some themes that aren’t in others or vise-versa.</p>
+<h2 id="google-analytics-and-disqus-comments">Google Analytics and Disqus Comments
+</h2><p>These last two points were something that I found difficult to figure out that I wanted to share my method for.</p>
+<p>Google Analytics allows you to keep track of the traffic coming to your website, and Disqus comments are a really simple way to include comments on your website, which many themes come able to support by default.</p>
+<p>Firstly, Google Analytics was a pain to figure out, but Hugo comes prepackaged by default with a <code>google_analytics.html</code> file that easily allows you to bring analytics into any site. First, in the config file, you want to do the following:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># GA Tracking ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">googleAnalytics</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>This will give you a way to input your tracking tag or GTag. However, you need to go into the theme’s files and find the <code>head.html</code> file in your layouts, which is usually in the <code>partials</code> folder.</p>
+<p>Once in there, you can just add <code>{{- template &quot;_internal/google_analytics.html&quot; . }}</code> anywhere in that file and it will enable the ability to track analytics. Some themes come with this already included, others try but make it difficult to enable, so just make sure it’s by itself listed in the <code>head.html</code> file and you should be good.</p>
+<p>With Disqus comments, most themes come with them already able to be included. You should see a section in your configuration file that looks like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span><span class="nt">commentSystems</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">disqus</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">shortname</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>When you make an account with Disqus, you should be able to find your shortname in the general tab of the comment admin panel. You will just copy and past that into where it says “shortname”.</p>
+<p>With some comment systems, you need to implement the Disqus API. This is a little more involved, but not too difficult. You will need to create an API application <a class="link" href="http://disqus.com/api/applications/"  target="_blank" rel="noopener"
+    >here</a>.</p>
+<p>From there, you should get all the information needed. This is what the configuration section may look like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span><span class="nt">comments</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">disqus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">disqusjs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">shortname</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">apiUrl</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">apiKey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">admin</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">adminLabel</span><span class="p">:</span><span class="w"> 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>In the api application, once you’ve filled it out, you should get a settings page. From there, you should see the OAuth section:</p>
+<p><img src="/p/overview-of-hugo-site-setup/oauth-settings.png"
+	width="624"
+	height="485"
+	srcset="/p/overview-of-hugo-site-setup/oauth-settings_hu3699585885600222782.png 480w, /p/overview-of-hugo-site-setup/oauth-settings_hu3024140871151274822.png 1024w"
+	loading="lazy"
+	
+		alt="An example of what the OAuth panel looks like"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="128"
+		data-flex-basis="308px"
+	
+></p>
+<p>You will want to grab the API Key and put that where it says apiKey in the configuration. Then, grab the authorization URL, and put that where it says apiUrl. Of course, you should already have your shortname.</p>
+<p>To get your admin name and label, you can go to your profile and look over to where it says your name.</p>
+<p><img src="/p/overview-of-hugo-site-setup/profile.png"
+	width="365"
+	height="478"
+	srcset="/p/overview-of-hugo-site-setup/profile_hu13748880007032729729.png 480w, /p/overview-of-hugo-site-setup/profile_hu15095057623397430318.png 1024w"
+	loading="lazy"
+	
+		alt="What a Disqus profile looks like"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="76"
+		data-flex-basis="183px"
+	
+></p>
+<p>Where it says “admin” in your configuration file, you should put the @string where &ldquo;string&rdquo; is the string that is next to your @. The admin label should be your profile name.</p>
+<p>Once all that is put into your configuration, if these steps are necessary, you should be able to have Disqus comments! Some themes don’t provide this functionality, although there are ways to add them in yourself.</p>
+<p>I recommend if you want to include Disqus comments, but don&rsquo;t have it directly integrated, to follow the manual install guide the Disqus provides. You should just have to insert the function they give you into the layout html for your posts.</p>
+<h2 id="conclusion">Conclusion
+</h2><p>I do hope this article answered a few questions you may have had in the process of setting up your Hugo website.</p>
+<p>If requested, I can absolutely go more into depth on how to get a Hugo website set up from scratch. That will just take significantly longer to write.</p>
+<p>Let me know if that’s something you would like to see! Thank you for reading :)</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/post/">Post</a>
+        
+            <a href="/tags/webdev/">Webdev</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/setting-up-goad-on-windows/">
+        
+        
+            <div class="article-image">
+                <img src="/p/setting-up-goad-on-windows/image.a574ed49efe3132d128f699ba56c1677_hu15784885137698628433.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Setting Up GOAD On Windows"
+                        
+                        data-hash="md5-pXTtSe/jEy0Sj2mbpWwWdw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Setting Up GOAD On Windows</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kd0ve" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Kat
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

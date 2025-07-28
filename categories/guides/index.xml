@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Guides on Dove</title>
+        <link>http://localhost:1313/categories/guides/</link>
+        <description>Recent content in Guides on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/guides/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Setting Up GOAD On Windows</title>
+        <link>http://localhost:1313/p/setting-up-goad-on-windows/</link>
+        <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/setting-up-goad-on-windows/</guid>
+        <description>&lt;img src="http://localhost:1313/p/setting-up-goad-on-windows/image.png" alt="Featured image of post Setting Up GOAD On Windows" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+&lt;/h2&gt;&lt;p&gt;We will be going over the process of getting the Game Of Active Directory set up on a Windows device. I am going to be using VMWare workstation for this.&lt;/p&gt;
+&lt;h2 id=&#34;environment&#34;&gt;Environment
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;VMWare Workstation&lt;/li&gt;
+&lt;li&gt;Windows 11 - Host machine&lt;/li&gt;
+&lt;li&gt;Kali&lt;/li&gt;
+&lt;li&gt;GOAD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;what-you-need&#34;&gt;What You Need
+&lt;/h2&gt;&lt;p&gt;You will need Python &amp;gt;=3.8 installed on your device. You can install Python &lt;a class=&#34;link&#34; href=&#34;https://www.python.org/downloads/windows/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;. You will also need pip installed, which we will do coming up here shortly.&lt;/p&gt;
+&lt;p&gt;First, make sure you have plenty of space on your drive. I am just setting up the light version of GOAD, but you still need a good amount of space and RAM to get it set up properly.&lt;/p&gt;
+&lt;p&gt;Next, we will be cloning the directory &lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/Orange-Cyberdefense/GOAD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;The documentation is very useful, and they have a section on Windows, but I will be going over some differences in what their walkthrough does that I ran into. You can find that documentation &lt;a class=&#34;link&#34; href=&#34;https://orange-cyberdefense.github.io/GOAD/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You will have to install pip using the following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python get-pip.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;setup-and-install&#34;&gt;Setup and Install
+&lt;/h2&gt;&lt;p&gt;From here, you will need go into the GOAD directory you just cloned and install the &lt;code&gt;noansible_requirements.yml&lt;/code&gt; file using pip. The way that they show in the documentation didn&amp;rsquo;t work for me, so I did the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python -m pip install -r noansible_requirements.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Once this runs, you should be able to run the &lt;a class=&#34;link&#34; href=&#34;http://goad.py&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;code&gt;goad.py&lt;/code&gt;&lt;/a&gt; file like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python goad.py -m vm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And you should get the following screen:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image.png&#34;
+	width=&#34;821&#34;
+	height=&#34;323&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of the GOAD menu that should spawn after the command&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;254&#34;
+		data-flex-basis=&#34;610px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, in the command prompt that spawns, you want to set a few things. I personally set the lab to GOAD-Light and set the IP range to 192.168.74. You can change those the following ways:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set_lab &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;lab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; # GOAD/GOAD-Light/NHA/SCCM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set_ip_range &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ip-range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; # you only need to specify the first three digits like 192.168.56
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;install # will finalize your settings
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;If you are fine with the default range of 192.168.56, don&amp;rsquo;t worry about changing the IP range. The most important thing is specifying the type of lab you want to build.&lt;/p&gt;
+&lt;h3 id=&#34;possible-issues&#34;&gt;Possible Issues
+&lt;/h3&gt;&lt;p&gt;When installing, I ran into an error that is pretty common.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[-] 3 fails abort.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[-] Something wrong during the provisioning task : build.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;What helped me was assigning an IP to my machine for the adaptor that was being used for the machines. I go over later on how to figure out which adaptor is the one your lab is using. You can skip the the &amp;ldquo;Getting Kali Configured&amp;rdquo; section to see how I did that and then come back here.&lt;/p&gt;
+&lt;p&gt;To get to the adaptors, you need to go to the Control Panel in your host machine and go to &amp;ldquo;Network and Internet.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1.png&#34;
+	width=&#34;751&#34;
+	height=&#34;495&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click for Network and Internet&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;364px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You then want to go to &amp;ldquo;Network and Sharing Center.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2.png&#34;
+	width=&#34;749&#34;
+	height=&#34;371&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click for Network and Sharing Center&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;201&#34;
+		data-flex-basis=&#34;484px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And then you&amp;rsquo;ll want to click &amp;ldquo;Change adaptor settings.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3.png&#34;
+	width=&#34;755&#34;
+	height=&#34;448&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click for adaptor settings&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;168&#34;
+		data-flex-basis=&#34;404px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Then you want to right click the adaptor you need to configure and select properties. A window will pop up where you will want to go down to &amp;ldquo;Internet Protocol Version 4.&amp;rdquo; From here you will select &amp;ldquo;Properties.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4.png&#34;
+	width=&#34;350&#34;
+	height=&#34;460&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click to get into IPv4 properties&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;76&#34;
+		data-flex-basis=&#34;182px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, you will edit the configuration similarly to what I have below depending on your IP range you set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5.png&#34;
+	width=&#34;391&#34;
+	height=&#34;446&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of the network adaptor configurations&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;87&#34;
+		data-flex-basis=&#34;210px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I also made the DNS server Google&amp;rsquo;s DNS server just to ensure name resolution. This seemed to also fix an issue I was having with internet connection.&lt;/p&gt;
+&lt;p&gt;This fix was suggested by a user on github named &amp;rsquo;theiosif&amp;rsquo; which you can find &lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD/issues/281&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The installation will take quite a while, so it&amp;rsquo;s best to just leave it running while it does its thing.&lt;/p&gt;
+&lt;h2 id=&#34;getting-kali-configured&#34;&gt;Getting Kali Configured
+&lt;/h2&gt;&lt;p&gt;To get Kali to be able to communicate with all the machines on the network, you need to add the adaptor to the machine.&lt;/p&gt;
+&lt;p&gt;First, you need to find what adaptor is hosting the IP range you specified. To do that you can go to &amp;ldquo;Edit&amp;rdquo; and then &amp;ldquo;Virtual Network Editor&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6.png&#34;
+	width=&#34;596&#34;
+	height=&#34;550&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Image of the Virtual Network Editor window&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;108&#34;
+		data-flex-basis=&#34;260px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You can see here I have multiple adaptors, but the one with the range &amp;ldquo;192.168.74.0&amp;rdquo; is the one I need to connect to. That would be VMnet1.&lt;/p&gt;
+&lt;p&gt;Next you want to right click on the Kali box in VMWare and click &amp;ldquo;Settings&amp;rdquo;. From here, you can edit the adaptor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7.png&#34;
+	width=&#34;753&#34;
+	height=&#34;725&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating how your settings should be configured&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;249px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Where I have highlighted in red, you should have set and selected the VMnet adaptor that corresponds to the one for your GOAD network.&lt;/p&gt;
+&lt;p&gt;After saving these settings and booting into Kali, you may have to set a static IP for the box. To do this, click the upper left corner Kali menu and search &amp;ldquo;Network&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8.png&#34;
+	width=&#34;562&#34;
+	height=&#34;476&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of searching Network in kali menu&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;118&#34;
+		data-flex-basis=&#34;283px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Click the &amp;ldquo;Advanced Network Configuration&amp;rdquo; option. This will open up your network configurations, where you want to click on the Wired Connection and click the gear icon.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9.png&#34;
+	width=&#34;598&#34;
+	height=&#34;425&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;showing where to click the gear icon after selecting the wired connection&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;140&#34;
+		data-flex-basis=&#34;337px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You then want to click into the IPv4 settings window, and add your IP address within the range of your lab. I also just set the DNS to 8.8.8.8 for good measure and to prevent any name resolution issues.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10.png&#34;
+	width=&#34;693&#34;
+	height=&#34;543&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where you should click and what you should set&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;306px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, I just ran &lt;code&gt;netdiscover -r 192.168.74.0/24&lt;/code&gt; to find all the IPs on the range. You can then go ahead and ping the IPs to check connectivity. If you did the GOAD-Light lab like I did, four of these should return with responses. Those are your lab machines.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;I hope this helped a bit with getting GOAD set up on Windows! I had a lot of issues getting it set up for a while, so I wanted to make a guide to make it easier in case anyone else runs into the same problems.&lt;/p&gt;
+&lt;p&gt;Please let me know in the comments if there&amp;rsquo;s anything I could add or clarify and make better! Thank you for reading.&lt;/p&gt;
+&lt;h2 id=&#34;sources&#34;&gt;Sources
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Orange-Cyberdefense/GOAD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://phoenixnap.com/kb/install-pip-windows&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://phoenixnap.com/kb/install-pip-windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://orange-cyberdefense.github.io/GOAD/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://orange-cyberdefense.github.io/GOAD/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD/issues/281&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Orange-Cyberdefense/GOAD/issues/281&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Overview of Hugo Site Setup</title>
+        <link>http://localhost:1313/p/overview-of-hugo-site-setup/</link>
+        <pubDate>Wed, 17 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/overview-of-hugo-site-setup/</guid>
+        <description>&lt;img src="http://localhost:1313/p/overview-of-hugo-site-setup/hugo-logo.png" alt="Featured image of post Overview of Hugo Site Setup" /&gt;&lt;p&gt;This post is going to be about how I would go about setting up a website like mine now that I’ve done it. I’ve learned a lot, and ran into a lot of specific issues, and figured I could be helpful to others who run into these weird little issues too, as it was difficult to find information on them online.&lt;/p&gt;
+&lt;p&gt;I’m not going to be going over the specifics of Hugo or really going into detail certain terms I am using. I would recommend getting a basic idea of how Hugo works by reading the Hugo &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/about/introduction/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;documentation&lt;/a&gt;. This is always going to be a great reference to have.&lt;/p&gt;
+&lt;h2 id=&#34;hugo&#34;&gt;Hugo
+&lt;/h2&gt;&lt;p&gt;Starting off, I decided to use the Hugo framework as opposed to Jekyll for a variety of reasons. The markdown support just feels better, and it’s actually a lot easier to get Github to run a Hugo website than it is to get it to run a Jekyll website even though Github advertises Jekyll primarily.&lt;/p&gt;
+&lt;p&gt;I want to go over how a Hugo website even works regarding file systems, as it was difficult for me to get a grasp of initially. However, first I’m going to go over how to even get a website displaying on a local server with hugo, and then we’ll go over how to go about configuring things, as well as the function of the file system.&lt;/p&gt;
+&lt;h2 id=&#34;install-hugo&#34;&gt;Install Hugo
+&lt;/h2&gt;&lt;p&gt;First, you’re going to want to install Hugo onto your system. You can do this easily on Windows by running &lt;code&gt;winget install Hugo.Hugo.Extended&lt;/code&gt; in your terminal. This will automatically install Hugo.&lt;/p&gt;
+&lt;p&gt;I’ve found this to be the best route, as &lt;code&gt;winget&lt;/code&gt; is on every Windows 10 and 11 device by default, so it will typically just work. If you have a different host system, go &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/installation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt; to get the appropriate instruction for your system.&lt;/p&gt;
+&lt;h2 id=&#34;creating-first-site&#34;&gt;Creating First Site
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/root-folder.png&#34;
+	width=&#34;624&#34;
+	height=&#34;413&#34;
+	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/root-folder_hu1154808637891486140.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/root-folder_hu16124952820340381237.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is what a root folder might look like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;362px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;When you run &lt;code&gt;hugo new site &amp;lt;sitename&amp;gt; -f “yaml”&lt;/code&gt; Hugo generates certain default files that are in a YAML format. For me, working with YAML instead of their default format is much more straight forward, and a lot of themes come by default with yaml configs.&lt;/p&gt;
+&lt;p&gt;I’ve found many tutorials recommending running this command and then adding in the theme to the “themes” folder that’s generated, and then putting in the theme name into your config file that is generated. Although this works, there are a few more steps that could (and should) be taken.&lt;/p&gt;
+&lt;h2 id=&#34;adding-theme&#34;&gt;Adding Theme
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder.png&#34;
+	width=&#34;624&#34;
+	height=&#34;449&#34;
+	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder_hu3159321689814680720.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/theme-folder_hu17815554162465711669.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is what a theme folder might look like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;138&#34;
+		data-flex-basis=&#34;333px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;First, you want to go into your themes folder, and then do &lt;code&gt;git clone &amp;lt;http clone link on repo&amp;gt;&lt;/code&gt;. This will generate a folder with the theme name, which you should at this point &lt;code&gt;cd&lt;/code&gt; into.&lt;/p&gt;
+&lt;p&gt;Once there, I recommend removing the &lt;code&gt;.git&lt;/code&gt; folder, as this will make your personal repo associate that folder with the theme’s repo rather than what is in the theme’s folders.&lt;/p&gt;
+&lt;p&gt;So if you try to configure the theme, and the .git folder is still in there, it won’t change anything. This is largely in relation to the css of the site.&lt;/p&gt;
+&lt;p&gt;Lots of theme tutorials recommend adding in alterations into the provided root folders, however this doesn’t always work with every theme, and just integrating the theme’s folders into your website directly instead of attempting to configure them separately just tended to work more often for me.&lt;/p&gt;
+&lt;p&gt;To do this you &lt;em&gt;need&lt;/em&gt; to remove the &lt;code&gt;.git&lt;/code&gt; folder in the theme’s directory.&lt;/p&gt;
+&lt;p&gt;I would also recommend taking the files in their demo site, which is usually provided in a folder in the cloned repo, and copying them all over to your root directory, replacing the default ones generated by the &lt;code&gt;hugo new site&lt;/code&gt; command. This will give you a base to mess with, with a proper configuration file that you can just change as you need.&lt;/p&gt;
+&lt;h2 id=&#34;folder-layout&#34;&gt;Folder Layout
+&lt;/h2&gt;&lt;p&gt;Now you should be able to run &lt;code&gt;hugo serve&lt;/code&gt; or &lt;code&gt;hugo server&lt;/code&gt; and get a display of the website on &lt;code&gt;localhost:1313&lt;/code&gt;. This should be the example site being displayed in your browser. From here, let’s look at the folders and how they’re laid out.
+First, you’ll have your content folder. This is the most important folder, and one of the ones that confused me the most.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/content-folder.png&#34;
+	width=&#34;624&#34;
+	height=&#34;110&#34;
+	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/content-folder_hu16183800506701782520.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/content-folder_hu9833812900818557534.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is what a contents folder might look like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;567&#34;
+		data-flex-basis=&#34;1361px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;This is an example of what your content page might look like. Each folder is a type of content on your website. You can make exclusive respects of their front matter and put that markdown file into your archetypes folder. If an archetypes folder wasn’t generated by default, you can take the one from the theme and copy it into your root directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder.png&#34;
+	width=&#34;624&#34;
+	height=&#34;119&#34;
+	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder_hu12226516954040258921.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/archetype-folder_hu867295626708893591.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is what an archetypes folder might look like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;524&#34;
+		data-flex-basis=&#34;1258px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Here’s an example of what my &lt;code&gt;page.md&lt;/code&gt; archetype looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;{{ replace .Name &amp;#34;&lt;/span&gt;-&lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34; | title }}&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;{{&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;.Date }}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;lastmod&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;{{&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;.Date }}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;aliases&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;about-us&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;about-hugo&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;contact&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;license&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;CC BY-NC-ND&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;menu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;weight&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;-&lt;span class=&#34;m&#34;&gt;90&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;params&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;icon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;comments&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And my &lt;code&gt;post.md&lt;/code&gt; archetype file looks like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;{{ replace .Name &amp;#34;&lt;/span&gt;-&lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34; | title }}&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;{{&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;.Date }}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;lastmod&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;{{&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;.Date }}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;categories&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;license&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;CC BY-NC-ND&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;comments&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Then, when you want to make a new post, you would do &lt;code&gt;hugo new content post/title.md&lt;/code&gt; or for a new page you would do &lt;code&gt;hugo new content page/title.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This will generate a markdown file with the archetype skeleton you created already set up. From there, you can write a post or make a new page.&lt;/p&gt;
+&lt;p&gt;I’m not going into specifics of configuring your site as that is dependent entirely on the theme you are working with, however I will provide some points that are important to know when configuring your website.&lt;/p&gt;
+&lt;h2 id=&#34;the-config-file&#34;&gt;The Config File
+&lt;/h2&gt;&lt;p&gt;All website config files will generally work the same with Hugo, so these settings can be present in basically any Hugo site and still will work in some way.&lt;/p&gt;
+&lt;p&gt;Some points, there will always be certain configurations that should be set. Firstly is the introductory information:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;baseurl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;languageCode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;en-us&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;theme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;&amp;lt;theme&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;paginate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;Website&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;copyright&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;This will set the title, theme, language, and copyright information for your website. The following will be parameters that are included in almost all themes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;params&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;defaultTheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;auto&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;author&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;images&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;cover.png&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;favicon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;apple-touch-icon.png&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;logo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;icon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;DateFormat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;2006-01-02&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;mainSections&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;posts&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;notes&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;There’s a lot that could be covered with the configuration file, and a lot of the settings largely depend on the theme, but these are just some examples.&lt;/p&gt;
+&lt;p&gt;One article that helped me greatly with examples was from &lt;a class=&#34;link&#34; href=&#34;https://kyxie.github.io/en/blog/tech/papermod/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Kyrie&lt;/a&gt; who’s website and specific configuration examples you can find by clicking their name.&lt;/p&gt;
+&lt;p&gt;A lot of these instructions are done with the papermod theme in mind, but I utilized a different theme for my blog and noticed that a lot of the configuration can be applied to both sites. There are just some settings in some themes that aren’t in others or vise-versa.&lt;/p&gt;
+&lt;h2 id=&#34;google-analytics-and-disqus-comments&#34;&gt;Google Analytics and Disqus Comments
+&lt;/h2&gt;&lt;p&gt;These last two points were something that I found difficult to figure out that I wanted to share my method for.&lt;/p&gt;
+&lt;p&gt;Google Analytics allows you to keep track of the traffic coming to your website, and Disqus comments are a really simple way to include comments on your website, which many themes come able to support by default.&lt;/p&gt;
+&lt;p&gt;Firstly, Google Analytics was a pain to figure out, but Hugo comes prepackaged by default with a &lt;code&gt;google_analytics.html&lt;/code&gt; file that easily allows you to bring analytics into any site. First, in the config file, you want to do the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;services&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# GA Tracking ID&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;googleAnalytics&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;This will give you a way to input your tracking tag or GTag. However, you need to go into the theme’s files and find the &lt;code&gt;head.html&lt;/code&gt; file in your layouts, which is usually in the &lt;code&gt;partials&lt;/code&gt; folder.&lt;/p&gt;
+&lt;p&gt;Once in there, you can just add &lt;code&gt;{{- template &amp;quot;_internal/google_analytics.html&amp;quot; . }}&lt;/code&gt; anywhere in that file and it will enable the ability to track analytics. Some themes come with this already included, others try but make it difficult to enable, so just make sure it’s by itself listed in the &lt;code&gt;head.html&lt;/code&gt; file and you should be good.&lt;/p&gt;
+&lt;p&gt;With Disqus comments, most themes come with them already able to be included. You should see a section in your configuration file that looks like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;commentSystems&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;disqus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;shortname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;When you make an account with Disqus, you should be able to find your shortname in the general tab of the comment admin panel. You will just copy and past that into where it says “shortname”.&lt;/p&gt;
+&lt;p&gt;With some comment systems, you need to implement the Disqus API. This is a little more involved, but not too difficult. You will need to create an API application &lt;a class=&#34;link&#34; href=&#34;http://disqus.com/api/applications/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;From there, you should get all the information needed. This is what the configuration section may look like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;comments&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;provider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;disqus&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;disqusjs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;shortname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;apiUrl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;apiKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;admin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;            &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;adminLabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;In the api application, once you’ve filled it out, you should get a settings page. From there, you should see the OAuth section:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings.png&#34;
+	width=&#34;624&#34;
+	height=&#34;485&#34;
+	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings_hu3699585885600222782.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/oauth-settings_hu3024140871151274822.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;An example of what the OAuth panel looks like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;128&#34;
+		data-flex-basis=&#34;308px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You will want to grab the API Key and put that where it says apiKey in the configuration. Then, grab the authorization URL, and put that where it says apiUrl. Of course, you should already have your shortname.&lt;/p&gt;
+&lt;p&gt;To get your admin name and label, you can go to your profile and look over to where it says your name.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/profile.png&#34;
+	width=&#34;365&#34;
+	height=&#34;478&#34;
+	srcset=&#34;http://localhost:1313/p/overview-of-hugo-site-setup/profile_hu13748880007032729729.png 480w, http://localhost:1313/p/overview-of-hugo-site-setup/profile_hu15095057623397430318.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;What a Disqus profile looks like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;76&#34;
+		data-flex-basis=&#34;183px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Where it says “admin” in your configuration file, you should put the @string where &amp;ldquo;string&amp;rdquo; is the string that is next to your @. The admin label should be your profile name.&lt;/p&gt;
+&lt;p&gt;Once all that is put into your configuration, if these steps are necessary, you should be able to have Disqus comments! Some themes don’t provide this functionality, although there are ways to add them in yourself.&lt;/p&gt;
+&lt;p&gt;I recommend if you want to include Disqus comments, but don&amp;rsquo;t have it directly integrated, to follow the manual install guide the Disqus provides. You should just have to insert the function they give you into the layout html for your posts.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;I do hope this article answered a few questions you may have had in the process of setting up your Hugo website.&lt;/p&gt;
+&lt;p&gt;If requested, I can absolutely go more into depth on how to get a Hugo website set up from scratch. That will just take significantly longer to write.&lt;/p&gt;
+&lt;p&gt;Let me know if that’s something you would like to see! Thank you for reading :)&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

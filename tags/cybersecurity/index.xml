@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Cybersecurity on Dove</title>
+        <link>http://localhost:1313/tags/cybersecurity/</link>
+        <description>Recent content in Cybersecurity on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/cybersecurity/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Setting Up GOAD On Windows</title>
+        <link>http://localhost:1313/p/setting-up-goad-on-windows/</link>
+        <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/setting-up-goad-on-windows/</guid>
+        <description>&lt;img src="http://localhost:1313/p/setting-up-goad-on-windows/image.png" alt="Featured image of post Setting Up GOAD On Windows" /&gt;&lt;h2 id=&#34;description&#34;&gt;Description
+&lt;/h2&gt;&lt;p&gt;We will be going over the process of getting the Game Of Active Directory set up on a Windows device. I am going to be using VMWare workstation for this.&lt;/p&gt;
+&lt;h2 id=&#34;environment&#34;&gt;Environment
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;VMWare Workstation&lt;/li&gt;
+&lt;li&gt;Windows 11 - Host machine&lt;/li&gt;
+&lt;li&gt;Kali&lt;/li&gt;
+&lt;li&gt;GOAD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;what-you-need&#34;&gt;What You Need
+&lt;/h2&gt;&lt;p&gt;You will need Python &amp;gt;=3.8 installed on your device. You can install Python &lt;a class=&#34;link&#34; href=&#34;https://www.python.org/downloads/windows/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;. You will also need pip installed, which we will do coming up here shortly.&lt;/p&gt;
+&lt;p&gt;First, make sure you have plenty of space on your drive. I am just setting up the light version of GOAD, but you still need a good amount of space and RAM to get it set up properly.&lt;/p&gt;
+&lt;p&gt;Next, we will be cloning the directory &lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/Orange-Cyberdefense/GOAD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;The documentation is very useful, and they have a section on Windows, but I will be going over some differences in what their walkthrough does that I ran into. You can find that documentation &lt;a class=&#34;link&#34; href=&#34;https://orange-cyberdefense.github.io/GOAD/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You will have to install pip using the following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python get-pip.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;setup-and-install&#34;&gt;Setup and Install
+&lt;/h2&gt;&lt;p&gt;From here, you will need go into the GOAD directory you just cloned and install the &lt;code&gt;noansible_requirements.yml&lt;/code&gt; file using pip. The way that they show in the documentation didn&amp;rsquo;t work for me, so I did the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python -m pip install -r noansible_requirements.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Once this runs, you should be able to run the &lt;a class=&#34;link&#34; href=&#34;http://goad.py&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;code&gt;goad.py&lt;/code&gt;&lt;/a&gt; file like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python goad.py -m vm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And you should get the following screen:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image.png&#34;
+	width=&#34;821&#34;
+	height=&#34;323&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of the GOAD menu that should spawn after the command&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;254&#34;
+		data-flex-basis=&#34;610px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, in the command prompt that spawns, you want to set a few things. I personally set the lab to GOAD-Light and set the IP range to 192.168.74. You can change those the following ways:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set_lab &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;lab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; # GOAD/GOAD-Light/NHA/SCCM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set_ip_range &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ip-range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; # you only need to specify the first three digits like 192.168.56
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;install # will finalize your settings
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;If you are fine with the default range of 192.168.56, don&amp;rsquo;t worry about changing the IP range. The most important thing is specifying the type of lab you want to build.&lt;/p&gt;
+&lt;h3 id=&#34;possible-issues&#34;&gt;Possible Issues
+&lt;/h3&gt;&lt;p&gt;When installing, I ran into an error that is pretty common.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[-] 3 fails abort.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[-] Something wrong during the provisioning task : build.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;What helped me was assigning an IP to my machine for the adaptor that was being used for the machines. I go over later on how to figure out which adaptor is the one your lab is using. You can skip the the &amp;ldquo;Getting Kali Configured&amp;rdquo; section to see how I did that and then come back here.&lt;/p&gt;
+&lt;p&gt;To get to the adaptors, you need to go to the Control Panel in your host machine and go to &amp;ldquo;Network and Internet.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1.png&#34;
+	width=&#34;751&#34;
+	height=&#34;495&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click for Network and Internet&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;364px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You then want to go to &amp;ldquo;Network and Sharing Center.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2.png&#34;
+	width=&#34;749&#34;
+	height=&#34;371&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click for Network and Sharing Center&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;201&#34;
+		data-flex-basis=&#34;484px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And then you&amp;rsquo;ll want to click &amp;ldquo;Change adaptor settings.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3.png&#34;
+	width=&#34;755&#34;
+	height=&#34;448&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click for adaptor settings&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;168&#34;
+		data-flex-basis=&#34;404px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Then you want to right click the adaptor you need to configure and select properties. A window will pop up where you will want to go down to &amp;ldquo;Internet Protocol Version 4.&amp;rdquo; From here you will select &amp;ldquo;Properties.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4.png&#34;
+	width=&#34;350&#34;
+	height=&#34;460&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where to click to get into IPv4 properties&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;76&#34;
+		data-flex-basis=&#34;182px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, you will edit the configuration similarly to what I have below depending on your IP range you set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5.png&#34;
+	width=&#34;391&#34;
+	height=&#34;446&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of the network adaptor configurations&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;87&#34;
+		data-flex-basis=&#34;210px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I also made the DNS server Google&amp;rsquo;s DNS server just to ensure name resolution. This seemed to also fix an issue I was having with internet connection.&lt;/p&gt;
+&lt;p&gt;This fix was suggested by a user on github named &amp;rsquo;theiosif&amp;rsquo; which you can find &lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD/issues/281&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The installation will take quite a while, so it&amp;rsquo;s best to just leave it running while it does its thing.&lt;/p&gt;
+&lt;h2 id=&#34;getting-kali-configured&#34;&gt;Getting Kali Configured
+&lt;/h2&gt;&lt;p&gt;To get Kali to be able to communicate with all the machines on the network, you need to add the adaptor to the machine.&lt;/p&gt;
+&lt;p&gt;First, you need to find what adaptor is hosting the IP range you specified. To do that you can go to &amp;ldquo;Edit&amp;rdquo; and then &amp;ldquo;Virtual Network Editor&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6.png&#34;
+	width=&#34;596&#34;
+	height=&#34;550&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Image of the Virtual Network Editor window&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;108&#34;
+		data-flex-basis=&#34;260px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You can see here I have multiple adaptors, but the one with the range &amp;ldquo;192.168.74.0&amp;rdquo; is the one I need to connect to. That would be VMnet1.&lt;/p&gt;
+&lt;p&gt;Next you want to right click on the Kali box in VMWare and click &amp;ldquo;Settings&amp;rdquo;. From here, you can edit the adaptor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7.png&#34;
+	width=&#34;753&#34;
+	height=&#34;725&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating how your settings should be configured&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;249px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Where I have highlighted in red, you should have set and selected the VMnet adaptor that corresponds to the one for your GOAD network.&lt;/p&gt;
+&lt;p&gt;After saving these settings and booting into Kali, you may have to set a static IP for the box. To do this, click the upper left corner Kali menu and search &amp;ldquo;Network&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8.png&#34;
+	width=&#34;562&#34;
+	height=&#34;476&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image of searching Network in kali menu&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;118&#34;
+		data-flex-basis=&#34;283px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Click the &amp;ldquo;Advanced Network Configuration&amp;rdquo; option. This will open up your network configurations, where you want to click on the Wired Connection and click the gear icon.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9.png&#34;
+	width=&#34;598&#34;
+	height=&#34;425&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;showing where to click the gear icon after selecting the wired connection&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;140&#34;
+		data-flex-basis=&#34;337px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;You then want to click into the IPv4 settings window, and add your IP address within the range of your lab. I also just set the DNS to 8.8.8.8 for good measure and to prevent any name resolution issues.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10.png&#34;
+	width=&#34;693&#34;
+	height=&#34;543&#34;
+	srcset=&#34;http://localhost:1313/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, http://localhost:1313/p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image indicating where you should click and what you should set&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;306px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From here, I just ran &lt;code&gt;netdiscover -r 192.168.74.0/24&lt;/code&gt; to find all the IPs on the range. You can then go ahead and ping the IPs to check connectivity. If you did the GOAD-Light lab like I did, four of these should return with responses. Those are your lab machines.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;I hope this helped a bit with getting GOAD set up on Windows! I had a lot of issues getting it set up for a while, so I wanted to make a guide to make it easier in case anyone else runs into the same problems.&lt;/p&gt;
+&lt;p&gt;Please let me know in the comments if there&amp;rsquo;s anything I could add or clarify and make better! Thank you for reading.&lt;/p&gt;
+&lt;h2 id=&#34;sources&#34;&gt;Sources
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Orange-Cyberdefense/GOAD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://phoenixnap.com/kb/install-pip-windows&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://phoenixnap.com/kb/install-pip-windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://orange-cyberdefense.github.io/GOAD/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://orange-cyberdefense.github.io/GOAD/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Orange-Cyberdefense/GOAD/issues/281&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Orange-Cyberdefense/GOAD/issues/281&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

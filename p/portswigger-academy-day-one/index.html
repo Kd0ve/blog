@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Notes about first day working on portswigger academy">
+<title>Portswigger Academy Day One</title>
+
+<link rel='canonical' href='http://localhost:1313/p/portswigger-academy-day-one/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Portswigger Academy Day One">
+<meta property='og:description' content="Notes about first day working on portswigger academy">
+<meta property='og:url' content='http://localhost:1313/p/portswigger-academy-day-one/'>
+<meta property='og:site_name' content='Dove'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-04-25T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/portswigger-academy-day-one/portswigger-01.png' />
+<meta name="twitter:title" content="Portswigger Academy Day One">
+<meta name="twitter:description" content="Notes about first day working on portswigger academy"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/portswigger-academy-day-one/portswigger-01.png' />
+    <link rel="shortcut icon" href="/apple-touch-icon.png" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TYMHMTK6Q6');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h2 class="site-description">I like breaking things :)</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/kd0ve'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/kat_ish_'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kd0ve.github.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+                
+                <span>Landing Page</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kdove.moe/blog/resources/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>Resources</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#path-traversal">Path Traversal</a></li>
+    <li><a href="#access-control">Access Control</a>
+      <ol>
+        <li><a href="#vertical-privilege-escalation">Vertical Privilege Escalation</a></li>
+        <li><a href="#unpredictable-url">Unpredictable URL</a></li>
+        <li><a href="#parameter-based-access-control">Parameter-based Access Control</a></li>
+        <li><a href="#horizontal-privilege-escalation">Horizontal Privilege Escalation</a></li>
+        <li><a href="#unpredictable-id">Unpredictable ID</a></li>
+      </ol>
+    </li>
+    <li><a href="#authentication-vulnerabilities">Authentication Vulnerabilities</a>
+      <ol>
+        <li><a href="#brute-force">Brute Force</a></li>
+        <li><a href="#bypassing-two-factor-authentication">Bypassing Two-factor Authentication</a></li>
+      </ol>
+    </li>
+    <li><a href="#server-side-request-forgery-ssrf">Server-side Request Forgery (SSRF)</a>
+      <ol>
+        <li><a href="#against-other-back-end-systems">Against Other Back-end Systems</a></li>
+      </ol>
+    </li>
+    <li><a href="#file-upload-vulnerabilities">File Upload Vulnerabilities</a>
+      <ol>
+        <li><a href="#exploiting-flawed-file-upload-validation">Exploiting Flawed File Upload Validation</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/portswigger-academy-day-one/">
+                <img src="/p/portswigger-academy-day-one/portswigger-01_hu3745657104651707704.png"
+                        srcset="/p/portswigger-academy-day-one/portswigger-01_hu3745657104651707704.png 800w, /p/portswigger-academy-day-one/portswigger-01_hu12958434480127605264.png 1600w"
+                        width="800" 
+                        height="320" 
+                        loading="lazy"
+                        alt="Featured image of post Portswigger Academy Day One" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/portswigger-academy-day-one/">Portswigger Academy Day One</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Notes about first day working on portswigger academy
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 24, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p>Today I&rsquo;m making my first entry in what I hope will be a series of posts on my daily learning at Portswigger Academy! Please let me know if you enjoyed this post, and without further ado, here are my notes for day one!</p>
+<h2 id="path-traversal">Path Traversal
+</h2><p>Starting off I&rsquo;m going down the server-side vulnerabilities path, which covers a variety of common server-side exploits.</p>
+<p>Starting off, they went over path traversal, which essentially is a vulnerability that allows you to access different areas of the server than you otherwise should be able to. The example that Portswigger Academy gives is there being a path traversal exploit within the image viewing.</p>
+<p>This would look like <code>url-here.com/file?image=image.jpg</code>, where you can then put in something like <code>url-here.com/file?image=../../../etc/passwd</code>. The <code>../</code> is a valid file path, and you would put it there 3 times to traverse the path <code>/var/www/site</code>.</p>
+<hr>
+<h2 id="access-control">Access Control
+</h2><p>There are many vulnerabilities that can be abused when it comes to access control.</p>
+<h3 id="vertical-privilege-escalation">Vertical Privilege Escalation
+</h3><p>Here, we looked at being able to traverse to other accounts using settings shown in the url, such as <code>url.com/login?id=123</code> being able to be changed to a different ID number, or being able to find an exposed area of the website in something like the robots.txt file.</p>
+<h3 id="unpredictable-url">Unpredictable URL
+</h3><p>This is where they may obfuscate the url path of something, such as the admin panel, to prevent people being able to access them. However, often these obfuscated URLs are exposed within the HTML of the website or scripts running on the website.</p>
+<h3 id="parameter-based-access-control">Parameter-based Access Control
+</h3><p>This one was interesting. Often, a cookie will be set to determine access rights. The thing about this is that cookies can be easily edited, which can allow the user to change their own privileges on the website.</p>
+<p>In the example, they had us login to an authenticated account, which had an admin cookie set to false. You can easily use a cookie editor and change the admin setting in that cookie to &ldquo;true&rdquo;.</p>
+<h3 id="horizontal-privilege-escalation">Horizontal Privilege Escalation
+</h3><p>This relates to traversing different accounts using things like user IDs, often GUIDs. Although sometimes these ID settings are in a predictable pattern, such as being set to the username of the user, often they are a random string of numbers and letters used to identify different accounts.</p>
+<h3 id="unpredictable-id">Unpredictable ID
+</h3><p>This is a similar idea to the unpredictable URL, where the ID is unpredictable. In the example lab, we had to go to the user account from their blog posts, which would leak the GUID in the URL, which can be input in the &ldquo;My Account&rdquo; panel, which will go to their account, where the password was exposed in the HTML.</p>
+<hr>
+<h2 id="authentication-vulnerabilities">Authentication Vulnerabilities
+</h2><p>These are vulnerabilities where authentication can be easily bypassed. Authentication is the process of verifying that the user is who they claim to be, while the similar term, Authorization, is verifying that the user is <em>allowed</em> to do something. This would be related to user permissions like being an administrator account.</p>
+<h3 id="brute-force">Brute Force
+</h3><p>This is where credentials are rapidly attempted on a login page. There are small indications in something like Burpsuite that the brute force attack has found something. Particularly with usernames, websites will often specify if the username or password is incorrect, which is a security flaw as this can indicate a user that exists on the website. You can tell the difference by the response size.</p>
+<p>With passwords, once you find a username to test against, there will usually be a 302 status code returned, although paying attention to response time, response size, and possible other status codes that vary from the one consistently being returned is a good thing to do as well.</p>
+<h3 id="bypassing-two-factor-authentication">Bypassing Two-factor Authentication
+</h3><p>Sometimes, even though two factor authentication is implemented, if a user has already authenticated with their password, sometimes other areas of the website that should be restricted to only be accessed when logged in are still accessible, even though the two-factor authentication wasn&rsquo;t done.</p>
+<h2 id="server-side-request-forgery-ssrf">Server-side Request Forgery (SSRF)
+</h2><p>These are attacks where the attacker may be able to get the server-side application to make requests to unintended locations. This would be like making the server connect to internal-only services, or making the server connect to an arbitrary external system, which could leak sensitive data.</p>
+<p>In the lab, the requirement was to just request <code>http://localhost/admin</code>, however that wouldn&rsquo;t delete the user you needed. You needed to find out what the URL was that deleted the user required, which was <code>http://localhost/admin/delete?username=carlos</code>, and put that in the <code>stockApi</code> request. It was much easier to do in burpsuite.</p>
+<h3 id="against-other-back-end-systems">Against Other Back-end Systems
+</h3><p>Here, instead of doing something like <code>http://localhost/admin</code>, you would replace <code>localhost</code> with an internal address such as <code>192.168.0.68</code>. So, the request would look like <code>stockApi=http://192.168.0.68/admin</code>, which can give you access to the administrative panel of this internal system.</p>
+<p>This one is a pain. You had to iterate through all the IPs in the <code>192.168.0.*</code> range which takes forever on the community version of burpsuite. Ther&rsquo;s probably a different way to do it faster outside of burpsuite, but anyway, once you find the one that pops the 200 status, you just find the URL for deleting carlos and boom you&rsquo;ve got it.</p>
+<p>Same thing as last time essentially but you use the internal address you find.</p>
+<h2 id="file-upload-vulnerabilities">File Upload Vulnerabilities
+</h2><p>These types of vulnerabilities occur in file upload areas of a website. This is where a file upload doesn&rsquo;t verify the filetype, which means you are able to upload code that may open shells within the system. The task in this lab is to upload a php script and gain access to the contents of a certain file. The php code I&rsquo;m going to use is:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">    &lt;body&gt;
+</span></span><span class="line"><span class="cl">    &lt;form method=&#34;GET&#34; name=&#34;&lt;?php echo basename($_SERVER[&#39;PHP_SELF&#39;]); ?&gt;&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;input type=&#34;TEXT&#34; name=&#34;cmd&#34; autofocus id=&#34;cmd&#34; size=&#34;80&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;input type=&#34;SUBMIT&#34; value=&#34;Execute&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;/form&gt;
+</span></span><span class="line"><span class="cl">    &lt;pre&gt;
+</span></span><span class="line"><span class="cl">        &lt;?php
+</span></span><span class="line"><span class="cl">            echo file_get_contents(&#39;/home/carlos/secret&#39;);
+</span></span><span class="line"><span class="cl">        ?&gt;
+</span></span><span class="line"><span class="cl">    &lt;/pre&gt;
+</span></span><span class="line"><span class="cl">    &lt;/body&gt;
+</span></span><span class="line"><span class="cl">&lt;/html&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This shows the contents of that file, which is where the required flag is.</p>
+<h3 id="exploiting-flawed-file-upload-validation">Exploiting Flawed File Upload Validation
+</h3><p>Sometimes, even when a webpage tries to validate the file-type, it doesn&rsquo;t do a very in-depth job of verifying. Because of this, you can use burpsuite to change the <code>Content-Type</code> header to match the MIME type that would allow your file. This is able to happen when the &ldquo;header is implicitly trusted by the server&rdquo; according to portswigger academy.</p>
+<p>The lab here had you upload the same shell but intercept it using burpsuite. Once you intercepted it, you had to change the content type to image/jpeg, which would allow the file to be uploaded.</p>
+<hr>
+<p>This is all of what I did on my first day going through this free course. If any of you want to try the course out, go to <a class="link" href="https://portswigger.net/web-security"  target="_blank" rel="noopener"
+    >https://portswigger.net/web-security</a> and register an account. There are a bunch of learning paths, so if you already feel versed in certain areas, you can go to others and try them out.</p>
+<p>I&rsquo;m hoping to continue to update each day as I work on these. I&rsquo;m going to use these posts to take notes, and then post them at the end of the day with all the content I&rsquo;ve learned. Hopefully this entry piqued your interest, and you look into doing these courses yourself!</p>
+<p>If you made it this far, I appreciate you reading. You can email me if you have anything you want to share, feel free to comment below! I&rsquo;m hoping these note posts will keep me accountable with doing these pathways, and that it&rsquo;ll be a good way to document my journey trying to get into web app exploitation!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Apr 25, 2024 00:00 UTC
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kd0ve" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Kat
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

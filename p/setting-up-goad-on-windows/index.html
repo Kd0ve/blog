@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="In this post I cover how to get GOAD set up using Windows 11 and VMWare">
+<title>Setting Up GOAD On Windows</title>
+
+<link rel='canonical' href='http://localhost:1313/p/setting-up-goad-on-windows/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Setting Up GOAD On Windows">
+<meta property='og:description' content="In this post I cover how to get GOAD set up using Windows 11 and VMWare">
+<meta property='og:url' content='http://localhost:1313/p/setting-up-goad-on-windows/'>
+<meta property='og:site_name' content='Dove'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Post' /><meta property='article:tag' content='Cybersecurity' /><meta property='article:published_time' content='2025-01-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-20T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/setting-up-goad-on-windows/image.png' />
+<meta name="twitter:title" content="Setting Up GOAD On Windows">
+<meta name="twitter:description" content="In this post I cover how to get GOAD set up using Windows 11 and VMWare"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/setting-up-goad-on-windows/image.png' />
+    <link rel="shortcut icon" href="/apple-touch-icon.png" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TYMHMTK6Q6');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h2 class="site-description">I like breaking things :)</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/kd0ve'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/kat_ish_'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kd0ve.github.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+                
+                <span>Landing Page</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kdove.moe/blog/resources/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>Resources</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#description">Description</a></li>
+    <li><a href="#environment">Environment</a></li>
+    <li><a href="#what-you-need">What You Need</a></li>
+    <li><a href="#setup-and-install">Setup and Install</a>
+      <ol>
+        <li><a href="#possible-issues">Possible Issues</a></li>
+      </ol>
+    </li>
+    <li><a href="#getting-kali-configured">Getting Kali Configured</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/setting-up-goad-on-windows/">
+                <img src="/p/setting-up-goad-on-windows/image_hu14612516607389344897.png"
+                        srcset="/p/setting-up-goad-on-windows/image_hu14612516607389344897.png 800w, /p/setting-up-goad-on-windows/image_hu14700814850912891701.png 1600w"
+                        width="800" 
+                        height="315" 
+                        loading="lazy"
+                        alt="Featured image of post Setting Up GOAD On Windows" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/guides/" >
+                Guides
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/setting-up-goad-on-windows/">Setting Up GOAD On Windows</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            In this post I cover how to get GOAD set up using Windows 11 and VMWare
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 20, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="description">Description
+</h2><p>We will be going over the process of getting the Game Of Active Directory set up on a Windows device. I am going to be using VMWare workstation for this.</p>
+<h2 id="environment">Environment
+</h2><ul>
+<li>VMWare Workstation</li>
+<li>Windows 11 - Host machine</li>
+<li>Kali</li>
+<li>GOAD</li>
+</ul>
+<h2 id="what-you-need">What You Need
+</h2><p>You will need Python &gt;=3.8 installed on your device. You can install Python <a class="link" href="https://www.python.org/downloads/windows/"  target="_blank" rel="noopener"
+    >here</a>. You will also need pip installed, which we will do coming up here shortly.</p>
+<p>First, make sure you have plenty of space on your drive. I am just setting up the light version of GOAD, but you still need a good amount of space and RAM to get it set up properly.</p>
+<p>Next, we will be cloning the directory <a class="link" href="https://github.com/Orange-Cyberdefense/GOAD"  target="_blank" rel="noopener"
+    >here</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">git clone https://github.com/Orange-Cyberdefense/GOAD
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The documentation is very useful, and they have a section on Windows, but I will be going over some differences in what their walkthrough does that I ran into. You can find that documentation <a class="link" href="https://orange-cyberdefense.github.io/GOAD/"  target="_blank" rel="noopener"
+    >here</a>.</p>
+<p>You will have to install pip using the following commands:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+</span></span><span class="line"><span class="cl">python get-pip.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="setup-and-install">Setup and Install
+</h2><p>From here, you will need go into the GOAD directory you just cloned and install the <code>noansible_requirements.yml</code> file using pip. The way that they show in the documentation didn&rsquo;t work for me, so I did the following:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">python -m pip install -r noansible_requirements.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Once this runs, you should be able to run the <a class="link" href="http://goad.py"  target="_blank" rel="noopener"
+    ><code>goad.py</code></a> file like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">python goad.py -m vm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And you should get the following screen:</p>
+<p><img src="/p/setting-up-goad-on-windows/image.png"
+	width="821"
+	height="323"
+	srcset="/p/setting-up-goad-on-windows/image_hu18237651502173413709.png 480w, /p/setting-up-goad-on-windows/image_hu13200253163627797248.png 1024w"
+	loading="lazy"
+	
+		alt="image of the GOAD menu that should spawn after the command"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="254"
+		data-flex-basis="610px"
+	
+></p>
+<p>From here, in the command prompt that spawns, you want to set a few things. I personally set the lab to GOAD-Light and set the IP range to 192.168.74. You can change those the following ways:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">set_lab <span class="p">&lt;</span><span class="nt">lab</span><span class="p">&gt;</span> # GOAD/GOAD-Light/NHA/SCCM
+</span></span><span class="line"><span class="cl">set_ip_range <span class="p">&lt;</span><span class="nt">ip-range</span><span class="p">&gt;</span> # you only need to specify the first three digits like 192.168.56
+</span></span><span class="line"><span class="cl">install # will finalize your settings
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you are fine with the default range of 192.168.56, don&rsquo;t worry about changing the IP range. The most important thing is specifying the type of lab you want to build.</p>
+<h3 id="possible-issues">Possible Issues
+</h3><p>When installing, I ran into an error that is pretty common.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">[-] 3 fails abort.
+</span></span><span class="line"><span class="cl">[-] Something wrong during the provisioning task : build.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>What helped me was assigning an IP to my machine for the adaptor that was being used for the machines. I go over later on how to figure out which adaptor is the one your lab is using. You can skip the the &ldquo;Getting Kali Configured&rdquo; section to see how I did that and then come back here.</p>
+<p>To get to the adaptors, you need to go to the Control Panel in your host machine and go to &ldquo;Network and Internet.&rdquo;</p>
+<p><img src="/p/setting-up-goad-on-windows/image1.png"
+	width="751"
+	height="495"
+	srcset="/p/setting-up-goad-on-windows/image1_hu17357337793557639139.png 480w, /p/setting-up-goad-on-windows/image1_hu1512950661739292278.png 1024w"
+	loading="lazy"
+	
+		alt="image indicating where to click for Network and Internet"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="364px"
+	
+></p>
+<p>You then want to go to &ldquo;Network and Sharing Center.&rdquo;</p>
+<p><img src="/p/setting-up-goad-on-windows/image2.png"
+	width="749"
+	height="371"
+	srcset="/p/setting-up-goad-on-windows/image2_hu6475609258043676213.png 480w, /p/setting-up-goad-on-windows/image2_hu17535045346172148649.png 1024w"
+	loading="lazy"
+	
+		alt="image indicating where to click for Network and Sharing Center"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="201"
+		data-flex-basis="484px"
+	
+></p>
+<p>And then you&rsquo;ll want to click &ldquo;Change adaptor settings.&rdquo;</p>
+<p><img src="/p/setting-up-goad-on-windows/image3.png"
+	width="755"
+	height="448"
+	srcset="/p/setting-up-goad-on-windows/image3_hu15952721614839412451.png 480w, /p/setting-up-goad-on-windows/image3_hu5363959532952820339.png 1024w"
+	loading="lazy"
+	
+		alt="image indicating where to click for adaptor settings"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="168"
+		data-flex-basis="404px"
+	
+></p>
+<p>Then you want to right click the adaptor you need to configure and select properties. A window will pop up where you will want to go down to &ldquo;Internet Protocol Version 4.&rdquo; From here you will select &ldquo;Properties.&rdquo;</p>
+<p><img src="/p/setting-up-goad-on-windows/image4.png"
+	width="350"
+	height="460"
+	srcset="/p/setting-up-goad-on-windows/image4_hu3374002383557099561.png 480w, /p/setting-up-goad-on-windows/image4_hu1381796425577008893.png 1024w"
+	loading="lazy"
+	
+		alt="image indicating where to click to get into IPv4 properties"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="76"
+		data-flex-basis="182px"
+	
+></p>
+<p>From here, you will edit the configuration similarly to what I have below depending on your IP range you set.</p>
+<p><img src="/p/setting-up-goad-on-windows/image5.png"
+	width="391"
+	height="446"
+	srcset="/p/setting-up-goad-on-windows/image5_hu4779679503535178888.png 480w, /p/setting-up-goad-on-windows/image5_hu16033117424280783435.png 1024w"
+	loading="lazy"
+	
+		alt="image of the network adaptor configurations"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="87"
+		data-flex-basis="210px"
+	
+></p>
+<p>I also made the DNS server Google&rsquo;s DNS server just to ensure name resolution. This seemed to also fix an issue I was having with internet connection.</p>
+<p>This fix was suggested by a user on github named &rsquo;theiosif&rsquo; which you can find <a class="link" href="https://github.com/Orange-Cyberdefense/GOAD/issues/281"  target="_blank" rel="noopener"
+    >here</a>.</p>
+<p>The installation will take quite a while, so it&rsquo;s best to just leave it running while it does its thing.</p>
+<h2 id="getting-kali-configured">Getting Kali Configured
+</h2><p>To get Kali to be able to communicate with all the machines on the network, you need to add the adaptor to the machine.</p>
+<p>First, you need to find what adaptor is hosting the IP range you specified. To do that you can go to &ldquo;Edit&rdquo; and then &ldquo;Virtual Network Editor&rdquo;.</p>
+<p><img src="/p/setting-up-goad-on-windows/image6.png"
+	width="596"
+	height="550"
+	srcset="/p/setting-up-goad-on-windows/image6_hu15228459485898105897.png 480w, /p/setting-up-goad-on-windows/image6_hu17802668160541774343.png 1024w"
+	loading="lazy"
+	
+		alt="Image of the Virtual Network Editor window"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="108"
+		data-flex-basis="260px"
+	
+></p>
+<p>You can see here I have multiple adaptors, but the one with the range &ldquo;192.168.74.0&rdquo; is the one I need to connect to. That would be VMnet1.</p>
+<p>Next you want to right click on the Kali box in VMWare and click &ldquo;Settings&rdquo;. From here, you can edit the adaptor.</p>
+<p><img src="/p/setting-up-goad-on-windows/image7.png"
+	width="753"
+	height="725"
+	srcset="/p/setting-up-goad-on-windows/image7_hu10037928010835082006.png 480w, /p/setting-up-goad-on-windows/image7_hu13077403006378966008.png 1024w"
+	loading="lazy"
+	
+		alt="image indicating how your settings should be configured"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="103"
+		data-flex-basis="249px"
+	
+></p>
+<p>Where I have highlighted in red, you should have set and selected the VMnet adaptor that corresponds to the one for your GOAD network.</p>
+<p>After saving these settings and booting into Kali, you may have to set a static IP for the box. To do this, click the upper left corner Kali menu and search &ldquo;Network&rdquo;.</p>
+<p><img src="/p/setting-up-goad-on-windows/image8.png"
+	width="562"
+	height="476"
+	srcset="/p/setting-up-goad-on-windows/image8_hu9040524704942950560.png 480w, /p/setting-up-goad-on-windows/image8_hu9867083006090741129.png 1024w"
+	loading="lazy"
+	
+		alt="image of searching Network in kali menu"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="118"
+		data-flex-basis="283px"
+	
+></p>
+<p>Click the &ldquo;Advanced Network Configuration&rdquo; option. This will open up your network configurations, where you want to click on the Wired Connection and click the gear icon.</p>
+<p><img src="/p/setting-up-goad-on-windows/image9.png"
+	width="598"
+	height="425"
+	srcset="/p/setting-up-goad-on-windows/image9_hu9970950378421724827.png 480w, /p/setting-up-goad-on-windows/image9_hu14010874409031162285.png 1024w"
+	loading="lazy"
+	
+		alt="showing where to click the gear icon after selecting the wired connection"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="140"
+		data-flex-basis="337px"
+	
+></p>
+<p>You then want to click into the IPv4 settings window, and add your IP address within the range of your lab. I also just set the DNS to 8.8.8.8 for good measure and to prevent any name resolution issues.</p>
+<p><img src="/p/setting-up-goad-on-windows/image10.png"
+	width="693"
+	height="543"
+	srcset="/p/setting-up-goad-on-windows/image10_hu10771800478912843153.png 480w, /p/setting-up-goad-on-windows/image10_hu6903427682959049512.png 1024w"
+	loading="lazy"
+	
+		alt="image indicating where you should click and what you should set"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="127"
+		data-flex-basis="306px"
+	
+></p>
+<p>From here, I just ran <code>netdiscover -r 192.168.74.0/24</code> to find all the IPs on the range. You can then go ahead and ping the IPs to check connectivity. If you did the GOAD-Light lab like I did, four of these should return with responses. Those are your lab machines.</p>
+<h2 id="conclusion">Conclusion
+</h2><p>I hope this helped a bit with getting GOAD set up on Windows! I had a lot of issues getting it set up for a while, so I wanted to make a guide to make it easier in case anyone else runs into the same problems.</p>
+<p>Please let me know in the comments if there&rsquo;s anything I could add or clarify and make better! Thank you for reading.</p>
+<h2 id="sources">Sources
+</h2><ul>
+<li><a class="link" href="https://github.com/Orange-Cyberdefense/GOAD"  target="_blank" rel="noopener"
+    >https://github.com/Orange-Cyberdefense/GOAD</a></li>
+<li><a class="link" href="https://phoenixnap.com/kb/install-pip-windows"  target="_blank" rel="noopener"
+    >https://phoenixnap.com/kb/install-pip-windows</a></li>
+<li><a class="link" href="https://orange-cyberdefense.github.io/GOAD/"  target="_blank" rel="noopener"
+    >https://orange-cyberdefense.github.io/GOAD/</a></li>
+<li><a class="link" href="https://github.com/Orange-Cyberdefense/GOAD/issues/281"  target="_blank" rel="noopener"
+    >https://github.com/Orange-Cyberdefense/GOAD/issues/281</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/post/">Post</a>
+        
+            <a href="/tags/cybersecurity/">Cybersecurity</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/overview-of-hugo-site-setup/">
+        
+        
+            <div class="article-image">
+                <img src="/p/overview-of-hugo-site-setup/hugo-logo.be731607af01642da7a39ebef74ab469_hu12904982957312829658.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Overview of Hugo Site Setup"
+                        
+                        data-hash="md5-vnMWB68BZC2no56&#43;90q0aQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Overview of Hugo Site Setup</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kd0ve" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Kat
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

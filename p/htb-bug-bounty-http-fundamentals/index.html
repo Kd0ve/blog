@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Notes on my hack the box learning">
+<title>HTB Bug Bounty - HTTP Fundamentals</title>
+
+<link rel='canonical' href='http://localhost:1313/p/htb-bug-bounty-http-fundamentals/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="HTB Bug Bounty - HTTP Fundamentals">
+<meta property='og:description' content="Notes on my hack the box learning">
+<meta property='og:url' content='http://localhost:1313/p/htb-bug-bounty-http-fundamentals/'>
+<meta property='og:site_name' content='Dove'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='post' /><meta property='article:tag' content='HTB' /><meta property='article:tag' content='Hack The Box' /><meta property='article:published_time' content='2024-07-21T17:51:00&#43;00:00'/><meta property='article:modified_time' content='2024-07-21T20:17:51&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png' />
+<meta name="twitter:title" content="HTB Bug Bounty - HTTP Fundamentals">
+<meta name="twitter:description" content="Notes on my hack the box learning"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820.png' />
+    <link rel="shortcut icon" href="/apple-touch-icon.png" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYMHMTK6Q6"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TYMHMTK6Q6');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dove</a></h1>
+            <h2 class="site-description">I like breaking things :)</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/kd0ve'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/kat_ish_'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kd0ve.github.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+                
+                <span>Landing Page</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://kdove.moe/blog/resources/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>Resources</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#hypertext-transfer-protocol-http">HyperText Transfer Protocol (HTTP)</a></li>
+    <li><a href="#hypertext-transfer-protocol-secure-https">HyperText Transfer Protocol Secure (HTTPS)</a></li>
+    <li><a href="#http-requests-and-responses">HTTP Requests and Responses</a></li>
+    <li><a href="#http-headers">HTTP Headers</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/htb-bug-bounty-http-fundamentals/">
+                <img src="/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820_hu12159189768457393521.png"
+                        srcset="/p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820_hu12159189768457393521.png 800w, /p/htb-bug-bounty-http-fundamentals/hack-the-box-e1694085620820_hu1533871667233318017.png 1600w"
+                        width="800" 
+                        height="235" 
+                        loading="lazy"
+                        alt="Featured image of post HTB Bug Bounty - HTTP Fundamentals" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/learning/" >
+                Learning
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/htb-bug-bounty-http-fundamentals/">HTB Bug Bounty - HTTP Fundamentals</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Notes on my hack the box learning
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 21, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p>This is just some notes I took while going through the Bug Bounty course in Hack The Box Academy. I figured I would post it in case it would help others learn.</p>
+<p>Apologies if it seems everywhere! I didn&rsquo;t go through and clean anything up :3</p>
+<hr>
+<h2 id="hypertext-transfer-protocol-http">HyperText Transfer Protocol (HTTP)
+</h2><p><strong>Fully Qualified Domain Name (FQDN)</strong> - essentially the domain name of the website
+<strong>Uniform Resource Locator</strong> - this includes the FQDN as well as different parts like the top-layer domain, subdomain, query string, and fragment.</p>
+<p>There are different parts of a URL
+<em>Scheme</em> - this is like <code>http://</code> or <code>https://</code>
+<em>User info</em> - this would sometimes be a part of the url, but not always. It looks like <code>admin:password@</code> and then the main domain name.
+<em>Host</em> - this includes the domain name and sub domain. It looks like <code>hackthebox.com</code>
+<em>Port</em> - sometimes included, but not always necessary. Will look like <code>:80</code> after the host.
+<em>Path</em> - this immediately follows either the host or the port if the port is specified. Looks like <code>/dashboard.php</code>
+<em>Query String</em> - this is also sometimes included if needed to look up something. Will look like <code>?login=true</code> or similar
+<em>Fragments</em> - this is to specify a section within the main resource. Will look something like <code>#status</code></p>
+<p><strong>HTTP Flow</strong>
+User -&gt; DNS -&gt; IP
+DNS sends IP -&gt; User
+User -&gt; Send HTTP Request to IP/Web Server
+IP/Web server -&gt; Send HTTP Response to User</p>
+<blockquote>
+<p>Basically, the user requests the IP of the domain specified to the Domain Name Server. The DNS sends the IP of the web server to the User. The User then sends an HTTP or HTTPS request to that IP address. That web server at that IP address sends back an HTTP or HTTPS response.
+Request: GET /HTTP/1.1
+Response: HTTP/1.1 200 OK</p>
+</blockquote>
+<blockquote>
+<p><strong>Side Note</strong>
+Typically, on a Linux system, the browser will first look in <code>/etc/hosts</code> to find the IP address associated with the domain name. You can use this to specify domain names for IP addresses that don&rsquo;t necessarily have one assigned with a DNS. HTB wants this to be done quite a bit :)</p>
+</blockquote>
+<p><strong>cURL</strong>
+This is a really important command, as you can send HTTP requests and see the response in terminal. You can also do stuff like getting the <code>index.html</code> file that is rendered when you first request the main website. You can do this using the <code>-O</code> flag in curl. You can also use the <code>-o</code> flag to specify just a general output file.</p>
+<p>Calling the <code>index.html</code> file for say <code>hackthebox.com</code> would look like <code>curl -O hackthebox.com/index.html</code>, and you should have created a copy of that domain&rsquo;s <code>index.html</code> file that&rsquo;s been requested. You can also do the <code>-s</code> flag to silence the status and the <code>-O</code> flag in conjunction to just straight grab the <code>index.html</code> file without the status.</p>
+<h2 id="hypertext-transfer-protocol-secure-https">HyperText Transfer Protocol Secure (HTTPS)
+</h2><p>One drawback to HTTP is that it sends everything over plaintext, which is pretty dangerous. This is why HTTPS was created. It utilizes TLS/SSL to encrypt traffic sent over the protocol. This even includes login credentials if they aren&rsquo;t hashed client-side.</p>
+<p>If someone intercepts HTTPS traffic, they won&rsquo;t be able to see the data within that request. You can tell if a website is using HTTPS as it will have <code>https://</code> in the beginning of the URL. Most browsers will also warn you now before you visit a website only using HTTP.</p>
+<p>HTTPS is where the three-way-handshake is employed. This is to make sure that the communication is secure and stable before transferring any information between the client and host. There are different response codes depending on the status of the requested page as well.</p>
+<p><strong>cURL For HTTPS</strong>
+Using curl with HTTPS, there might be an issue where there will be an SSL Certificate problem saying that the certificate is invalid. To bypass this, when you are doing the cURL command, you can add on the <code>-k</code> flag to the curl command.</p>
+<h2 id="http-requests-and-responses">HTTP Requests and Responses
+</h2><p>HTTP requests and responses are structured in particular ways that are consistent. The send request information will cause certain responses, so they must be formatted correctly to get the intended response back. Browsers will craft these automatically.</p>
+<p><strong>HTTP Request</strong>
+In a request, there are three main aspects of the header. There will be the <code>method</code>, <code>path</code>, and <code>version</code>. The <code>method</code> will be something like <code>GET</code>, <code>POST</code>, <code>DELETE</code>, and more. There are a lot of different kinds of methods.</p>
+<p>The <code>path</code> was somewhat covered earlier, but generally will look like <code>/index.html</code> if you&rsquo;re calling that particular file. The path is whatever resource you are requesting. The <code>version</code> is the version of HTTP being used.</p>
+<p>Following these, there tend to be a lot more parameters, but the important thing for now is those main three request parts.</p>
+<p><strong>HTTP Response</strong>
+With this, in the first line, there are two main fields returned. That will be the HTTP <code>version</code>, and the response code. The response code denotes what ended up happening with the request. Typically, a <code>200 OK</code> response means that the page was returned successfully. Something like a <code>404 ERROR</code> response will be that the page doesn&rsquo;t exist.</p>
+<p>Again, there will be a lot more perameters in the header, but these two are the main things to pay attention to.</p>
+<p><strong>cURL</strong>
+Utilizing the <code>-v</code> flag will show what is send more clearly. You can also use <code>-vvv</code>, which will increase verbosity, or the information you are shown about the exchange.</p>
+<p><strong>Browser DevTools</strong>
+Basically, we&rsquo;re talking about inspect element. I typically like using the FireFox DevTools as you can much more easily edit requests right there in the toolkit. For Chrom or FireFox, you can press <code>CTRL+SHIFT+I</code> or click <code>F12</code> to pull up the toolkit.</p>
+<p>You&rsquo;ll mainly want to focus on the <code>Network</code> tab to grab files being transferred and requests being performed. Here is where you&rsquo;ll be able to find the requests to alter. You can apparently use the <code>Filter</code> to filter out and search certain requests if a website loads too many to parse through.</p>
+<h2 id="http-headers">HTTP Headers
+</h2><p>Since we didn&rsquo;t discuss them before, they&rsquo;re covered here thankfully (somewhat). We&rsquo;re going to go over a few different kinds of headers that you&rsquo;ll typically encounter. There are general, entity, response, request, and security headers.</p>
+<p>For general headers, you&rsquo;ll either encounter the date, or the connection status. The date is well, the date. The connection status will either be <code>close</code> or <code>keep-alive</code>. It will commonly look like <code>Connection: close</code> or <code>Connection: keep-alive</code>.</p>
+<p>For entity headers, there are quite a few. There&rsquo;s content-type, media-type, boundary, content-length, and content-encoding. The content-type specifies the kind of content accepted. The media-type defines the data that&rsquo;s being transferred. The boundary acts as a marker to seperate content.</p>
+<p>The content length contains the size of what&rsquo;s being passed. The content-encoding defines the kinds of transformations the data goes through. This means that, if the data being transferred is large, it will denote that the content-encoding was compressed, and what kind of compression was used.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/post/">Post</a>
+        
+            <a href="/tags/htb/">HTB</a>
+        
+            <a href="/tags/hack-the-box/">Hack the Box</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Jul 21, 2024 20:17 UTC
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/portswigger-academy-day-three/">
+        
+        
+            <div class="article-image">
+                <img src="/p/portswigger-academy-day-three/portswigger-03.84ca61b0719484948c9237efaa055b20_hu8598489279698399354.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Portswigger Academy Day Three"
+                        
+                        data-hash="md5-hMphsHGUhJSMkjfvqgVbIA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Portswigger Academy Day Three</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kd0ve" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Kat
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.adb703823fd81ee5268cfced2d62986494c70e86f61648fd7e631d6c99bcc1eb.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

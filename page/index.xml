@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on Dove</title>
+        <link>http://localhost:1313/page/</link>
+        <description>Recent content in Pages on Dove</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Kat</copyright>
+        <lastBuildDate>Wed, 17 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Resources</title>
+        <link>http://localhost:1313/resources/</link>
+        <pubDate>Wed, 17 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/resources/</guid>
+        <description>&lt;h2 id=&#34;generalmisc&#34;&gt;General/Misc
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://www.thehacker.recipes/&#34;&gt;&lt;li&gt;The Hacker Recipes&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://cybersources.glide.page/dl/da19fa&#34;&gt;&lt;li&gt;Learning - FHR&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://github.com/JohnHammond/security-resources&#34;&gt;&lt;li&gt;John Hammond Security Resources&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://gchq.github.io/CyberChef/&#34;&gt;&lt;li&gt;CyberChef&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://csbygb.gitbook.io/pentips&#34;&gt;&lt;li&gt;CSByGB PenTips&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://cobalt.tools/&#34;&gt;&lt;li&gt;Cobalt Socialmedia Conversion Tool&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;full-pwn&#34;&gt;Full-Pwn
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://highon.coffee/blog/reverse-shell-cheat-sheet/&#34;&gt;&lt;li&gt;Reverse Shell Cheat Sheet&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://xorond.com/posts/2021/04/windows-local-privilege-escalation/&#34;&gt;&lt;li&gt;Windows PrivEsc&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/SpecterOps/BloodHound&#34;&gt;&lt;li&gt;Bloodhound&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/yaap7/ldapsearch-ad&#34;&gt;&lt;li&gt;ldapsearch-ad&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/CravateRouge/bloodyAD&#34;&gt;&lt;li&gt;bloodyAD&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/fortra/impacket&#34;&gt;&lt;li&gt;Impacket&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/ly4k/Certipy&#34;&gt;&lt;li&gt;Certipy&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;osint&#34;&gt;OSINT
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://intellfusion.medium.com/the-best-open-source-intelligence-osint-tools-and-techniques-a275fb134da0&#34;&gt;&lt;li&gt;List Of OSINT Resources&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://ohshint.gitbook.io/oh-shint-its-a-blog&#34;&gt;&lt;li&gt;OH SHINT&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://bellingcat.gitbook.io/toolkit&#34;&gt;&lt;li&gt;Bellingcat&#39;s Online OSINT Toolkit&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.zoomeye.ai/&#34;&gt;&lt;li&gt;ZoomEye&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.shodan.io/dashboard&#34;&gt;&lt;li&gt;Shodan&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://what3words.com/products/what3words-app&#34;&gt;&lt;li&gt;What 3 Words&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://www.epochconverter.com/&#34;&gt;&lt;li&gt;Epoch Converter&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.blockchain.com/&#34;&gt;&lt;li&gt;Blockchain Lookup&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://web.archive.org/&#34;&gt;&lt;li&gt;The Internet Archive&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;password-cracking&#34;&gt;Password Cracking
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://www.hackingarticles.in/a-detailed-guide-on-cewl/&#34;&gt;&lt;li&gt;How To: Cewl&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://crackstation.net/&#34;&gt;&lt;li&gt;Crackstation&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://null-byte.wonderhowto.com/how-to/create-custom-wordlists-for-password-cracking-using-mentalist-0183992/&#34;&gt;&lt;li&gt;How To: Mentalist&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://ophcrack.sourceforge.io/tables.php&#34;&gt;&lt;li&gt;Ophcrack&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/kkrypt0nn/wordlists&#34;&gt;&lt;li&gt;kkryp0nn Wordlists Repo&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;forensics&#34;&gt;Forensics
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://cybersources.glide.page/dl/ddecb1&#34;&gt;&lt;li&gt;Stegonography - FHR&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.aperisolve.com/96a7f666c0bf82891135e98c8c2e5bea&#34;&gt;&lt;li&gt;Aperi Solve&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://www.kali.org/tools/binwalk/&#34;&gt;&lt;li&gt;Binwalk&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://exifinfo.org/&#34;&gt;&lt;li&gt;Exif&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://29a.ch/photo-forensics/#forensic-magnifier&#34;&gt;&lt;li&gt;Forensically&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;reverse-engineering&#34;&gt;Reverse Engineering
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://imhex.werwolv.net/&#34;&gt;&lt;li&gt;ImHex&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://www.kitploit.com/2024/04/toolkit-essential-toolkit-for-reversing.html&#34;&gt;&lt;li&gt;Toolkit - Ultimate Toolkit for Reversing, Malware Analysis, and Cracking&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;network-traffic-analysis&#34;&gt;Network Traffic Analysis
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://github.com/MalwareBro/Network_Traffic_Analysis_CheatSheet/blob/main/Network_Traffic_Analysis_Cheatsheet.md&#34;&gt;&lt;li&gt;Network Traffic Analysis Cheatsheet Repo&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://lab.dynamite.ai/&#34;&gt;&lt;li&gt;DynamiteLab Auto Analyze&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://cybersources.glide.page/dl/767bfd&#34;&gt;&lt;li&gt;Wireshark - FHR&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;enumeration-and-exploitation&#34;&gt;Enumeration and Exploitation
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://csbygb.gitbook.io/pentips/binary-exploitation/assembly&#34;&gt;&lt;li&gt;Intro to Assembly&lt;/li&gt;&lt;/a&gt; 
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;web-app-exploitation&#34;&gt;Web App Exploitation
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://github.com/swisskyrepo/PayloadsAllTheThings&#34;&gt;&lt;li&gt;PayloadAllTheThings&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://dnsdumpster.com/&#34;&gt;&lt;li&gt;DNS Dumpster&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://portswigger.net/web-security/all-labs#sql-injection&#34;&gt;&lt;li&gt;SQL Injection Labs&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://owasp.org/www-project-top-ten/&#34;&gt;&lt;li&gt;OWASP Top Ten&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://cheatsheetseries.owasp.org/IndexTopTen.html&#34;&gt;&lt;li&gt;OWASP Top Ten Cheatsheet&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://cryptokait.com/2020/03/09/breaking-web-applications-for-beginners/&#34;&gt;&lt;li&gt;Breaking Web Apps For Beginners&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://getfoxyproxy.org/&#34;&gt;&lt;li&gt;FoxyProxy&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/guelfoweb/knock &#34;&gt;&lt;li&gt;Subdomain Finder&lt;/li&gt;&lt;/a&gt;  
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;cryptography&#34;&gt;Cryptography
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://github.com/jvdsn/crypto-attacks/tree/master&#34;&gt;&lt;li&gt;Crypto Attacks&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.cachesleuth.com/multidecoder/&#34;&gt;&lt;li&gt;CacheSleuth&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.dcode.fr/&#34;&gt;&lt;li&gt;Dcode.fr&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://blog.cryptohack.org/twitter-secrets &#34;&gt;&lt;li&gt;Recover PEM Keys&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://www.rapidtables.com/convert/number/ascii-hex-bin-dec-converter.html&#34;&gt;&lt;li&gt;ASCII, Hex, Binary, Decimal, Base64 converter&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://github.com/Ciphey/Ciphey&#34;&gt;&lt;li&gt;Ciphey&lt;/li&gt;&lt;/a&gt;
+    &lt;a href=&#34;https://morsecode.world/international/translator.html&#34;&gt;&lt;li&gt;Moarse Code Translator&lt;/li&gt;&lt;/a&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;scanning-and-recon&#34;&gt;Scanning and Recon
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://highon.coffee/blog/nmap-cheat-sheet/&#34;&gt;&lt;li&gt;NMAP Cheatsheet&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://trove.cyberskyline.com/8a788e8f624448f2913d66686f21525a&#34;&gt;&lt;li&gt;How to: Ping All Devices&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://www.kali.org/tools/dirbuster/&#34;&gt;&lt;li&gt;Dirbuster GUI&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://techyrick.com/dirbuster-full-command-tutorial-for-beginners/&#34;&gt;&lt;li&gt;How to: Dirbuster&lt;/li&gt;&lt;/a&gt; 
+    &lt;a href=&#34;https://portscanner.standingtech.com/&#34;&gt;&lt;li&gt;Online Port Scanner&lt;/li&gt;&lt;/a&gt; 
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;log-analysis&#34;&gt;Log Analysis
+&lt;/h2&gt;&lt;ul&gt;
+    &lt;a href=&#34;https://cybersources.glide.page/dl/245b4e&#34;&gt;&lt;li&gt;Log Analysis - FHR&lt;/li&gt;&lt;/a&gt; 
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>About</title>
+        <link>http://localhost:1313/about/</link>
+        <pubDate>Tue, 16 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/about/</guid>
+        <description>&lt;p&gt;Hi! I&amp;rsquo;m Kat, and online I go by Kdove.&lt;/p&gt;
+&lt;p&gt;I have a Bachelor&amp;rsquo;s degree in Cybersecurity with a plethora of experience in CTFs and personal projects, which I plan on putting here.&lt;/p&gt;
+&lt;p&gt;This site is where I&amp;rsquo;ll be putting&amp;hellip; well&amp;hellip; everything! I want to use it as a knowledge base, as well as a blog and porfolio. Below are going to be some of my links that I think you should be aware of.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;resume&#34;&gt;Resume
+&lt;/h2&gt;&lt;p&gt;First, I want to direct you to my resume &lt;a class=&#34;link&#34; href=&#34;katrinadube_resume_share.pdf&#34; &gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;social-media&#34;&gt;Social Media
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Here are my primary socials:&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/kat_ish_&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Twitter&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://linkedin.com/in/katrina-dube-386ba41a8&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linkedin&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Here is my Gravatar and my pronouns page:&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://gravatar.com/kd0ve&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Gravatar&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://en.pronouns.page/@kdove&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Pronouns&lt;/a&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Here is where all my projects and random coding stuff goes:&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/Kd0ve&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Github&lt;/a&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact
+&lt;/h2&gt;&lt;p&gt;I encourage anyone looking to ask further questions to click below. It will redirect you to my Linkedin, where we can connect. Feel free to send me a message if you&amp;rsquo;re wondering anything! Hopefully this website will give you plenty of information about my interests and such, but if not, I am more than willing to speak with anyone! I will also provide my email below!&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/katrina-dube-386ba41a8&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linkedin&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;mailto:llavender123@proton.me&#34; &gt;Email&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Archives</title>
+        <link>http://localhost:1313/archives/</link>
+        <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Links</title>
+        <link>http://localhost:1313/links/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/links/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Search</title>
+        <link>http://localhost:1313/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
